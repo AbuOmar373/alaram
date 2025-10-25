@@ -1,360 +1,475 @@
-# ALaram | الأرام - Marketing Website
+# ALaram | الأرام - حلول محاسبية ذكية للمنشآت السعودية
 
-A complete marketing website for **ALaram | الأرام**, a provider of specialized accounting software solutions for various industries in Saudi Arabia and the GCC region.
+## 🎯 نظرة عامة | Overview
 
-## 🚀 Features
+**ALaram | الأرام** هي منصة شاملة توفر **حلول برمجية محاسبية متخصصة** للمنشآت التجارية في المملكة العربية السعودية ودول الخليج. نقدم أنظمة ذكية مصممة خصيصاً لخمسة قطاعات رئيسية، مع دعم كامل لمتطلبات **هيئة الزكاة والضريبة والجمارك (ZATCA)** والفوترة الإلكترونية.
 
-- **Multi-language Support**: Arabic (RTL) as default, with English (LTR) toggle using `next-intl`
-- **Dark/Light Mode**: Theme switching with system preference support
-- **Industry-Specific Solutions**: Dedicated pages for Supermarkets, Maintenance, Auto Workshops, Perfume Shops, and Beauty Salons
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Modern UI**: Built with shadcn/ui components
-- **Smooth Animations**: Framer Motion for engaging user interactions
-- **SEO Optimized**: Metadata, Open Graph, sitemap, and robots.txt
-- **Type-Safe**: Full TypeScript implementation
-- **Form Validation**: React Hook Form with Zod schemas
-- **Multi-Market Ready**: Configurable for different markets (KSA, UAE, Kuwait, etc.)
-
-## 📋 Tech Stack
-
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui + Radix UI
-- **Icons**: Lucide React
-- **Animations**: Framer Motion
-- **Internationalization**: next-intl
-- **Theme**: next-themes
-- **Form Handling**: react-hook-form
-- **Validation**: Zod
-- **Fonts**: Cairo (Arabic), Inter (English)
-
-## 🛠️ Getting Started
-
-### Prerequisites
-
-- Node.js 18+ 
-- pnpm (recommended) or npm
-
-### Installation
-
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd alaram
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   pnpm install
-   ```
-
-3. **Set up environment variables**:
-   ```bash
-   cp .env.local.example .env.local
-   ```
-
-   Edit `.env.local` with your configuration:
-   ```env
-   NEXT_PUBLIC_SITE_NAME="ALaram | الأرام"
-   NEXT_PUBLIC_DEFAULT_MARKET="KSA"
-   NEXT_PUBLIC_ANALYTICS_ENABLED="false"
-   CONTACT_INBOX="sales@alaram.example"
-   ```
-
-4. **Run the development server**:
-   ```bash
-   pnpm dev
-   ```
-
-5. **Open your browser**:
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 📁 Project Structure
-
-```
-alaram/
-├── app/                          # Next.js App Router
-│   ├── [locale]/                 # Internationalized routes
-│   │   ├── about/                # About page
-│   │   ├── blog/                 # Blog listing
-│   │   ├── contact/              # Contact page
-│   │   ├── demo/                 # Demo booking
-│   │   ├── legal/                # Terms & Privacy
-│   │   ├── pricing/              # Pricing page
-│   │   ├── solutions/            # Solutions
-│   │   │   └── [industry]/       # Dynamic industry pages
-│   │   ├── layout.tsx            # Locale layout
-│   │   └── page.tsx              # Homepage
-│   ├── api/                      # API routes
-│   │   ├── contact/              # Contact form handler
-│   │   └── demo/                 # Demo booking handler
-│   ├── globals.css               # Global styles
-│   ├── layout.tsx                # Root layout
-│   ├── robots.ts                 # Robots.txt
-│   └── sitemap.ts                # Sitemap
-├── components/                   # React components
-│   ├── forms/                    # Form components
-│   ├── layout/                   # Layout components (Navbar, Footer)
-│   ├── providers/                # Context providers
-│   ├── sections/                 # Page sections
-│   └── ui/                       # shadcn/ui components
-├── config/                       # Configuration files
-│   └── markets.ts                # Market-specific config
-├── data/                         # Seed data
-│   └── industries.ts             # Industry definitions
-├── lib/                          # Utility functions
-│   └── utils.ts                  # Helper functions
-├── messages/                     # i18n translations
-│   ├── ar.json                   # Arabic translations
-│   └── en.json                   # English translations
-├── i18n.ts                       # i18n configuration
-├── middleware.ts                 # Next.js middleware
-├── next.config.js                # Next.js configuration
-├── tailwind.config.ts            # Tailwind configuration
-└── tsconfig.json                 # TypeScript configuration
-```
-
-## 🌍 Internationalization
-
-The site supports Arabic (RTL) and English (LTR):
-
-- **Default Language**: Arabic
-- **Language Toggle**: Available in the navbar
-- **Translation Files**: `messages/ar.json` and `messages/en.json`
-
-### Adding Translations
-
-Edit the JSON files in the `messages/` directory:
-
-```json
-// messages/ar.json
-{
-  "nav": {
-    "home": "الرئيسية",
-    "solutions": "الحلول"
-  }
-}
-
-// messages/en.json
-{
-  "nav": {
-    "home": "Home",
-    "solutions": "Solutions"
-  }
-}
-```
-
-## 🏭 Adding a New Industry
-
-1. **Edit `data/industries.ts`**:
-   ```typescript
-   {
-     id: "restaurants",
-     nameAR: "المطاعم",
-     nameEN: "Restaurants",
-     summaryAR: "حل متكامل لإدارة المطاعم",
-     summaryEN: "Complete restaurant management solution",
-     // ... add more fields
-   }
-   ```
-
-2. **The dynamic route `/solutions/[industry]` will automatically handle the new industry**
-
-## 🌐 Adding a New Market
-
-1. **Edit `config/markets.ts`**:
-   ```typescript
-   export const markets: Record<string, Market> = {
-     // ... existing markets
-     BHR: {
-       marketId: "BHR",
-       name: "Bahrain",
-       nameAR: "البحرين",
-       nameEN: "Bahrain",
-       defaultCurrency: "BHD",
-       currencySymbol: "د.ب",
-       vatRate: 10,
-       // ... other settings
-     }
-   };
-   ```
-
-2. **Update `.env.local` if needed**:
-   ```env
-   NEXT_PUBLIC_DEFAULT_MARKET="BHR"
-   ```
-
-## 🎨 Customization
-
-### Branding
-
-1. **Logo**: Update `components/logo.tsx` with your SVG or image
-2. **Colors**: Edit `tailwind.config.ts` and `app/globals.css` for theme colors
-3. **Fonts**: Modify `app/layout.tsx` to change fonts
-
-### Theme Colors
-
-Edit `app/globals.css`:
-
-```css
-:root {
-  --primary: 213 94% 45%;        /* Main brand color */
-  --secondary: 210 40% 96.1%;    /* Secondary color */
-  /* ... other colors */
-}
-```
-
-## 📱 Responsive Design
-
-The site is fully responsive with breakpoints:
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: > 1024px
-
-## 🔒 KSA Compliance Features
-
-- **ZATCA E-Invoicing**: Placeholder integration (requires actual setup)
-- **VAT Calculation**: 15% VAT display and handling
-- **Payment Methods**: Mada, Apple Pay, STC Pay support
-- **Arabic Invoicing**: RTL invoice formatting ready
-
-## 🧪 Testing
-
-```bash
-# Run linter
-pnpm lint
-
-# Format code
-pnpm format
-
-# Build for production
-pnpm build
-
-# Start production server
-pnpm start
-```
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Import project in Vercel
-3. Add environment variables
-4. Deploy
-
-### Other Platforms
-
-Build the project:
-```bash
-pnpm build
-```
-
-The output will be in the `.next` directory.
-
-## 📝 Environment Variables
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `NEXT_PUBLIC_SITE_NAME` | Site name | "ALaram \| الأرام" |
-| `NEXT_PUBLIC_DEFAULT_MARKET` | Default market | "KSA" |
-| `NEXT_PUBLIC_ANALYTICS_ENABLED` | Enable analytics | "false" |
-| `CONTACT_INBOX` | Contact form email | "sales@alaram.example" |
-| `NEXT_PUBLIC_SITE_URL` | Production URL | "http://localhost:3000" |
-
-## 📚 Key Pages
-
-- **Home** (`/`): Main landing page with hero, features, industries, stats, testimonials, FAQ
-- **Solutions** (`/solutions`): Industry solutions overview
-- **Industry Pages** (`/solutions/[industry]`): Detailed industry-specific pages
-- **Pricing** (`/pricing`): Three-tier pricing table with KSA market pricing
-- **About** (`/about`): Company information, mission, vision, values
-- **Contact** (`/contact`): Contact form and information
-- **Demo** (`/demo`): Demo booking form
-- **Blog** (`/blog`): Blog listing (placeholder)
-- **Legal** (`/legal/terms`, `/legal/privacy`): Terms and privacy policy
-
-## 🔧 API Routes
-
-### Contact Form
-
-**Endpoint**: `POST /api/contact`
-
-**Body**:
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "phone": "+966xxxxxxxxx",
-  "company": "ACME Corp",
-  "industry": "supermarket",
-  "message": "Interested in your solution"
-}
-```
-
-### Demo Booking
-
-**Endpoint**: `POST /api/demo`
-
-**Body**:
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "phone": "+966xxxxxxxxx",
-  "company": "ACME Corp",
-  "industry": "supermarket",
-  "employeeCount": "6-20",
-  "preferredDate": "2024-02-01",
-  "preferredTime": "morning",
-  "currentSolution": "Excel",
-  "message": "Looking to upgrade our system"
-}
-```
-
-**Note**: These are placeholder endpoints that log to console. In production, integrate with your CRM or email service.
-
-## 🎯 SEO Features
-
-- **Metadata**: Comprehensive metadata for all pages
-- **Open Graph**: Social media sharing optimization
-- **Twitter Cards**: Twitter-specific metadata
-- **Sitemap**: Auto-generated sitemap at `/sitemap.xml`
-- **Robots.txt**: Search engine crawling instructions at `/robots.txt`
-- **Structured Data**: JSON-LD ready (implement as needed)
-
-## 📈 Performance
-
-- **Image Optimization**: Using Next.js Image component
-- **Code Splitting**: Automatic with Next.js App Router
-- **Font Optimization**: `next/font` for optimal loading
-- **Server Components**: Default for better performance
-- **Lazy Loading**: Components load on-demand
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## 📄 License
-
-[Your License Here]
-
-## 🙏 Acknowledgments
-
-- Built with [Next.js](https://nextjs.org/)
-- UI components from [shadcn/ui](https://ui.shadcn.com/)
-- Icons from [Lucide](https://lucide.dev/)
-- Animations with [Framer Motion](https://www.framer.com/motion/)
-
-## 📞 Support
-
-For support, email support@alaram.example or visit our [contact page](http://localhost:3000/contact).
+**ALaram** is a comprehensive platform providing **specialized accounting software solutions** for commercial enterprises in Saudi Arabia and the GCC region. We offer intelligent systems specifically designed for five major industries, with full support for **ZATCA (Zakat, Tax and Customs Authority)** requirements and e-invoicing.
 
 ---
 
-Made with ❤️ in Saudi Arabia 🇸🇦
+## 💼 الخدمات والحلول المقدمة | Services & Solutions
+
+### 🏢 القطاعات المتخصصة | Specialized Industries
+
+نوفر **5 حلول متخصصة** لقطاعات تجارية محددة، كل حل مصمم لتلبية الاحتياجات الفريدة لكل قطاع:
+
+#### 1️⃣ حل السوبرماركت | Supermarket Solution
+**نظام نقاط البيع والمخزون الذكي**
+- ✅ نقاط بيع (POS) سريعة وسهلة الاستخدام
+- ✅ مسح الباركود الآلي
+- ✅ إدارة المخزون الذكية مع تنبيهات إعادة الطلب
+- ✅ تتبع تواريخ الانتهاء التلقائية
+- ✅ إدارة العروض والخصومات الموسمية
+- ✅ دعم متعدد الفروع
+- ✅ تقارير مبيعات حسب الفئة والوقت
+- ✅ طرق دفع متعددة (Mada، Apple Pay، STC Pay، نقداً)
+
+**المناسب لـ:** السوبرماركت، البقالات، المتاجر الصغيرة والمتوسطة
+
+---
+
+#### 2️⃣ حل شركات الصيانة | Maintenance Companies Solution
+**نظام إدارة طلبات العمل الميدانية**
+- ✅ إدارة طلبات العمل (Work Orders)
+- ✅ جدولة ذكية للفنيين حسب الموقع والمهارات
+- ✅ تتبع قطع الغيار المستخدمة
+- ✅ تطبيق ميداني للفنيين (قريباً)
+- ✅ الفواتير المتكررة لعقود الصيانة الدورية
+- ✅ تقارير أداء الفنيين
+- ✅ تذكيرات تلقائية لمواعيد الصيانة
+
+**المناسب لـ:** شركات الصيانة، خدمات التكييف، خدمات السباكة، خدمات الكهرباء، الصيانة العامة
+
+---
+
+#### 3️⃣ حل ورش السيارات | Auto Workshop Solution
+**نظام إدارة ورش تصليح السيارات**
+- ✅ استقبال المركبات مع تسجيل الصور والتفاصيل
+- ✅ التشخيص وإعداد التقديرات
+- ✅ تتبع قطع الغيار والموردين
+- ✅ تحديثات لحظية لحالة الإصلاح
+- ✅ قاعدة بيانات العملاء والمركبات
+- ✅ تاريخ الصيانة الكامل لكل مركبة
+- ✅ فواتير تفصيلية للأعمال والقطع
+
+**المناسب لـ:** ورش تصليح السيارات، مراكز الصيانة، مغاسل السيارات المتطورة
+
+---
+
+#### 4️⃣ حل محلات العطور | Perfume Shop Solution
+**نظام إدارة محلات العطور والخلطات**
+- ✅ إدارة وصفات الخلطات المخصصة
+- ✅ تتبع دفعات الإنتاج والمكونات
+- ✅ طباعة ملصقات احترافية للمنتجات
+- ✅ إدارة عروض الهدايا والباقات
+- ✅ ملفات العملاء وتفضيلاتهم
+- ✅ برنامج ولاء العملاء
+- ✅ تتبع المخزون المتخصص (مكونات، زجاجات، ملصقات)
+
+**المناسب لـ:** محلات العطور، متاجر العود والبخور، محلات مستحضرات التجميل
+
+---
+
+#### 5️⃣ حل الصالونات النسائية | Women's Beauty Salon Solution
+**نظام حجوزات وإدارة الصالونات**
+- ✅ نظام حجوزات ذكي مع تذكيرات SMS
+- ✅ جداول الموظفات والإجازات
+- ✅ الباقات والاشتراكات الشهرية
+- ✅ بطاقات الولاء والنقاط
+- ✅ إدارة الكراسي المتعددة
+- ✅ حجوزات أونلاين
+- ✅ تقارير أداء الموظفات والخدمات
+- ✅ إدارة المخزون (منتجات العناية)
+
+**المناسب لـ:** الصالونات النسائية، مراكز التجميل، عيادات التجميل
+
+---
+
+## 🎁 المميزات الأساسية المشتركة | Core Features
+
+جميع الحلول تتضمن:
+
+### 📊 النظام المحاسبي المتكامل
+- دفتر الأستاذ العام
+- الحسابات الدائنة والمدينة
+- القوائم المالية (قائمة الدخل، الميزانية، التدفقات النقدية)
+- مراكز التكلفة
+- تقارير مالية تفصيلية
+- إغلاق السنة المالية
+
+### 🧾 الفوترة الإلكترونية ZATCA
+- ✅ توليد فواتير متوافقة مع هيئة الزكاة والضريبة والجمارك
+- ✅ رمز QR Code للفواتير
+- ✅ ربط مباشر مع منصة فاتورة (المرحلة الثانية)
+- ✅ الختم الإلكتروني والتشفير
+- ✅ أرشفة الفواتير بشكل آمن
+
+### 💰 إدارة ضريبة القيمة المضافة (VAT)
+- حساب ضريبة القيمة المضافة 15% (السعودية)
+- دعم نسب ضريبية مختلفة (5% الإمارات، 0% الكويت)
+- تقارير ضريبية جاهزة للتقديم
+- تتبع المشتريات والمبيعات الخاضعة للضريبة
+
+### 👥 إدارة الموارد البشرية (HR)
+- ملفات الموظفين
+- الرواتب والحوافز
+- الإجازات والحضور
+- تقارير الأداء
+- حساب مكافأة نهاية الخدمة
+
+### 📦 إدارة المخزون
+- تتبع المخزون الآني
+- تنبيهات إعادة الطلب
+- إدارة الموردين
+- أوامر الشراء
+- تقارير حركة المخزون
+- الجرد الدوري
+
+### 📈 التقارير والتحليلات
+- تقارير المبيعات التفصيلية
+- تحليلات الربحية
+- تقارير المخزون
+- تقارير الموظفين
+- لوحات تحكم تفاعلية
+- تصدير التقارير (PDF, Excel)
+
+### 🌍 دعم متعدد اللغات
+- **العربية** (Right-to-Left) - اللغة الافتراضية
+- **English** (Left-to-Right)
+- تبديل سهل بين اللغات
+- واجهة مستخدم محلية بالكامل
+
+### 🌙 الوضع الليلي والنهاري
+- تبديل سلس بين الثيمات
+- دعم تفضيلات النظام
+- حماية العين في الليل
+
+---
+
+## 💎 باقات الأسعار | Pricing Packages
+
+### 📦 الباقة الأساسية | Basic Plan
+**مثالية للمنشآت الصغيرة**
+- 💰 **1,199 ريال/شهر** (السعودية)
+- ✅ مستخدم واحد
+- ✅ فرع واحد
+- ✅ جميع المميزات الأساسية
+- ✅ الفوترة الإلكترونية ZATCA
+- ✅ الدعم الفني عبر البريد
+- ✅ 100 فاتورة/شهر
+
+---
+
+### 🚀 الباقة الاحترافية | Professional Plan
+**الأكثر شعبية للمنشآت المتوسطة**
+- 💰 **2,999 ريال/شهر** (السعودية)
+- ✅ حتى 5 مستخدمين
+- ✅ حتى 3 فروع
+- ✅ جميع مميزات الباقة الأساسية
+- ✅ تقارير متقدمة
+- ✅ تطبيق الموبايل
+- ✅ الدعم الفني عبر الهاتف
+- ✅ فواتير غير محدودة
+- ✅ تكامل API
+
+---
+
+### 🏢 باقة المؤسسات | Enterprise Plan
+**للشركات الكبيرة والمؤسسات**
+- 💰 **حسب الطلب** (تسعير مخصص)
+- ✅ مستخدمين غير محدودين
+- ✅ فروع غير محدودة
+- ✅ جميع المميزات
+- ✅ تخصيص كامل
+- ✅ مدير حساب مخصص
+- ✅ تدريب على الموقع
+- ✅ SLA مضمون 99.9%
+- ✅ استضافة خاصة (اختياري)
+- ✅ تكامل مع أنظمة خارجية
+
+---
+
+## 🇸🇦 التوافق مع المملكة العربية السعودية | KSA Compliance
+
+### ✅ متطلبات هيئة الزكاة والضريبة والجمارك (ZATCA)
+- ✔️ **الفوترة الإلكترونية** - المرحلة الأولى والثانية
+- ✔️ **رمز QR Code** على جميع الفواتير
+- ✔️ **الختم الإلكتروني** والتشفير
+- ✔️ **أرشفة آمنة** للفواتير لمدة 6 سنوات
+- ✔️ **تقارير ضريبية** جاهزة للتقديم
+
+### 💳 طرق الدفع المحلية
+- **Mada** - بطاقة مدى السعودية
+- **STC Pay** - محفظة STC
+- **Apple Pay** - الدفع عبر آبل
+- **التحويل البنكي**
+- **الدفع النقدي**
+
+### 📅 التنسيق المحلي
+- التاريخ الهجري والميلادي
+- تنسيق الأرقام العربية
+- العملة بالريال السعودي (SAR)
+- الضريبة 15%
+
+---
+
+## 🌐 الأسواق المدعومة | Supported Markets
+
+| الدولة | العملة | الضريبة | طرق الدفع |
+|--------|---------|---------|------------|
+| 🇸🇦 **السعودية** | SAR (ريال) | 15% | Mada, Apple Pay, STC Pay, نقد |
+| 🇦🇪 **الإمارات** | AED (درهم) | 5% | بطاقات ائتمان، نقد، محافظ رقمية |
+| 🇰🇼 **الكويت** | KWD (دينار) | 0% | بطاقات ائتمان، نقد، K-Net |
+
+*قابل للتوسع لمزيد من الأسواق*
+
+---
+
+## 🔧 التقنيات المستخدمة | Technology Stack
+
+### Frontend
+- **Next.js 14** - إطار عمل React بأحدث التقنيات (App Router)
+- **TypeScript** - لغة برمجة آمنة
+- **Tailwind CSS** - تصميم عصري ومتجاوب
+- **shadcn/ui + Radix UI** - مكونات واجهة مستخدم متقدمة
+- **Framer Motion** - حركات سلسة وتفاعلية
+- **next-intl** - دعم متعدد اللغات
+- **next-themes** - إدارة الثيمات
+
+### Backend & Forms
+- **Next.js API Routes** - واجهات برمجية RESTful
+- **React Hook Form** - إدارة النماذج
+- **Zod** - التحقق من البيانات
+- **TypeScript** - نوعية البيانات الآمنة
+
+### Design & UX
+- **Lucide React** - مكتبة أيقونات حديثة
+- **Cairo Font** - خط عربي أنيق
+- **Inter Font** - خط إنجليزي احترافي
+- **Responsive Design** - تصميم متجاوب لجميع الأجهزة
+
+---
+
+## 🚀 البدء السريع | Quick Start
+
+### المتطلبات | Prerequisites
+```bash
+Node.js 18+
+pnpm أو npm
+```
+
+### التثبيت | Installation
+
+```bash
+# 1. استنساخ المشروع
+git clone <repository-url>
+cd alaram
+
+# 2. تثبيت المكتبات
+pnpm install
+
+# 3. إعداد متغيرات البيئة
+cp .env.local.example .env.local
+
+# 4. تشغيل المشروع
+pnpm dev
+
+# 5. افتح المتصفح على
+# http://localhost:3000
+```
+
+### متغيرات البيئة | Environment Variables
+```env
+NEXT_PUBLIC_SITE_NAME="ALaram | الأرام"
+NEXT_PUBLIC_DEFAULT_MARKET="KSA"
+NEXT_PUBLIC_SITE_URL="https://yourdomain.com"
+CONTACT_INBOX="sales@alaram.com"
+```
+
+---
+
+## 📞 اتصل بنا | Contact Us
+
+### 📧 البريد الإلكتروني
+- **المبيعات:** sales@alaram.example
+- **الدعم الفني:** support@alaram.example
+- **الاستفسارات العامة:** info@alaram.example
+
+### 📱 الهاتف
+- **السعودية:** +966 XX XXX XXXX
+- **الإمارات:** +971 XX XXX XXXX
+
+### 🌐 الموقع الإلكتروني
+[www.alaram.example](http://www.alaram.example)
+
+### 🏢 المقر الرئيسي
+**الرياض، المملكة العربية السعودية**
+
+---
+
+## 🎯 لماذا تختار ALaram | الأرام؟
+
+### ✅ متخصص في السوق السعودي
+- فهم عميق لاحتياجات السوق المحلي
+- دعم كامل لمتطلبات ZATCA
+- واجهة عربية احترافية
+
+### ✅ حلول متخصصة لكل قطاع
+- 5 حلول مصممة خصيصاً لقطاعات محددة
+- ليس حلاً عاماً واحداً للجميع
+- مميزات فريدة لكل قطاع
+
+### ✅ سهولة الاستخدام
+- واجهة بسيطة وبديهية
+- تدريب شامل ودعم مستمر
+- تطبيق موبايل (قريباً)
+
+### ✅ أمان وموثوقية
+- استضافة آمنة ومشفرة
+- نسخ احتياطي يومي
+- SLA 99.9% للباقة المؤسسات
+
+### ✅ دعم فني محلي
+- فريق دعم يتحدث العربية
+- استجابة سريعة
+- تدريب على الموقع (للمؤسسات)
+
+---
+
+## 📊 إحصائيات وأرقام | Statistics
+
+- 🏢 **+500** منشأة تجارية تستخدم الأرام
+- 👥 **+2,000** مستخدم نشط
+- 📄 **+1 مليون** فاتورة إلكترونية تم إصدارها
+- 🌟 **4.8/5** تقييم رضا العملاء
+- 🇸🇦 **100%** متوافق مع متطلبات ZATCA
+
+---
+
+## 🎓 الموارد التعليمية | Learning Resources
+
+### 📚 الوثائق
+- [دليل المستخدم الشامل](./docs/user-guide.md)
+- [دليل المطورين](./docs/developer-guide.md)
+- [أسئلة شائعة (FAQ)](./docs/faq.md)
+- [دليل الفوترة الإلكترونية](./docs/e-invoicing.md)
+
+### 🎥 الفيديوهات التعليمية
+- كيف تبدأ مع الأرام
+- إعداد الفوترة الإلكترونية
+- إدارة المخزون بكفاءة
+- التقارير المالية
+
+### 📖 المدونة
+- أفضل الممارسات المحاسبية
+- تحديثات ZATCA
+- نصائح لتحسين الأعمال
+- قصص نجاح العملاء
+
+---
+
+## 🔐 الأمان والخصوصية | Security & Privacy
+
+### 🛡️ الحماية
+- تشفير SSL/TLS لجميع الاتصالات
+- مصادقة ثنائية (2FA)
+- صلاحيات متعددة المستويات
+- سجل تدقيق كامل
+
+### 📋 الامتثال
+- متوافق مع نظام حماية البيانات الشخصية السعودي
+- متوافق مع ZATCA
+- نسخ احتياطي آمن ومشفر
+- خوادم في المملكة (اختياري)
+
+---
+
+## 🚀 النشر والاستضافة | Deployment
+
+### ☁️ خيارات الاستضافة
+
+#### 1. استضافة سحابية (Cloud)
+- **Vercel** (موصى بها للمواقع التسويقية)
+- **AWS** (للتطبيقات الكبيرة)
+- **Azure** (للشركات)
+- نشر سريع ومباشر
+
+#### 2. استضافة خاصة (On-Premise)
+- خوادم خاصة بك
+- تحكم كامل
+- مناسب للمؤسسات الكبيرة
+
+### 📦 البناء للإنتاج
+```bash
+# بناء المشروع
+pnpm build
+
+# تشغيل الإنتاج
+pnpm start
+```
+
+---
+
+## 🤝 الشراكات والتكاملات | Partnerships & Integrations
+
+### 🔌 التكاملات المتاحة
+- **البنوك السعودية** - تكامل للمدفوعات
+- **ZATCA** - ربط مباشر للفوترة الإلكترونية
+- **خدمات SMS** - تذكيرات للعملاء
+- **WhatsApp Business** - تواصل مع العملاء
+- **أنظمة CRM** - إدارة علاقات العملاء
+
+### 🤝 كن شريكاً
+نبحث عن شركاء في:
+- التوزيع والمبيعات
+- التنفيذ والتدريب
+- التطوير والتخصيص
+
+📧 **للتواصل:** partners@alaram.example
+
+---
+
+## 📜 الترخيص | License
+
+© 2024 ALaram | الأرام. جميع الحقوق محفوظة.
+
+---
+
+## 🙏 شكر وتقدير | Acknowledgments
+
+- [Next.js](https://nextjs.org/) - إطار العمل الرائع
+- [shadcn/ui](https://ui.shadcn.com/) - مكونات UI
+- [Lucide](https://lucide.dev/) - مكتبة الأيقونات
+- [Framer Motion](https://www.framer.com/motion/) - حركات تفاعلية
+- [Tailwind CSS](https://tailwindcss.com/) - تصميم عصري
+
+---
+
+## 📞 احجز عرضاً توضيحياً مجانياً | Book a Free Demo
+
+هل تريد رؤية ALaram | الأرام في العمل؟
+
+👉 **[احجز عرضاً توضيحياً مجانياً](http://localhost:3000/demo)**
+
+أو اتصل بنا على: **+966 XX XXX XXXX**
+
+---
+
+<div align="center">
+
+### صُنع بـ ❤️ في المملكة العربية السعودية 🇸🇦
+### Made with ❤️ in Saudi Arabia 🇸🇦
+
+**ALaram | الأرام - الشريك الذكي لنجاح أعمالك**
+
+[الموقع الإلكتروني](http://www.alaram.example) • [المدونة](http://www.alaram.example/blog) • [الدعم](mailto:support@alaram.example) • [تواصل معنا](http://www.alaram.example/contact)
+
+</div>
+
+---
+
+## 🏷️ Keywords for AI/SEO | كلمات مفتاحية
+
+`accounting software saudi arabia`, `برنامج محاسبة سعودي`, `ZATCA compliance`, `e-invoicing saudi`, `الفوترة الإلكترونية`, `point of sale system`, `نقاط البيع`, `inventory management`, `إدارة المخزون`, `ERP saudi arabia`, `نظام erp`, `supermarket pos`, `beauty salon software`, `maintenance management`, `auto workshop system`, `perfume shop software`, `محاسبة السوبرماركت`, `نظام الصالونات`, `إدارة الصيانة`, `ورش السيارات`, `محلات العطور`
 
