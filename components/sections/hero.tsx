@@ -39,7 +39,7 @@ export function Hero({
             transition={{ duration: 0.5 }}
           >
             <div className="mb-6 inline-block animate-pulse rounded-full bg-gradient-to-r from-primary/10 to-purple-500/10 px-5 py-2.5 text-sm font-semibold text-primary">
-              ✨ حلول محاسبية متخصصة للسوق السعودي
+              ✨ حلول محاسبية مدعمة بالذكاء الصناعي
             </div>
             <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-5xl font-bold leading-tight tracking-tight text-transparent dark:from-gray-100 dark:via-white dark:to-gray-100 sm:text-6xl md:text-7xl lg:text-8xl">
               {headline}
