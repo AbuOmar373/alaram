@@ -1,6 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+
+export const dynamic = 'force-dynamic';
 import { motion } from "framer-motion";
 import {
   Target,
@@ -23,7 +25,8 @@ import { Stats } from "@/components/sections/stats";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-export default function AboutPage({ params: { locale } }: { params: { locale: string } }) {
+export default function AboutPage({ params }: { params: { locale: string } }) {
+  const { locale } = params;
   const t = useTranslations("about");
   const tStats = useTranslations("stats");
   const isRTL = locale === "ar";

@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
+
 import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -23,7 +25,8 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
-export default function PricingPage({ params: { locale } }: { params: { locale: string } }) {
+export default function PricingPage({ params }: { params: { locale: string } }) {
+  const { locale } = params;
   const t = useTranslations("pricing");
   const market = getDefaultMarket();
   const isRTL = locale === "ar";

@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+
+export const dynamic = 'force-dynamic';
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Check, TrendingUp } from "lucide-react";
 
@@ -10,7 +12,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-export default function SolutionsPage({ params: { locale } }: { params: { locale: string } }) {
+export default function SolutionsPage({ params }: { params: { locale: string } }) {
+  const { locale } = params;
   const t = useTranslations("solutions");
   const isRTL = locale === "ar";
 

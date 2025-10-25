@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { Check } from "lucide-react";
 
 import { getIndustryById } from "@/data/industries";
@@ -10,12 +11,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FAQ } from "@/components/sections/faq";
 
-export default function IndustryPage({
-  params: { locale, industry: industryId },
+export default async function IndustryPage({
+  params,
 }: {
-  params: { locale: string; industry: string };
+  params: Promise<{ locale: string; industry: string }>;
 }) {
-  const t = useTranslations("solutions");
+  const { locale, industry: industryId } = await params;
+  setRequestLocale(locale);
+  
+  const t = await getTranslations("solutions");
   const industry = getIndustryById(industryId);
 
   if (!industry) {

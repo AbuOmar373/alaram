@@ -1,6 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+
+export const dynamic = 'force-dynamic';
 import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -26,7 +28,8 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-export default function BlogPage({ params: { locale } }: { params: { locale: string } }) {
+export default function BlogPage({ params }: { params: { locale: string } }) {
+  const { locale } = params;
   const t = useTranslations("blog");
   const isRTL = locale === "ar";
   const [selectedCategory, setSelectedCategory] = useState<string>("all");

@@ -1,6 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+
+export const dynamic = 'force-dynamic';
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -25,7 +27,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-export default function ContactPage({ params: { locale } }: { params: { locale: string } }) {
+export default function ContactPage({ params }: { params: { locale: string } }) {
+  const { locale } = params;
   const t = useTranslations("contact");
   const isRTL = locale === "ar";
 

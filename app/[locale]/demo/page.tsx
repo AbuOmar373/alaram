@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
+
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -62,7 +64,8 @@ const demoFormSchema = z.object({
 
 type DemoFormData = z.infer<typeof demoFormSchema>;
 
-export default function DemoPage({ params: { locale } }: { params: { locale: string } }) {
+export default function DemoPage({ params }: { params: { locale: string } }) {
+  const { locale } = params;
   const t = useTranslations("demo");
   const tContact = useTranslations("contact");
   const isRTL = locale === "ar";

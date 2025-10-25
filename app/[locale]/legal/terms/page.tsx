@@ -1,6 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { setRequestLocale } from "next-intl/server";
 
-export default function TermsPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function TermsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <div className="py-20">
       <div className="container mx-auto px-4">

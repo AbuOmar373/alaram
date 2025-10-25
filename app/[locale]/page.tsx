@@ -1,4 +1,5 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
 import { Hero } from "@/components/sections/hero";
 import { FeatureGrid } from "@/components/sections/feature-grid";
@@ -9,15 +10,21 @@ import { Testimonials } from "@/components/sections/testimonials";
 import { industries } from "@/data/industries";
 import { Badge } from "@/components/ui/badge";
 
-export default function HomePage({ params: { locale } }: { params: { locale: string } }) {
-  const t = useTranslations("home");
-  const tSolutions = useTranslations("solutions");
-  const tFaq = useTranslations("faq");
-  const tTestimonials = useTranslations("testimonials");
-  const tStats = useTranslations("stats");
-  const tCompliance = useTranslations("compliance");
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  
+  const t = await getTranslations("home");
+  const tSolutions = await getTranslations("solutions");
+  const tFaq = await getTranslations("faq");
+  const tTestimonials = await getTranslations("testimonials");
+  const tStats = await getTranslations("stats");
+  const tCompliance = await getTranslations("compliance");
 
-  const features = [
+  // Match FeatureGrid's expected iconName type (Lucide icon names)
+  type LucideIconName = keyof typeof import("lucide-react");
+
+  const features: Array<{ iconName: LucideIconName; title: string; description: string }> = [
     {
       iconName: "ShoppingCart",
       title: locale === "ar" ? "نقاط بيع سريعة" : "Fast POS",
