@@ -57,6 +57,14 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      backgroundSize: {
+        "size-200": "200% 200%",
+        "size-150": "150% 150%",
+      },
+      backgroundPosition: {
+        "pos-0": "0% 0%",
+        "pos-100": "100% 100%",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
