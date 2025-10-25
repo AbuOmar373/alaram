@@ -1,0 +1,160 @@
+{
+  "common": {
+    "siteName": "ALaram | الأرام",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "close": "Close",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "readMore": "Read More"
+  },
+  "nav": {
+    "home": "Home",
+    "solutions": "Solutions",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact",
+    "demo": "Book Demo",
+    "blog": "Blog",
+    "startFreeTrial": "Start Free Trial",
+    "bookDemo": "Book a Demo"
+  },
+  "home": {
+    "hero": {
+      "headline": "Multi-Industry Accounting Software — POS, Accounting, Warehouse, and HR in One System",
+      "subheadline": "Tailored solutions for supermarkets, maintenance, auto workshops, perfume shops, and women's beauty salons. Easy to use, fast performance, and accurate real-time reports.",
+      "cta": "Try the System Now",
+      "secondaryCta": "Book a Demo"
+    },
+    "industries": {
+      "title": "Solutions Tailored to Every Industry",
+      "subtitle": "Specialized software designed to meet your industry's needs precisely"
+    },
+    "features": {
+      "title": "Core Capabilities",
+      "subtitle": "Everything you need to successfully manage your business"
+    },
+    "why": {
+      "title": "Why ALaram?",
+      "subtitle": "The optimal solution for managing your business"
+    },
+    "cta": {
+      "title": "Ready to Begin?",
+      "subtitle": "Book a free demo or try the system now",
+      "primary": "Start Your Free Trial",
+      "secondary": "Talk to Sales Team"
+    }
+  },
+  "solutions": {
+    "title": "Our Specialized Solutions",
+    "subtitle": "Choose the right solution for your industry",
+    "viewDetails": "View Details",
+    "coreModules": "Core Modules",
+    "specializedFeatures": "Specialized Features",
+    "startFreeTrial": "Try the System Now",
+    "bookDemo": "Book a Demo"
+  },
+  "pricing": {
+    "title": "Transparent Pricing",
+    "subtitle": "Choose the plan that fits your business size",
+    "monthly": "Monthly",
+    "annually": "Annually",
+    "saveAnnually": "Save 20%",
+    "perMonth": "/ month",
+    "perUser": "per user",
+    "startFreeTrial": "Start Free Trial",
+    "talkToSales": "Talk to Sales",
+    "mostPopular": "Most Popular",
+    "features": "Features",
+    "includedFeatures": "Included Features"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "We are ALaram, your partner in success",
+    "mission": "Our Mission",
+    "vision": "Our Vision",
+    "values": "Our Values"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're here to help you",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "company": "Company Name",
+      "industry": "Industry",
+      "message": "Your Message",
+      "submit": "Send",
+      "sending": "Sending...",
+      "success": "Your message was sent successfully!",
+      "error": "An error occurred. Please try again."
+    },
+    "info": {
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address"
+    }
+  },
+  "demo": {
+    "title": "Book a Demo",
+    "subtitle": "See how ALaram can transform your business",
+    "form": {
+      "preferredDate": "Preferred Date",
+      "preferredTime": "Preferred Time",
+      "employeeCount": "Number of Employees",
+      "currentSolution": "Current Solution (if any)"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Latest news and articles",
+    "readMore": "Read More",
+    "categories": "Categories",
+    "recent": "Recent Articles"
+  },
+  "footer": {
+    "description": "Specialized accounting software platform for all industries",
+    "products": "Products",
+    "company": "Company",
+    "support": "Support",
+    "legal": "Legal",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "followUs": "Follow Us",
+    "allRightsReserved": "All Rights Reserved",
+    "madeInKSA": "Made in Saudi Arabia 🇸🇦"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the most common questions"
+  },
+  "testimonials": {
+    "title": "Customer Testimonials",
+    "subtitle": "What our customers say about us"
+  },
+  "stats": {
+    "customers": "Customers",
+    "transactions": "Daily Transactions",
+    "support": "24/7 Support",
+    "satisfaction": "Customer Satisfaction"
+  },
+  "compliance": {
+    "zatca": {
+      "title": "E-Invoicing Ready",
+      "description": "Our system is ready to integrate with ZATCA (Zakat, Tax and Customs Authority)",
+      "note": "Note: This is a placeholder, actual integration requires additional setup"
+    },
+    "vat": {
+      "title": "VAT Management",
+      "description": "Automatically calculate and manage 15% VAT"
+    }
+  },
+  "markets": {
+    "ksa": "Saudi Arabia",
+    "selectMarket": "Select Market"
+  }
+}
+

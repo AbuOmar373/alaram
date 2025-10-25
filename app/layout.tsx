@@ -1,0 +1,64 @@
+import type { Metadata } from "next";
+import { Cairo } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import "./globals.css";
+
+const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo" });
+
+export const metadata: Metadata = {
+  title: {
+    default: "الأرام | ALaram - منصة برامج محاسبية متخصصة",
+    template: "%s | الأرام | ALaram",
+  },
+  description:
+    "منصة برامج محاسبية متعددة القطاعات — نقاط بيع، محاسبة، مستودعات، وموارد بشرية في نظام واحد",
+  keywords: [
+    "برامج محاسبة",
+    "نقاط البيع",
+    "إدارة المخزون",
+    "الموارد البشرية",
+    "السعودية",
+    "الفوترة الإلكترونية",
+  ],
+  authors: [{ name: "ALaram" }],
+  creator: "ALaram",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  openGraph: {
+    type: "website",
+    locale: "ar_SA",
+    url: "/",
+    title: "الأرام | ALaram - منصة برامج محاسبية متخصصة",
+    description:
+      "حلول مُفصّلة للسوبرماركت، الصيانة، ورش السيارات، العطور، والصالونات النسائية",
+    siteName: "الأرام | ALaram",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "الأرام | ALaram - منصة برامج محاسبية متخصصة",
+    description:
+      "حلول مُفصّلة للسوبرماركت، الصيانة، ورش السيارات، العطور، والصالونات النسائية",
+  },
+};
+
+export default async function RootLayout({
+  children,
+  params: { locale },
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) {
+  const messages = await getMessages();
+
+  return (
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
+      <body className={cairo.className}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+
