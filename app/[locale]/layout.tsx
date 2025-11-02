@@ -8,8 +8,9 @@ export function generateStaticParams() {
   return [{ locale: "ar" }, { locale: "en" }];
 }
 
-export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
-  setRequestLocale(params.locale);
+export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const messages = await getMessages();
   return (
     <NextIntlClientProvider messages={messages}>

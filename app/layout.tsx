@@ -42,13 +42,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  params: { locale },
 }: {
   children: React.ReactNode;
-  params: { locale: string };
 }) {
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <body className={cairo.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
