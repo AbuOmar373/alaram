@@ -64,8 +64,8 @@ const demoFormSchema = z.object({
 
 type DemoFormData = z.infer<typeof demoFormSchema>;
 
-export default function DemoPage({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export default function DemoPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = React.use(params);
   const t = useTranslations("demo");
   const tContact = useTranslations("contact");
   const isRTL = locale === "ar";

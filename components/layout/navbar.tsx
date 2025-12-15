@@ -40,22 +40,28 @@ export function Navbar() {
 
   const toggleLanguage = () => {
     const newLocale = locale === "ar" ? "en" : "ar";
-    const currentPath = pathname.replace(`/${locale}`, "");
-    window.location.href = `/${newLocale}${currentPath}`;
+    // Remove any locale prefix (/ar or /en) from the pathname
+    const pathWithoutLocale = pathname.replace(/^\/(ar|en)(\/|$)/, "/");
+    // Construct new path with new locale
+    const newPath = pathWithoutLocale === "/"
+      ? `/${newLocale}`
+      : `/${newLocale}${pathWithoutLocale}`;
+
+    window.location.href = newPath;
   };
 
   return (
-    <header 
+    <header
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
-        scrolled 
-          ? "border-b border-border/60 bg-background/95 shadow-lg shadow-primary/5 backdrop-blur-2xl supports-[backdrop-filter]:bg-background/75" 
+        scrolled
+          ? "border-b border-border/60 bg-background/95 shadow-lg shadow-primary/5 backdrop-blur-2xl supports-[backdrop-filter]:bg-background/75"
           : "border-b border-border/20 bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/50"
       )}
     >
       {/* Top Gradient Bar */}
       <div className="h-0.5 w-full bg-gradient-to-r from-primary via-purple-500 to-primary opacity-70" />
-      
+
       <nav className="container mx-auto flex h-16 items-center justify-between px-4 lg:h-20 lg:px-6">
         <Logo />
 
@@ -67,19 +73,19 @@ export function Navbar() {
               href={item.href}
               className={cn(
                 "group relative overflow-hidden rounded-xl px-4 py-2 text-sm font-medium transition-all duration-300",
-                pathname === item.href 
-                  ? "text-primary" 
+                pathname === item.href
+                  ? "text-primary"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
               {/* Hover Effect Background */}
               <span className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              
+
               {/* Active Indicator */}
               {pathname === item.href && (
                 <span className="absolute inset-x-1 -bottom-0 h-0.5 rounded-full bg-gradient-to-r from-primary via-purple-500 to-primary" />
               )}
-              
+
               <span className="relative">{item.name}</span>
             </Link>
           ))}
@@ -101,11 +107,11 @@ export function Navbar() {
           </Button>
 
           {/* Language Toggle */}
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={toggleLanguage} 
-            aria-label="Toggle language" 
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleLanguage}
+            aria-label="Toggle language"
             className="group relative overflow-hidden rounded-xl hover:bg-primary/10"
           >
             <Globe className="h-5 w-5" />
@@ -113,8 +119,8 @@ export function Navbar() {
           </Button>
 
           {/* CTA Button */}
-          <Button 
-            asChild 
+          <Button
+            asChild
             className="group relative hidden overflow-hidden rounded-xl bg-gradient-to-r from-primary via-purple-500 to-primary bg-size-200 font-semibold shadow-lg shadow-primary/30 transition-all duration-500 hover:bg-pos-100 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.02] md:flex"
           >
             <Link href="/demo" className="flex items-center gap-2">
@@ -151,8 +157,8 @@ export function Navbar() {
                 href={item.href}
                 className={cn(
                   "block rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300",
-                  pathname === item.href 
-                    ? "bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 text-primary shadow-lg shadow-primary/10" 
+                  pathname === item.href
+                    ? "bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 text-primary shadow-lg shadow-primary/10"
                     : "text-muted-foreground hover:bg-gradient-to-r hover:from-primary/10 hover:via-purple-500/10 hover:to-primary/10 hover:text-foreground"
                 )}
                 onClick={() => setMobileMenuOpen(false)}
@@ -160,8 +166,8 @@ export function Navbar() {
                 {item.name}
               </Link>
             ))}
-            <Button 
-              asChild 
+            <Button
+              asChild
               className="mt-4 w-full rounded-xl bg-gradient-to-r from-primary via-purple-500 to-primary bg-size-200 font-semibold shadow-lg shadow-primary/30 transition-all duration-500 hover:bg-pos-100 hover:shadow-xl"
             >
               <Link href="/demo" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2">

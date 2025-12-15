@@ -69,13 +69,13 @@ export function Hero({
               <Sparkles className="h-5 w-5 text-accent" />
             </div>
 
-            <h1 className="bg-gradient-to-br from-gray-900 via-primary/90 to-accent/80 bg-clip-text text-6xl font-black leading-tight tracking-tight text-transparent dark:from-gray-100 dark:via-primary dark:to-accent sm:text-7xl md:text-8xl lg:text-9xl">
+            <h1 className="bg-gradient-to-br from-gray-900 via-primary/90 to-accent/80 bg-clip-text text-3xl font-black leading-tight tracking-tight text-transparent dark:from-gray-100 dark:via-primary dark:to-accent sm:text-4xl md:text-5xl">
               {headline}
             </h1>
           </motion.div>
 
           <motion.p
-            className="mt-8 text-lg font-medium leading-relaxed text-muted-foreground md:text-xl lg:text-2xl"
+            className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
