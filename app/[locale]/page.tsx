@@ -7,13 +7,14 @@ import { IndustriesCarousel } from "@/components/sections/industries-carousel";
 import { Stats } from "@/components/sections/stats";
 import { FAQ } from "@/components/sections/faq";
 import { Testimonials } from "@/components/sections/testimonials";
+import { CTASection } from "@/components/sections/cta-section";
 import { industries } from "@/data/industries";
 import { Badge } from "@/components/ui/badge";
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  
+
   const t = await getTranslations("home");
   const tSolutions = await getTranslations("solutions");
   const tFaq = await getTranslations("faq");
@@ -200,28 +201,32 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <FeatureGrid title={t("features.title")} subtitle={t("features.subtitle")} features={features} />
 
       {/* Compliance Section */}
-      <section className="border-y bg-muted/30 py-12">
+      <section className="border-y bg-gradient-to-r from-green-50/50 via-emerald-50/30 to-green-50/50 py-20 dark:from-green-950/20 dark:via-emerald-950/10 dark:to-green-950/20">
         <div className="container mx-auto px-4">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="flex gap-4">
-              <Badge variant="success" className="h-fit">
-                {locale === "ar" ? "جاهز" : "Ready"}
-              </Badge>
+          <div className="grid gap-10 md:grid-cols-2">
+            <div className="group flex gap-6 rounded-2xl border-2 border-green-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-green-300 hover:shadow-xl dark:border-green-800/50 dark:bg-gray-900/80">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 shadow-md">
+                <Badge variant="success" className="text-base font-bold">
+                  {locale === "ar" ? "جاهز" : "Ready"}
+                </Badge>
+              </div>
               <div>
-                <h3 className="mb-2 text-lg font-semibold">{tCompliance("zatca.title")}</h3>
-                <p className="text-sm text-muted-foreground">{tCompliance("zatca.description")}</p>
-                <p className="mt-2 text-xs italic text-muted-foreground">
+                <h3 className="mb-3 text-2xl font-bold text-foreground">{tCompliance("zatca.title")}</h3>
+                <p className="text-base leading-relaxed text-muted-foreground">{tCompliance("zatca.description")}</p>
+                <p className="mt-3 text-sm font-medium italic text-green-600 dark:text-green-400">
                   {tCompliance("zatca.note")}
                 </p>
               </div>
             </div>
-            <div className="flex gap-4">
-              <Badge variant="success" className="h-fit">
-                15%
-              </Badge>
+            <div className="group flex gap-6 rounded-2xl border-2 border-green-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-green-300 hover:shadow-xl dark:border-green-800/50 dark:bg-gray-900/80">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 shadow-md">
+                <Badge variant="success" className="text-base font-bold">
+                  15%
+                </Badge>
+              </div>
               <div>
-                <h3 className="mb-2 text-lg font-semibold">{tCompliance("vat.title")}</h3>
-                <p className="text-sm text-muted-foreground">{tCompliance("vat.description")}</p>
+                <h3 className="mb-3 text-2xl font-bold text-foreground">{tCompliance("vat.title")}</h3>
+                <p className="text-base leading-relaxed text-muted-foreground">{tCompliance("vat.description")}</p>
               </div>
             </div>
           </div>
@@ -237,27 +242,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <FAQ title={tFaq("title")} subtitle={tFaq("subtitle")} items={faqs} />
 
       {/* Final CTA */}
-      <section className="bg-primary py-20 text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold sm:text-4xl">{t("cta.title")}</h2>
-          <p className="mt-4 text-lg opacity-90">{t("cta.subtitle")}</p>
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <a
-              href="/demo"
-              className="inline-flex h-11 items-center justify-center rounded-lg bg-background px-8 font-medium text-foreground transition-colors hover:bg-background/90"
-            >
-              {t("cta.primary")}
-            </a>
-            <a
-              href="/contact"
-              className="inline-flex h-11 items-center justify-center rounded-lg border border-primary-foreground/20 bg-transparent px-8 font-medium transition-colors hover:bg-primary-foreground/10"
-            >
-              {t("cta.secondary")}
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title={t("cta.title")}
+        subtitle={t("cta.subtitle")}
+        primaryCta={t("cta.primary")}
+        secondaryCta={t("cta.secondary")}
+      />
     </>
   );
 }
-

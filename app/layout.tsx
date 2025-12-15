@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import { Cairo } from "next/font/google";
+import { Tajawal } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 
-const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo" });
+const tajawal = Tajawal({
+  subsets: ["arabic", "latin"],
+  weight: ["200", "300", "400", "500", "700", "800", "900"],
+  variable: "--font-tajawal",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -47,8 +52,8 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning>
-      <body className={cairo.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+      <body className={tajawal.className}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
         </ThemeProvider>
       </body>
