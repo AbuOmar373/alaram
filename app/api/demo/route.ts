@@ -33,10 +33,13 @@ export async function POST(request: NextRequest) {
 
     const data = parsed.data;
 
+
+
     const result = await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL,
-      to: process.env.RESEND_TO_EMAIL || "",
-      replyTo: data.email,
+      to: data.email,
+      cc: process.env.RESEND_TO_EMAIL || "",
+      replyTo: process.env.RESEND_TO_EMAIL || "",
       subject:
         data.locale === "ar"
           ? `طلب عرض توضيحي جديد - ${data.company}`
