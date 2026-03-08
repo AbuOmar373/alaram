@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     const result = await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL,
-      to: "wzw808@gmail.com",
+      to: process.env.RESEND_TO_EMAIL || "",
       replyTo: data.email,
       subject:
         data.locale === "ar"

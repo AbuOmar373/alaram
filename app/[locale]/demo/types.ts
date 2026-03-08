@@ -1,4 +1,3 @@
-import * as z from "zod";
-import { demoFormSchema } from "./schema";
+import type { DemoFormData } from "@/lib/validations/demo-schema";
 
-export type DemoFormData = z.infer<typeof demoFormSchema>;
+export type { DemoFormData };

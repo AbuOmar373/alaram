@@ -13,7 +13,6 @@ import {
   Tailwind,
   Text,
 } from "@react-email/components";
-import tailwindConfig from "../tailwind.config";
 
 type DemoConfirmationEmailProps = {
   locale?: "ar" | "en";
@@ -93,7 +92,7 @@ export default function DemoConfirmationEmail({
       <Head />
       <Preview>{t.preview}</Preview>
 
-      <Tailwind config={tailwindConfig}>
+      <Tailwind>
         <Body className="bg-white font-sans">
           <Container className="mx-auto w-[660px] max-w-full px-0 pt-5 pb-12">
             {/* Header */}
