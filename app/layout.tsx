@@ -51,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning>
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body className={tajawal.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}

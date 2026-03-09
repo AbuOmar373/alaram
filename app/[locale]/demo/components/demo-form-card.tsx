@@ -1,13 +1,21 @@
 "use client";
 
+import * as React from "react";
 import { useTranslations } from "next-intl";
-import { Calendar, ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  Calendar,
+  ArrowRight,
+  CheckCircle2,
+  Bold,
+  Italic,
+  Underline,
+  List,
+} from "lucide-react";
 
 import { industries } from "@/data/industries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
   CardContent,
@@ -33,16 +41,50 @@ type Props = {
 export default function DemoFormCard({ locale, isRTL }: Props) {
   const t = useTranslations("demo");
   const tContact = useTranslations("contact");
+  const editorRef = React.useRef<HTMLDivElement>(null);
+  const [isMessageEmpty, setIsMessageEmpty] = React.useState(true);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
     onSubmit,
     isSubmitting,
     submitStatus,
   } = useDemoForm();
+  const messageValue = watch("message") ?? "";
+
+  React.useEffect(() => {
+    const editor = editorRef.current;
+    if (!editor) return;
+
+    if (editor.innerHTML !== messageValue) {
+      editor.innerHTML = messageValue;
+    }
+
+    const plainText = editor.textContent?.trim() ?? "";
+    setIsMessageEmpty(!plainText);
+  }, [messageValue]);
+
+  const syncEditorValue = () => {
+    const editor = editorRef.current;
+    if (!editor) return;
+
+    setValue("message", editor.innerHTML, { shouldDirty: true, shouldValidate: true });
+    const plainText = editor.textContent?.trim() ?? "";
+    setIsMessageEmpty(!plainText);
+  };
+
+  const applyEditorCommand = (command: "bold" | "italic" | "underline" | "insertUnorderedList") => {
+    const editor = editorRef.current;
+    if (!editor) return;
+
+    editor.focus();
+    document.execCommand(command);
+    syncEditorValue();
+  };
 
   return (
     <Card className="border-2 shadow-xl">
@@ -255,15 +297,72 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
             <Label htmlFor="message" className="text-base font-semibold">
               {tContact("form.message")}
             </Label>
-            <Textarea
-              id="message"
-              rows={4}
-              {...register("message")}
-              className="rounded-xl border-2"
-              placeholder={
-                isRTL ? "أخبرنا المزيد عن احتياجاتك..." : "Tell us more about your needs..."
-              }
-            />
+            <input type="hidden" {...register("message")} />
+            <div className="rounded-xl border-2">
+              <div className="flex items-center gap-1 border-b p-2">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8"
+                  onClick={() => applyEditorCommand("bold")}
+                  aria-label={isRTL ? "تنسيق غامق" : "Bold"}
+                  title={isRTL ? "غامق" : "Bold"}
+                >
+                  <Bold className="h-4 w-4" />
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8"
+                  onClick={() => applyEditorCommand("italic")}
+                  aria-label={isRTL ? "تنسيق مائل" : "Italic"}
+                  title={isRTL ? "مائل" : "Italic"}
+                >
+                  <Italic className="h-4 w-4" />
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8"
+                  onClick={() => applyEditorCommand("underline")}
+                  aria-label={isRTL ? "تسطير" : "Underline"}
+                  title={isRTL ? "تحته خط" : "Underline"}
+                >
+                  <Underline className="h-4 w-4" />
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8"
+                  onClick={() => applyEditorCommand("insertUnorderedList")}
+                  aria-label={isRTL ? "قائمة نقطية" : "Bullet list"}
+                  title={isRTL ? "قائمة نقطية" : "Bullet list"}
+                >
+                  <List className="h-4 w-4" />
+                </Button>
+              </div>
+
+              <div className="relative">
+                {isMessageEmpty && (
+                  <span className="pointer-events-none absolute inset-x-3 top-3 text-sm text-muted-foreground">
+                    {isRTL ? "أخبرنا المزيد عن احتياجاتك..." : "Tell us more about your needs..."}
+                  </span>
+                )}
+                <div
+                  id="message"
+                  ref={editorRef}
+                  dir={isRTL ? "rtl" : "ltr"}
+                  contentEditable
+                  suppressContentEditableWarning
+                  onInput={syncEditorValue}
+                  className="min-h-[140px] p-3 text-sm outline-none"
+                />
+              </div>
+            </div>
           </div>
 
           <Button
