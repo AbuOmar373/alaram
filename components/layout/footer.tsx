@@ -1,12 +1,14 @@
 import Link from "next/link";
-import { useTranslations } from "next-intl";
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Send, Heart } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Heart } from "lucide-react";
 
 import { Logo } from "@/components/logo";
 
 export function Footer() {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
+  const locale = useLocale();
+  const withLocale = (href: string) => (href === "/" ? `/${locale}` : `/${locale}${href}`);
 
   const footerSections = [
     {
@@ -62,7 +64,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-6">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <Logo />
+            <Logo href={withLocale("/")} />
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               {t("description")}
             </p>
@@ -109,7 +111,7 @@ export function Footer() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
                   <MapPin className="h-4 w-4 text-primary" />
                 </div>
-                <span>المملكة العربية السعودية</span>
+                <span>{t("country")}</span>
               </div>
             </div>
           </div>
@@ -125,7 +127,7 @@ export function Footer() {
                 {section.links.map((link) => (
                   <li key={link.href}>
                     <Link
-                      href={link.href}
+                      href={withLocale(link.href)}
                       className="group relative inline-flex items-center text-sm text-muted-foreground transition-colors hover:text-primary"
                     >
                       <span className="absolute -left-2 h-1.5 w-1.5 rounded-full bg-primary opacity-0 transition-all duration-300 group-hover:opacity-100" />
@@ -146,7 +148,7 @@ export function Footer() {
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div className="flex flex-col items-center gap-2 md:items-start">
               <p className="flex items-center gap-2 text-sm text-muted-foreground">
-                © {new Date().getFullYear()} ALaram | الأرام. {t("allRightsReserved")}
+                © {new Date().getFullYear()} {t("brandLine")}. {t("allRightsReserved")}
               </p>
               <p className="flex items-center gap-1.5 text-xs text-muted-foreground/80">
                 {t("madeInKSA")} 
@@ -158,18 +160,18 @@ export function Footer() {
             <div className="flex flex-wrap items-center justify-center gap-3">
               <div className="flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-xs font-medium text-primary backdrop-blur-sm">
                 <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-                محاسبية معتمدة
+                {t("certifiedAccounting")}
               </div>
               <div className="flex items-center gap-2 rounded-lg border border-purple-500/30 bg-purple-500/5 px-3 py-1.5 text-xs font-medium text-purple-600 backdrop-blur-sm dark:text-purple-400">
                 <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple-500" />
-                متوافق مع هيئة الزكاة
+                {t("zatcaCompliant")}
               </div>
             </div>
           </div>
 
           {/* Payment Methods or Trust Badges */}
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4 opacity-50 grayscale transition-all hover:opacity-100 hover:grayscale-0">
-            <div className="text-xs text-muted-foreground">طرق الدفع المتاحة:</div>
+            <div className="text-xs text-muted-foreground">{t("paymentMethodsLabel")}</div>
             {/* Add payment method icons here if needed */}
           </div>
         </div>

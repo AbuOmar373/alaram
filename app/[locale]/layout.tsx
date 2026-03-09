@@ -13,7 +13,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const { locale } = await params;
   const isRTL = locale === "ar";
   setRequestLocale(locale);
-  const messages = await getMessages();
+  const messages = await getMessages({ locale });
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <LocaleDirectionSync locale={locale} />

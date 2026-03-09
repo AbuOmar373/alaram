@@ -16,84 +16,42 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
 
   const t = await getTranslations("home");
+  const tFeatureItems = await getTranslations("home.features.items");
+  const tFaqItems = await getTranslations("home.faqs.items");
+  const tTestimonialItems = await getTranslations("home.testimonials.items");
   const tSolutions = await getTranslations("solutions");
-  const tFaq = await getTranslations("faq");
-  const tTestimonials = await getTranslations("testimonials");
   const tStats = await getTranslations("stats");
   const tCompliance = await getTranslations("compliance");
 
   // Match FeatureGrid's expected iconName type (Lucide icon names)
   type LucideIconName = keyof typeof import("lucide-react");
-
-  const features: Array<{ iconName: LucideIconName; title: string; description: string }> = [
-    {
-      iconName: "ShoppingCart",
-      title: locale === "ar" ? "نقاط بيع سريعة" : "Fast POS",
-      description:
-        locale === "ar"
-          ? "نقاط بيع سريعة وسهلة الاستخدام مع دعم لجميع طرق الدفع"
-          : "Fast and easy-to-use POS with support for all payment methods",
-    },
-    {
-      iconName: "Calculator",
-      title: locale === "ar" ? "محاسبة متكاملة" : "Complete Accounting",
-      description:
-        locale === "ar"
-          ? "نظام محاسبي شامل مع تقارير مالية دقيقة"
-          : "Comprehensive accounting system with accurate financial reports",
-    },
-    {
-      iconName: "Package",
-      title: locale === "ar" ? "إدارة المخزون" : "Inventory Management",
-      description:
-        locale === "ar"
-          ? "تتبع دقيق للمخزون مع تنبيهات إعادة الطلب"
-          : "Accurate inventory tracking with reorder alerts",
-    },
-    {
-      iconName: "Users",
-      title: locale === "ar" ? "الموارد البشرية" : "HR Management",
-      description:
-        locale === "ar"
-          ? "إدارة كاملة للموظفين والرواتب والحضور"
-          : "Complete employee, payroll, and attendance management",
-    },
-    {
-      iconName: "BarChart3",
-      title: locale === "ar" ? "تقارير متقدمة" : "Advanced Reports",
-      description:
-        locale === "ar"
-          ? "تقارير وتحليلات مفصلة لدعم قراراتك"
-          : "Detailed reports and analytics to support your decisions",
-    },
-    {
-      iconName: "Zap",
-      title: locale === "ar" ? "أداء سريع" : "Fast Performance",
-      description:
-        locale === "ar" ? "تجربة سريعة وسلسة حتى مع كميات بيانات كبيرة" : "Fast and smooth experience even with large data volumes",
-    },
-    {
-      iconName: "Shield",
-      title: locale === "ar" ? "أمان عالي" : "High Security",
-      description:
-        locale === "ar"
-          ? "حماية متقدمة لبياناتك مع نسخ احتياطي تلقائي"
-          : "Advanced protection for your data with automatic backups",
-    },
-    {
-      iconName: "Clock",
-      title: locale === "ar" ? "دعم 24/7" : "24/7 Support",
-      description:
-        locale === "ar"
-          ? "فريق دعم متواجد على مدار الساعة لمساعدتك"
-          : "Support team available 24/7 to help you",
-    },
+  const featureDefs: Array<{ key: "pos" | "accounting" | "inventory" | "hr" | "reports" | "performance" | "security" | "support"; iconName: LucideIconName }> = [
+    { key: "pos", iconName: "ShoppingCart" },
+    { key: "accounting", iconName: "Calculator" },
+    { key: "inventory", iconName: "Package" },
+    { key: "hr", iconName: "Users" },
+    { key: "reports", iconName: "BarChart3" },
+    { key: "performance", iconName: "Zap" },
+    { key: "security", iconName: "Shield" },
+    { key: "support", iconName: "Clock" },
   ];
+
+  const features: Array<{ iconName: LucideIconName; title: string; description: string }> = featureDefs.map(({ key, iconName }) => ({
+    iconName,
+    title: tFeatureItems(`${key}.title`),
+    description: tFeatureItems(`${key}.description`),
+  }));
+
+  const industryFields = {
+    ar: { name: "nameAR", summary: "summaryAR" },
+    en: { name: "nameEN", summary: "summaryEN" },
+  } as const;
+  const localizedIndustryFields = industryFields[locale as keyof typeof industryFields] ?? industryFields.en;
 
   const industriesList = industries.map((industry) => ({
     id: industry.id,
-    name: locale === "ar" ? industry.nameAR : industry.nameEN,
-    summary: locale === "ar" ? industry.summaryAR : industry.summaryEN,
+    name: industry[localizedIndustryFields.name],
+    summary: industry[localizedIndustryFields.summary],
   }));
 
   const stats = [
@@ -103,82 +61,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     { value: "98%", label: tStats("satisfaction") },
   ];
 
-  const testimonials = [
-    {
-      content:
-        locale === "ar"
-          ? "نظام رائع ساعدنا في تنظيم عملنا بشكل كامل. الدعم الفني ممتاز والواجهة سهلة الاستخدام."
-          : "Amazing system that helped us fully organize our business. Excellent technical support and easy-to-use interface.",
-      author: locale === "ar" ? "محمد العتيبي" : "Mohammed Al-Otaibi",
-      role: locale === "ar" ? "مدير" : "Manager",
-      company: locale === "ar" ? "سوبرماركت النخيل" : "Al-Nakheel Supermarket",
-    },
-    {
-      content:
-        locale === "ar"
-          ? "بعد تجربة عدة أنظمة، وجدنا في الأرام الحل الأمثل. التقارير دقيقة والنظام سريع جداً."
-          : "After trying several systems, we found ALaram to be the optimal solution. Reports are accurate and the system is very fast.",
-      author: locale === "ar" ? "فاطمة الدوسري" : "Fatimah Al-Dosari",
-      role: locale === "ar" ? "مالكة" : "Owner",
-      company: locale === "ar" ? "صالون الجوهرة" : "Al-Jawharah Salon",
-    },
-    {
-      content:
-        locale === "ar"
-          ? "التكامل مع الفوترة الإلكترونية كان سلساً جداً. ننصح به بشدة لأي صاحب عمل في السعودية."
-          : "Integration with e-invoicing was very smooth. We highly recommend it for any business owner in Saudi Arabia.",
-      author: locale === "ar" ? "خالد السعيد" : "Khaled Al-Saeed",
-      role: locale === "ar" ? "صاحب" : "Owner",
-      company: locale === "ar" ? "ورشة السعيد للسيارات" : "Al-Saeed Auto Workshop",
-    },
-  ];
+  const testimonialKeys = ["alotaibi", "aldosari", "alsaeed"] as const;
+  const testimonials = testimonialKeys.map((key) => ({
+    content: tTestimonialItems(`${key}.content`),
+    author: tTestimonialItems(`${key}.author`),
+    role: tTestimonialItems(`${key}.role`),
+    company: tTestimonialItems(`${key}.company`),
+  }));
 
-  const faqs = [
-    {
-      question:
-        locale === "ar"
-          ? "هل يدعم النظام عدة فروع؟"
-          : "Does the system support multiple branches?",
-      answer:
-        locale === "ar"
-          ? "نعم، يدعم النظام إدارة عدة فروع مع إمكانية المتابعة المركزية لجميع الفروع وإصدار تقارير موحدة."
-          : "Yes, the system supports multiple branch management with centralized monitoring and unified reports.",
-    },
-    {
-      question:
-        locale === "ar"
-          ? "هل يمكن استيراد البيانات من Excel؟"
-          : "Can I import data from Excel?",
-      answer:
-        locale === "ar"
-          ? "نعم، يمكنك استيراد المنتجات والعملاء والموردين من ملفات Excel بسهولة."
-          : "Yes, you can easily import products, customers, and suppliers from Excel files.",
-    },
-    {
-      question:
-        locale === "ar" ? "هل النظام متوافق مع متطلبات الزكاة والضريبة؟" : "Is the system compliant with ZATCA requirements?",
-      answer:
-        locale === "ar"
-          ? "نعم، النظام جاهز للتكامل مع متطلبات هيئة الزكاة والضريبة والجمارك (ZATCA) للفوترة الإلكترونية."
-          : "Yes, the system is ready to integrate with ZATCA e-invoicing requirements.",
-    },
-    {
-      question:
-        locale === "ar" ? "ما هي طرق الدفع المدعومة؟" : "What payment methods are supported?",
-      answer:
-        locale === "ar"
-          ? "ندعم جميع طرق الدفع الشائعة في السعودية: مدى، Apple Pay، STC Pay، والبطاقات الائتمانية."
-          : "We support all common payment methods in Saudi Arabia: Mada, Apple Pay, STC Pay, and credit cards.",
-    },
-    {
-      question:
-        locale === "ar" ? "هل يعمل النظام بدون إنترنت؟" : "Does the system work offline?",
-      answer:
-        locale === "ar"
-          ? "نعم، يمكن للنظام العمل بدون إنترنت ومزامنة البيانات عند توفر الاتصال."
-          : "Yes, the system can work offline and sync data when connection is available.",
-    },
-  ];
+  const faqKeys = ["branches", "excel", "zatca", "payments", "offline"] as const;
+  const faqs = faqKeys.map((key) => ({
+    question: tFaqItems(`${key}.question`),
+    answer: tFaqItems(`${key}.answer`),
+  }));
 
   return (
     <>
@@ -207,7 +102,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <div className="group flex gap-6 rounded-2xl border-2 border-green-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-green-300 hover:shadow-xl dark:border-green-800/50 dark:bg-gray-900/80">
               <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 shadow-md">
                 <Badge variant="success" className="text-base font-bold">
-                  {locale === "ar" ? "جاهز" : "Ready"}
+                  {tCompliance("zatca.ready")}
                 </Badge>
               </div>
               <div>
@@ -234,12 +129,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       <Testimonials
-        title={tTestimonials("title")}
-        subtitle={tTestimonials("subtitle")}
+        title={t("testimonials.title")}
+        subtitle={t("testimonials.subtitle")}
         testimonials={testimonials}
       />
 
-      <FAQ title={tFaq("title")} subtitle={tFaq("subtitle")} items={faqs} />
+      <FAQ title={t("faqs.title")} subtitle={t("faqs.subtitle")} items={faqs} />
 
       {/* Final CTA */}
       <CTASection

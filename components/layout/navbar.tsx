@@ -38,6 +38,8 @@ export function Navbar() {
     { name: t("blog"), href: "/blog" },
   ];
 
+  const withLocale = (href: string) => (href === "/" ? `/${locale}` : `/${locale}${href}`);
+
   const toggleLanguage = () => {
     const newLocale = locale === "ar" ? "en" : "ar";
     // Remove any locale prefix (/ar or /en) from the pathname
@@ -63,17 +65,17 @@ export function Navbar() {
       <div className="h-0.5 w-full bg-gradient-to-r from-primary via-purple-500 to-primary opacity-70" />
 
       <nav className="container mx-auto flex h-16 items-center justify-between px-4 lg:h-20 lg:px-6">
-        <Logo />
+        <Logo href={withLocale("/")} />
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-1 lg:flex lg:gap-2">
           {navigation.map((item) => (
             <Link
               key={item.href}
-              href={item.href}
+              href={withLocale(item.href)}
               className={cn(
                 "group relative overflow-hidden rounded-xl px-4 py-2 text-sm font-medium transition-all duration-300",
-                pathname === item.href
+                pathname === withLocale(item.href)
                   ? "text-primary"
                   : "text-muted-foreground hover:text-foreground"
               )}
@@ -82,7 +84,7 @@ export function Navbar() {
               <span className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
               {/* Active Indicator */}
-              {pathname === item.href && (
+              {pathname === withLocale(item.href) && (
                 <span className="absolute inset-x-1 -bottom-0 h-0.5 rounded-full bg-gradient-to-r from-primary via-purple-500 to-primary" />
               )}
 
@@ -123,7 +125,7 @@ export function Navbar() {
             asChild
             className="group relative hidden overflow-hidden rounded-xl bg-gradient-to-r from-primary via-purple-500 to-primary bg-size-200 font-semibold shadow-lg shadow-primary/30 transition-all duration-500 hover:bg-pos-100 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.02] md:flex"
           >
-            <Link href="/demo" className="flex items-center gap-2">
+            <Link href={withLocale("/demo")} className="flex items-center gap-2">
               <Sparkles className="h-4 w-4" />
               {t("bookDemo")}
             </Link>
@@ -154,10 +156,10 @@ export function Navbar() {
             {navigation.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={withLocale(item.href)}
                 className={cn(
                   "block rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300",
-                  pathname === item.href
+                  pathname === withLocale(item.href)
                     ? "bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 text-primary shadow-lg shadow-primary/10"
                     : "text-muted-foreground hover:bg-gradient-to-r hover:from-primary/10 hover:via-purple-500/10 hover:to-primary/10 hover:text-foreground"
                 )}
@@ -170,7 +172,7 @@ export function Navbar() {
               asChild
               className="mt-4 w-full rounded-xl bg-gradient-to-r from-primary via-purple-500 to-primary bg-size-200 font-semibold shadow-lg shadow-primary/30 transition-all duration-500 hover:bg-pos-100 hover:shadow-xl"
             >
-              <Link href="/demo" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2">
+              <Link href={withLocale("/demo")} onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2">
                 <Sparkles className="h-4 w-4" />
                 {t("bookDemo")}
               </Link>

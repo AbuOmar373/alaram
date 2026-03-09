@@ -34,7 +34,91 @@
     },
     "features": {
       "title": "Core Capabilities",
-      "subtitle": "Everything you need to successfully manage your business"
+      "subtitle": "Everything you need to successfully manage your business",
+      "items": {
+        "pos": {
+          "title": "Fast POS",
+          "description": "Fast and easy-to-use POS with support for all payment methods"
+        },
+        "accounting": {
+          "title": "Complete Accounting",
+          "description": "Comprehensive accounting system with accurate financial reports"
+        },
+        "inventory": {
+          "title": "Inventory Management",
+          "description": "Accurate inventory tracking with reorder alerts"
+        },
+        "hr": {
+          "title": "HR Management",
+          "description": "Complete employee, payroll, and attendance management"
+        },
+        "reports": {
+          "title": "Advanced Reports",
+          "description": "Detailed reports and analytics to support your decisions"
+        },
+        "performance": {
+          "title": "Fast Performance",
+          "description": "Fast and smooth experience even with large data volumes"
+        },
+        "security": {
+          "title": "High Security",
+          "description": "Advanced protection for your data with automatic backups"
+        },
+        "support": {
+          "title": "24/7 Support",
+          "description": "Support team available 24/7 to help you"
+        }
+      }
+    },
+    "testimonials": {
+      "title": "Customer Testimonials",
+      "subtitle": "What our customers say about us",
+      "items": {
+        "alotaibi": {
+          "content": "Amazing system that helped us fully organize our business. Excellent technical support and easy-to-use interface.",
+          "author": "Mohammed Al-Otaibi",
+          "role": "Manager",
+          "company": "Al-Nakheel Supermarket"
+        },
+        "aldosari": {
+          "content": "After trying several systems, we found ALaram to be the optimal solution. Reports are accurate and the system is very fast.",
+          "author": "Fatimah Al-Dosari",
+          "role": "Owner",
+          "company": "Al-Jawharah Salon"
+        },
+        "alsaeed": {
+          "content": "Integration with e-invoicing was very smooth. We highly recommend it for any business owner in Saudi Arabia.",
+          "author": "Khaled Al-Saeed",
+          "role": "Owner",
+          "company": "Al-Saeed Auto Workshop"
+        }
+      }
+    },
+    "faqs": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Answers to the most common questions",
+      "items": {
+        "branches": {
+          "question": "Does the system support multiple branches?",
+          "answer": "Yes, the system supports multiple branch management with centralized monitoring and unified reports."
+        },
+        "excel": {
+          "question": "Can I import data from Excel?",
+          "answer": "Yes, you can easily import products, customers, and suppliers from Excel files."
+        },
+        "zatca": {
+          "question": "Is the system compliant with ZATCA requirements?",
+          "answer": "Yes, the system is ready to integrate with ZATCA e-invoicing requirements."
+        },
+        "payments": {
+          "question": "What payment methods are supported?",
+          "answer": "We support all common payment methods in Saudi Arabia: Mada, Apple Pay, STC Pay, and credit cards."
+        },
+        "offline": {
+          "question": "Does the system work offline?",
+          "answer": "Yes, the system can work offline and sync data when connection is available."
+        }
+      }
     },
     "why": {
       "title": "Why ALaram?",
@@ -125,7 +209,16 @@
     "privacy": "Privacy Policy",
     "followUs": "Follow Us",
     "allRightsReserved": "All Rights Reserved",
-    "madeInKSA": "Made in Saudi Arabia 🇸🇦"
+    "madeInKSA": "Made in Saudi Arabia 🇸🇦",
+    "country": "Saudi Arabia",
+    "brandLine": "ALaram",
+    "certifiedAccounting": "Certified Accounting",
+    "zatcaCompliant": "ZATCA Compliant",
+    "paymentMethodsLabel": "Available payment methods:"
+  },
+  "logo": {
+    "primary": "ALaram",
+    "secondary": "Accounting Platform"
   },
   "faq": {
     "title": "Frequently Asked Questions",
@@ -144,6 +237,7 @@
   "compliance": {
     "zatca": {
       "title": "E-Invoicing Ready",
+      "ready": "Ready",
       "description": "Our system is ready to integrate with ZATCA (Zakat, Tax and Customs Authority)",
       "note": "Note: This is a placeholder, actual integration requires additional setup"
     },

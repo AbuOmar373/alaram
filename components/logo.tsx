@@ -1,15 +1,19 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
   className?: string;
   variant?: "default" | "compact";
+  href?: string;
 }
 
-export function Logo({ className, variant = "default" }: LogoProps) {
+export function Logo({ className, variant = "default", href = "/" }: LogoProps) {
+  const t = useTranslations("logo");
+
   return (
     <Link 
-      href="/" 
+      href={href}
       className={cn("group flex items-center gap-2.5 transition-all", className)}
     >
       <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-primary via-purple-500 to-primary shadow-lg shadow-primary/30 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-primary/40 group-hover:scale-105">
@@ -35,10 +39,10 @@ export function Logo({ className, variant = "default" }: LogoProps) {
       {variant === "default" && (
         <div className="flex flex-col">
           <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-lg font-bold leading-none text-transparent transition-all">
-            الأرام
+            {t("primary")}
           </span>
           <span className="text-xs font-medium leading-none text-muted-foreground transition-colors group-hover:text-foreground">
-            ALaram
+            {t("secondary")}
           </span>
         </div>
       )}
