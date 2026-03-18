@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 
@@ -11,9 +12,55 @@ import { CTASection } from "@/components/sections/cta-section";
 import { industries } from "@/data/industries";
 import { Badge } from "@/components/ui/badge";
 
-export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+type PageProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const tHome = await getTranslations({ locale, namespace: "home" });
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const canonical = `${baseUrl}/${locale}`;
+  const socialImage = `${baseUrl}/${locale}/opengraph-image`;
+
+  return {
+    title: tHome("hero.headline"),
+    description: tHome("hero.subheadline"),
+    alternates: {
+      canonical,
+      languages: {
+        ar: `${baseUrl}/ar`,
+        en: `${baseUrl}/en`,
+        "x-default": `${baseUrl}/ar`,
+      },
+    },
+    openGraph: {
+      type: "website",
+      url: canonical,
+      title: tHome("hero.headline"),
+      description: tHome("hero.subheadline"),
+      siteName: "ALaram",
+      locale: locale === "ar" ? "ar_SA" : "en_US",
+      images: [
+        {
+          url: socialImage,
+          width: 1200,
+          height: 630,
+          alt: "ALaram",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: tHome("hero.headline"),
+      description: tHome("hero.subheadline"),
+      images: [socialImage],
+    },
+  };
+}
+
+export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
   const t = await getTranslations("home");
   const tFeatureItems = await getTranslations("home.features.items");
@@ -74,9 +121,27 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     question: tFaqItems(`${key}.question`),
     answer: tFaqItems(`${key}.answer`),
   }));
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "ALaram",
+    url: `${baseUrl}/${locale}`,
+    inLanguage: locale,
+    description: t("hero.subheadline"),
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${baseUrl}/${locale}/blog?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        // JSON-LD helps search engines understand the site entity.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Hero
         headline={t("hero.headline")}
         subheadline={t("hero.subheadline")}

@@ -2,10 +2,9 @@ import { MetadataRoute } from "next";
 import { industries } from "@/data/industries";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-
-  // Static pages
-  const staticPages = [
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const locales = ["ar", "en"] as const;
+  const staticPaths = [
     "",
     "/solutions",
     "/pricing",
@@ -15,32 +14,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog",
     "/legal/terms",
     "/legal/privacy",
-  ];
+  ] as const;
 
-  // Generate sitemap entries for both languages
+  const buildAlternates = (path: string) => ({
+    languages: {
+      ar: `${baseUrl}/ar${path}`,
+      en: `${baseUrl}/en${path}`,
+      "x-default": `${baseUrl}/ar${path}`,
+    },
+  });
+
   const pages: MetadataRoute.Sitemap = [];
 
-  // Add static pages for both languages
-  ["ar", "en"].forEach((locale) => {
-    staticPages.forEach((page) => {
+  for (const path of staticPaths) {
+    for (const locale of locales) {
       pages.push({
-        url: `${baseUrl}/${locale}${page}`,
+        url: `${baseUrl}/${locale}${path}`,
         lastModified: new Date(),
-        changeFrequency: "weekly",
-        priority: page === "" ? 1 : 0.8,
+        changeFrequency: path === "" ? "daily" : "weekly",
+        priority: path === "" ? 1 : 0.8,
+        alternates: buildAlternates(path),
       });
-    });
+    }
+  }
 
-    // Add industry pages
-    industries.forEach((industry) => {
+  for (const industry of industries) {
+    const path = `/solutions/${industry.id}`;
+    for (const locale of locales) {
       pages.push({
-        url: `${baseUrl}/${locale}/solutions/${industry.id}`,
+        url: `${baseUrl}/${locale}${path}`,
         lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.7,
+        alternates: buildAlternates(path),
       });
-    });
-  });
+    }
+  }
 
   return pages;
 }
