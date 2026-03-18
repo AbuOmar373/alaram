@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Tajawal } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { getBaseUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const tajawal = Tajawal({
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "ALaram" }],
   creator: "ALaram",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL(getBaseUrl()),
   openGraph: {
     type: "website",
     locale: "ar_SA",
