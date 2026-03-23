@@ -8,7 +8,7 @@ export default async function Head({ params }: { params: Promise<{ locale: strin
   const baseUrl = getBaseUrl();
   const path = `/${currentLocale}/pricing`;
   const canonical = `${baseUrl}${path}`;
-  const title = currentLocale === "ar" ? `الأسعار | ${brand.name.ar}` : `Pricing | ${brand.name.en}`;
+  const title = currentLocale === "ar" ? "الأسعار" : "Pricing";
   const description =
     currentLocale === "ar"
       ? "تعرف على خطط أسعار الأرام واختر الباقة المناسبة لنشاطك واحتياجات التشغيل."

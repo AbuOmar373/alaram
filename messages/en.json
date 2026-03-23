@@ -1,6 +1,6 @@
 {
   "common": {
-    "siteName": "ALaram | Business Solutions",
+    "siteName": "ALaram",
     "loading": "Loading...",
     "error": "An error occurred",
     "submit": "Submit",
@@ -23,7 +23,7 @@
   },
   "home": {
     "hero": {
-      "headline": "Multi-Industry Accounting Software — POS, Accounting, Warehouse, and HR in One System",
+      "headline": "ALaram",
       "subheadline": "Tailored solutions for supermarkets, maintenance, auto workshops, perfume shops, and women's beauty salons. Easy to use, fast performance, and accurate real-time reports.",
       "cta": "Try the System Now",
       "secondaryCta": "Book a Demo"
@@ -218,7 +218,7 @@
   },
   "logo": {
     "primary": "ALaram",
-    "secondary": "Accounting Platform"
+    "secondary": "Business Solutions"
   },
   "faq": {
     "title": "Frequently Asked Questions",

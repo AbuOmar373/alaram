@@ -1,5 +1,6 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 export const dynamic = 'force-dynamic';
@@ -27,13 +28,16 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { usePageTitle } from "@/lib/use-page-title";
 
-export default function BlogPage({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export default function BlogPage() {
+  const params = useParams<{ locale: string }>();
+  const locale = params.locale;
   const t = useTranslations("blog");
   const isRTL = locale === "ar";
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [email, setEmail] = useState("");
+  usePageTitle(locale, locale === "ar" ? "المدونة" : "Blog");
 
   // Mock blog posts - in a real app, this would come from a CMS or database
   const posts = [

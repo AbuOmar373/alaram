@@ -1,5 +1,6 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 export const dynamic = 'force-dynamic';
@@ -24,11 +25,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Stats } from "@/components/sections/stats";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { usePageTitle } from "@/lib/use-page-title";
 
-export default function AboutPage({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export default function AboutPage() {
+  const params = useParams<{ locale: string }>();
+  const locale = params.locale;
   const t = useTranslations("about");
   const isRTL = locale === "ar";
+  usePageTitle(locale, locale === "ar" ? "من نحن" : "About");
 
   const stats = [
     { value: locale === "ar" ? "أونلاين" : "Online", label: locale === "ar" ? "نموذج الخدمة" : "Service Model" },

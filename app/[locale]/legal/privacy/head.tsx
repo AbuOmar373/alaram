@@ -6,22 +6,22 @@ export default async function Head({ params }: { params: Promise<{ locale: strin
   const { locale } = await params;
   const currentLocale = getLocaleFromParam(locale);
   const baseUrl = getBaseUrl();
-  const path = `/${currentLocale}/blog`;
+  const path = `/${currentLocale}/legal/privacy`;
   const canonical = `${baseUrl}${path}`;
-  const title = currentLocale === "ar" ? "المدونة" : "Blog";
+  const title = currentLocale === "ar" ? "سياسة الخصوصية" : "Privacy Policy";
   const description =
     currentLocale === "ar"
-      ? "مدونة الأرام: مقالات عملية حول إدارة الأعمال، الأنظمة، والتشغيل في السوق السعودي."
-      : "ALaram blog: practical articles on business operations, systems, and execution in the Saudi market.";
+      ? "سياسة الخصوصية الخاصة بموقع الأرام والخدمات الإلكترونية المقدمة داخل السعودية."
+      : "Privacy policy for ALaram website and online services provided in Saudi Arabia.";
 
   return (
     <>
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
-      <link rel="alternate" hrefLang="ar" href={`${baseUrl}/ar/blog`} />
-      <link rel="alternate" hrefLang="en" href={`${baseUrl}/en/blog`} />
-      <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/ar/blog`} />
+      <link rel="alternate" hrefLang="ar" href={`${baseUrl}/ar/legal/privacy`} />
+      <link rel="alternate" hrefLang="en" href={`${baseUrl}/en/legal/privacy`} />
+      <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/ar/legal/privacy`} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />

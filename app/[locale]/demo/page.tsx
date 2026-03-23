@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 
 import HeroSection from "./components/hero-section";
 import MainSection from "./sections/main-section";
+import { usePageTitle } from "@/lib/use-page-title";
 
 export default function DemoPage({
   params,
@@ -16,6 +17,7 @@ export default function DemoPage({
   const { locale } = React.use(params);
   const t = useTranslations("demo");
   const isRTL = locale === "ar";
+  usePageTitle(locale, locale === "ar" ? "احجز عرضاً" : "Book a Demo");
 
   return (
     <div className="min-h-screen">

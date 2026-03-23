@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Facebook, Mail, MessageCircle, Phone } from "lucide-react";
 
@@ -8,11 +9,14 @@ import { ContactForm } from "@/components/forms/contact-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { brand } from "@/lib/brand";
+import { usePageTitle } from "@/lib/use-page-title";
 
-export default function ContactPage({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export default function ContactPage() {
+  const params = useParams<{ locale: string }>();
+  const locale = params.locale;
   const isRTL = locale === "ar";
   const t = useTranslations("contact");
+  usePageTitle(locale, locale === "ar" ? "تواصل معنا" : "Contact");
 
   return (
     <div className="min-h-screen">

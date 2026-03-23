@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 export const dynamic = 'force-dynamic';
@@ -11,11 +12,14 @@ import { industries } from "@/data/industries";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { usePageTitle } from "@/lib/use-page-title";
 
-export default function SolutionsPage({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export default function SolutionsPage() {
+  const params = useParams<{ locale: string }>();
+  const locale = params.locale;
   const t = useTranslations("solutions");
   const isRTL = locale === "ar";
+  usePageTitle(locale, locale === "ar" ? "حلولنا المتخصصة" : "Our Specialized Solutions");
 
   const benefits = [
     {

@@ -8,7 +8,7 @@ export default async function Head({ params }: { params: Promise<{ locale: strin
   const baseUrl = getBaseUrl();
   const path = `/${currentLocale}/contact`;
   const canonical = `${baseUrl}${path}`;
-  const title = currentLocale === "ar" ? `تواصل معنا | ${brand.name.ar}` : `Contact | ${brand.name.en}`;
+  const title = currentLocale === "ar" ? "تواصل معنا" : "Contact";
   const description =
     currentLocale === "ar"
       ? "تواصل مع الأرام عبر الهاتف أو البريد أو واتساب أو فيسبوك. نقدم خدماتنا إلكترونيًا داخل السعودية."

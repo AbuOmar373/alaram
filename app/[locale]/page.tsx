@@ -23,11 +23,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const baseUrl = getBaseUrl();
   const canonical = `${baseUrl}${localizedPath(currentLocale)}`;
   const socialImage = `${baseUrl}${localizedPath(currentLocale, "/opengraph-image")}`;
-  const title = currentLocale === "ar" ? brand.title.ar : brand.title.en;
+  const title =
+    currentLocale === "ar"
+      ? `${brand.name.ar} - الصفحة الرئيسية`
+      : `${brand.name.en} - Home`;
   const description = brand.description[currentLocale];
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical,

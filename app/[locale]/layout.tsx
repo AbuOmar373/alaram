@@ -28,7 +28,7 @@ export async function generateMetadata({
     metadataBase: new URL(baseUrl),
     title: {
       default: tCommon("siteName"),
-      template: currentLocale === "ar" ? brand.titleTemplate.ar : brand.titleTemplate.en,
+      template: currentLocale === "ar" ? `${brand.name.ar} - %s` : `${brand.name.en} - %s`,
     },
     description: pageDescription,
     alternates: {

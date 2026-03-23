@@ -8,7 +8,7 @@ export default async function Head({ params }: { params: Promise<{ locale: strin
   const baseUrl = getBaseUrl();
   const path = `/${currentLocale}/about`;
   const canonical = `${baseUrl}${path}`;
-  const title = currentLocale === "ar" ? `من نحن | ${brand.name.ar}` : `About | ${brand.name.en}`;
+  const title = currentLocale === "ar" ? "من نحن" : "About";
   const description =
     currentLocale === "ar"
       ? "تعرف على الأرام ومنهجنا في تقديم حلول أعمال إلكترونية متعددة القطاعات داخل السعودية."

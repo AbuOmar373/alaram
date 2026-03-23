@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -30,6 +30,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
+import { usePageTitle } from "@/lib/use-page-title";
 
 // Blog posts data
 const getBlogPosts = (locale: string) => [
@@ -1025,14 +1026,10 @@ ALaram system provides all the tools you need to manage your inventory efficient
   },
 ];
 
-interface BlogPostPageProps {
-  params: {
-    locale: string;
-    slug: string;
-  };
-}
-
-export default function BlogPostPage({ params: { locale, slug } }: BlogPostPageProps) {
+export default function BlogPostPage() {
+  const params = useParams<{ locale: string; slug: string }>();
+  const locale = params.locale;
+  const slug = params.slug;
   const t = useTranslations("blog");
   const isRTL = locale === "ar";
 
@@ -1042,6 +1039,8 @@ export default function BlogPostPage({ params: { locale, slug } }: BlogPostPageP
   if (!post) {
     notFound();
   }
+
+  usePageTitle(locale, post.title);
 
   // Related posts (same category, excluding current)
   const relatedPosts = posts

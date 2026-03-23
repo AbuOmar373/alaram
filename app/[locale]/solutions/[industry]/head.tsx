@@ -28,10 +28,7 @@ export default async function Head({
       ? "حلول قطاعية من الأرام."
       : "Industry solutions by ALaram.";
 
-  const title =
-    currentLocale === "ar"
-      ? `${industryName} | ${brand.name.ar}`
-      : `${industryName} | ${brand.name.en}`;
+  const title = industryName;
 
   return (
     <>

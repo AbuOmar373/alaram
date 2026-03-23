@@ -4,6 +4,7 @@ export const dynamic = 'force-dynamic';
 
 import { useState } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
@@ -24,13 +25,16 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { usePageTitle } from "@/lib/use-page-title";
 
-export default function PricingPage({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export default function PricingPage() {
+  const params = useParams<{ locale: string }>();
+  const locale = params.locale;
   const t = useTranslations("pricing");
   const market = getDefaultMarket();
   const isRTL = locale === "ar";
   const [isAnnual, setIsAnnual] = useState(false);
+  usePageTitle(locale, locale === "ar" ? "الأسعار" : "Pricing");
 
   const calculatePrice = (monthlyPrice: number) => {
     if (isAnnual) {

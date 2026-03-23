@@ -1,15 +1,20 @@
+const envBrandNameAr = process.env.NEXT_PUBLIC_BRAND_NAME_AR?.trim();
+const envBrandNameEn = process.env.NEXT_PUBLIC_BRAND_NAME_EN?.trim();
+const brandNameAr = envBrandNameAr && envBrandNameAr.length > 0 ? envBrandNameAr : "الأرام";
+const brandNameEn = envBrandNameEn && envBrandNameEn.length > 0 ? envBrandNameEn : "ALaram";
+
 export const brand = {
   name: {
-    ar: "الأرام",
-    en: "ALaram",
+    ar: brandNameAr,
+    en: brandNameEn,
   },
   title: {
-    ar: "الأرام | حلول الأعمال",
-    en: "ALaram | Business Solutions",
+    ar: brandNameAr,
+    en: brandNameEn,
   },
   titleTemplate: {
-    ar: "%s | الأرام",
-    en: "%s | ALaram",
+    ar: `${brandNameAr} - %s`,
+    en: `${brandNameEn} - %s`,
   },
   description: {
     ar: "حلول مُفصّلة للسوبرماركت، الصيانة، ورش السيارات، العطور، والصالونات النسائية. سهولة الاستخدام، سرعة الأداء، وتقارير دقيقة لحظيًا.",
