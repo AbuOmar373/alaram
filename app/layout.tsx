@@ -13,9 +13,7 @@ const tajawal = Tajawal({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: brand.title.ar,
-  },
+  title: brand.title.ar,
   description: brand.description.ar,
   authors: [{ name: brand.name.en }],
   creator: brand.name.en,
