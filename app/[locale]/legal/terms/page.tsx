@@ -1,64 +1,61 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { setRequestLocale } from "next-intl/server";
+const LAST_UPDATED = "2026-03-23";
 
 export default async function TermsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const isArabic = locale === "ar";
   return (
     <div className="py-20">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl">
           <h1 className="mb-8 text-4xl font-bold">
-            {locale === "ar" ? "الشروط والأحكام" : "Terms & Conditions"}
+            {isArabic ? "الشروط والأحكام" : "Terms & Conditions"}
           </h1>
 
           <Card>
             <CardHeader>
               <CardTitle>
-                {locale === "ar" ? "آخر تحديث: يناير 2024" : "Last Updated: January 2024"}
+                {isArabic ? `آخر تحديث: ${LAST_UPDATED}` : `Last Updated: ${LAST_UPDATED}`}
               </CardTitle>
             </CardHeader>
             <CardContent className="prose prose-gray dark:prose-invert max-w-none">
-              <p>
-                {locale === "ar"
-                  ? "هذه الصفحة هي نموذج توضيحي. في التطبيق الفعلي، يجب أن تحتوي على الشروط والأحكام الكاملة والقانونية للخدمة."
-                  : "This is a placeholder page. In the actual application, it should contain complete and legal terms and conditions of service."}
-              </p>
-
-              <h2>{locale === "ar" ? "١. القبول بالشروط" : "1. Acceptance of Terms"}</h2>
-              <p>
-                {locale === "ar"
-                  ? "باستخدام خدمات الأرام، فإنك توافق على الالتزام بهذه الشروط والأحكام."
-                  : "By using ALaram services, you agree to be bound by these terms and conditions."}
-              </p>
-
-              <h2>{locale === "ar" ? "٢. استخدام الخدمة" : "2. Use of Service"}</h2>
-              <p>
-                {locale === "ar"
-                  ? "يجب عليك استخدام الخدمة بطريقة قانونية ومسؤولة وفقاً لجميع القوانين واللوائح المعمول بها."
-                  : "You must use the service in a legal and responsible manner in accordance with all applicable laws and regulations."}
-              </p>
-
-              <h2>{locale === "ar" ? "٣. الملكية الفكرية" : "3. Intellectual Property"}</h2>
-              <p>
-                {locale === "ar"
-                  ? "جميع حقوق الملكية الفكرية للبرنامج والمحتوى محفوظة لشركة الأرام."
-                  : "All intellectual property rights to the software and content are reserved to ALaram Company."}
-              </p>
-
-              <h2>{locale === "ar" ? "٤. المسؤولية" : "4. Liability"}</h2>
-              <p>
-                {locale === "ar"
-                  ? "الشركة غير مسؤولة عن أي أضرار مباشرة أو غير مباشرة قد تنتج عن استخدام الخدمة."
-                  : "The Company is not liable for any direct or indirect damages that may result from using the service."}
-              </p>
-
-              <h2>{locale === "ar" ? "٥. التعديلات" : "5. Modifications"}</h2>
-              <p>
-                {locale === "ar"
-                  ? "تحتفظ الأرام بالحق في تعديل هذه الشروط في أي وقت. سيتم إخطارك بأي تغييرات جوهرية."
-                  : "ALaram reserves the right to modify these terms at any time. You will be notified of any material changes."}
-              </p>
+              {isArabic ? (
+                <>
+                  <p>
+                    تنظم هذه الشروط استخدام موقع الأرام وخدماته الإلكترونية. باستخدام الموقع، فإنك تقر بمراجعة هذه
+                    الشروط والموافقة عليها.
+                  </p>
+                  <h2>1. نطاق الخدمة</h2>
+                  <p>تقدم الأرام خدماتها إلكترونيًا داخل السعودية، ولا يتضمن الموقع عنوانًا فعليًا للزيارة المباشرة.</p>
+                  <h2>2. الاستخدام المقبول</h2>
+                  <p>يجب استخدام الموقع والخدمات بشكل نظامي، والامتناع عن أي استخدام يسبب إساءة أو تعطيلًا للخدمة.</p>
+                  <h2>3. دقة المعلومات</h2>
+                  <p>يلتزم المستخدم بتقديم بيانات صحيحة عند تعبئة النماذج أو طلب التواصل، ويتحمل مسؤولية دقتها.</p>
+                  <h2>4. الملكية الفكرية</h2>
+                  <p>حقوق المحتوى والعلامة والتصاميم المرتبطة بالموقع محفوظة للأرام ما لم يُذكر خلاف ذلك.</p>
+                  <h2>5. التعديلات</h2>
+                  <p>يجوز تحديث هذه الشروط عند الحاجة، ويُعتمد تاريخ آخر تحديث المنشور في أعلى الصفحة.</p>
+                </>
+              ) : (
+                <>
+                  <p>
+                    These terms govern the use of ALaram website and online services. By using the site, you
+                    acknowledge and agree to these terms.
+                  </p>
+                  <h2>1. Service Scope</h2>
+                  <p>ALaram provides services online across Saudi Arabia and does not offer a fixed office visit location.</p>
+                  <h2>2. Acceptable Use</h2>
+                  <p>You must use the website and services lawfully and avoid any misuse that harms or interrupts service.</p>
+                  <h2>3. Information Accuracy</h2>
+                  <p>Users are responsible for providing accurate information in forms and communication requests.</p>
+                  <h2>4. Intellectual Property</h2>
+                  <p>Website content, branding, and design rights belong to ALaram unless explicitly stated otherwise.</p>
+                  <h2>5. Updates</h2>
+                  <p>These terms may be updated when needed. The last updated date at the top of this page applies.</p>
+                </>
+              )}
             </CardContent>
           </Card>
         </div>

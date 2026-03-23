@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Simulate email sending (in production, use a service like SendGrid, Mailgun, etc.)
-    console.log(`Sending email to: ${process.env.CONTACT_INBOX || "sales@alaram.example"}`);
+    console.log(`Sending email to: ${process.env.CONTACT_INBOX || "info@alaram.net"}`);
     console.log("Email content:", {
       subject: `New Contact Form: ${body.name}`,
       from: body.email,

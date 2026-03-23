@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Heart } from "lucide-react";
+import { Facebook, MessageCircle, Mail, Phone, Heart } from "lucide-react";
 
 import { Logo } from "@/components/logo";
+import { brand } from "@/lib/brand";
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -43,10 +44,8 @@ export function Footer() {
   ];
 
   const socialLinks = [
-    { name: "Facebook", icon: Facebook, href: "#", color: "hover:text-blue-500" },
-    { name: "Twitter", icon: Twitter, href: "#", color: "hover:text-sky-400" },
-    { name: "Instagram", icon: Instagram, href: "#", color: "hover:text-pink-500" },
-    { name: "LinkedIn", icon: Linkedin, href: "#", color: "hover:text-blue-600" },
+    { name: "Facebook", icon: Facebook, href: brand.facebook, color: "hover:text-blue-500" },
+    { name: "WhatsApp", icon: MessageCircle, href: brand.whatsapp, color: "hover:text-green-500" },
   ];
 
   return (
@@ -87,31 +86,31 @@ export function Footer() {
 
             {/* Contact Info */}
             <div className="mt-6 space-y-2">
-              <a 
-                href="mailto:sales@alaram.example" 
+              <a
+                href={brand.mailtoHref}
                 className="group flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20">
                   <Mail className="h-4 w-4 text-primary" />
                 </div>
-                <span>sales@alaram.example</span>
+                <span>{brand.email}</span>
               </a>
               
-              <a 
-                href="tel:+966XXXXXXXX" 
+              <a
+                href={brand.telHref}
                 className="group flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20">
                   <Phone className="h-4 w-4 text-primary" />
                 </div>
-                <span dir="ltr">+966 XX XXX XXXX</span>
+                <span dir="ltr">{brand.phoneLocal}</span>
               </a>
               
               <div className="group flex items-center gap-2 text-sm text-muted-foreground">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
-                  <MapPin className="h-4 w-4 text-primary" />
+                  <MessageCircle className="h-4 w-4 text-primary" />
                 </div>
-                <span>{t("country")}</span>
+                <span>{locale === "ar" ? brand.serviceArea.ar : brand.serviceArea.en}</span>
               </div>
             </div>
           </div>

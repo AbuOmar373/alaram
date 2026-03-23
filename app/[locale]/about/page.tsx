@@ -28,14 +28,13 @@ import { Button } from "@/components/ui/button";
 export default function AboutPage({ params }: { params: { locale: string } }) {
   const { locale } = params;
   const t = useTranslations("about");
-  const tStats = useTranslations("stats");
   const isRTL = locale === "ar";
 
   const stats = [
-    { value: "2020", label: locale === "ar" ? "تأسست" : "Founded" },
-    { value: "500+", label: tStats("customers") },
-    { value: "50+", label: locale === "ar" ? "موظف" : "Employees" },
-    { value: "5", label: locale === "ar" ? "قطاعات" : "Industries" },
+    { value: locale === "ar" ? "أونلاين" : "Online", label: locale === "ar" ? "نموذج الخدمة" : "Service Model" },
+    { value: locale === "ar" ? "السعودية" : "Saudi Arabia", label: locale === "ar" ? "نطاق الخدمة" : "Service Area" },
+    { value: "5+", label: locale === "ar" ? "قطاعات مستهدفة" : "Target Industries" },
+    { value: locale === "ar" ? "عربي/EN" : "AR/EN", label: locale === "ar" ? "لغة الدعم" : "Support Language" },
   ];
 
   const values = [
@@ -97,62 +96,62 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
 
   const timeline = [
     {
-      year: "2020",
-      title: locale === "ar" ? "التأسيس" : "Founded",
+      year: locale === "ar" ? "المرحلة 1" : "Phase 1",
+      title: locale === "ar" ? "بناء الأساس" : "Foundation",
       description:
         locale === "ar"
-          ? "تأسيس الشركة برؤية واضحة لتقديم حلول محاسبية متخصصة"
-          : "Company founded with a clear vision to provide specialized accounting solutions",
+          ? "تصميم تجربة منصة تركز على سهولة الاستخدام ووضوح العمليات الأساسية."
+          : "Building a platform experience focused on usability and clear core workflows.",
     },
     {
-      year: "2021",
-      title: locale === "ar" ? "أول 100 عميل" : "First 100 Customers",
+      year: locale === "ar" ? "المرحلة 2" : "Phase 2",
+      title: locale === "ar" ? "تطوير الحلول القطاعية" : "Industry Expansion",
       description:
         locale === "ar"
-          ? "وصلنا إلى أول 100 عميل في مختلف القطاعات"
-          : "Reached our first 100 customers across various sectors",
+          ? "توسيع الوحدات لتناسب احتياجات قطاعات متعددة مثل السوبرماركت والصيانة والورش."
+          : "Expanding modules to fit multiple industries such as supermarkets, maintenance, and workshops.",
     },
     {
-      year: "2022",
-      title: locale === "ar" ? "التوسع الإقليمي" : "Regional Expansion",
+      year: locale === "ar" ? "المرحلة 3" : "Phase 3",
+      title: locale === "ar" ? "تحسين الأداء" : "Performance Optimization",
       description:
         locale === "ar"
-          ? "بدأنا التوسع في دول الخليج"
-          : "Started expanding to Gulf countries",
+          ? "تحسين تجربة الاستخدام وسرعة التنفيذ والتقارير الفورية لدعم العمليات اليومية."
+          : "Enhancing usability, speed, and real-time reporting to support daily operations.",
     },
     {
-      year: "2023",
-      title: locale === "ar" ? "التكامل مع ZATCA" : "ZATCA Integration",
+      year: locale === "ar" ? "المرحلة 4" : "Phase 4",
+      title: locale === "ar" ? "تعزيز التكاملات" : "Integration Readiness",
       description:
         locale === "ar"
-          ? "إطلاق التكامل مع الفوترة الإلكترونية"
-          : "Launched e-invoicing integration",
+          ? "إضافة تجهيزات تقنية تدعم متطلبات التكامل حسب نطاق المشروع والتنفيذ الفني."
+          : "Adding technical readiness features for integrations based on project scope and implementation.",
     },
     {
-      year: "2024",
-      title: locale === "ar" ? "500+ عميل" : "500+ Customers",
+      year: locale === "ar" ? "مستمر" : "Ongoing",
+      title: locale === "ar" ? "تحديث مستمر" : "Continuous Improvement",
       description:
         locale === "ar"
-          ? "تجاوزنا 500 عميل راضٍ عن خدماتنا"
-          : "Surpassed 500 satisfied customers",
+          ? "تطوير مستمر وفق احتياجات العملاء الفعلية وأولويات التشغيل."
+          : "Continuous development aligned with real customer needs and operational priorities.",
     },
   ];
 
   const achievements = [
     {
       icon: CheckCircle2,
-      title: locale === "ar" ? "معتمدون من ZATCA" : "ZATCA Certified",
-      description: locale === "ar" ? "نظام متوافق مع متطلبات هيئة الزكاة" : "System compliant with ZATCA requirements",
+      title: locale === "ar" ? "حلول مخصصة" : "Tailored Solutions",
+      description: locale === "ar" ? "تجهيزات تناسب طبيعة كل قطاع" : "Setup designed for each industry workflow",
     },
     {
       icon: Globe,
-      title: locale === "ar" ? "خدمة 5 دول" : "Serving 5 Countries",
-      description: locale === "ar" ? "نخدم عملاء في 5 دول خليجية" : "Serving clients in 5 Gulf countries",
+      title: locale === "ar" ? "خدمة إلكترونية" : "Online Service Delivery",
+      description: locale === "ar" ? "تقديم الخدمات عن بُعد داخل السعودية" : "Services delivered remotely across Saudi Arabia",
     },
     {
       icon: Rocket,
-      title: locale === "ar" ? "نمو 300%" : "300% Growth",
-      description: locale === "ar" ? "نمو سنوي في قاعدة العملاء" : "Annual growth in customer base",
+      title: locale === "ar" ? "تحسين مستمر" : "Continuous Improvement",
+      description: locale === "ar" ? "تحديثات دورية على الأداء وتجربة الاستخدام" : "Regular updates for performance and user experience",
     },
   ];
 
@@ -202,7 +201,7 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
             >
               <div>
                 <Badge className="mb-4 bg-primary/10 text-primary hover:bg-primary/20">
-                  {isRTL ? "منذ 2020" : "Since 2020"}
+                  {isRTL ? "منصة حلول أعمال" : "Business Solutions Platform"}
                 </Badge>
                 <h2 className="mb-6 text-4xl font-bold">
                   {isRTL ? "رحلتنا نحو التميز" : "Our Journey to Excellence"}
@@ -210,13 +209,13 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
                 <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
                   <p>
                     {locale === "ar"
-                      ? "الأرام هي شركة سعودية متخصصة في تطوير حلول برمجية محاسبية متكاملة. تأسست الشركة في عام 2020 برؤية واضحة: توفير برامج محاسبية متخصصة تلبي احتياجات مختلف القطاعات في المملكة العربية السعودية ودول الخليج."
-                      : "ALaram is a Saudi company specialized in developing integrated accounting software solutions. The company was founded in 2020 with a clear vision: to provide specialized accounting software that meets the needs of various sectors in Saudi Arabia and the Gulf countries."}
+                      ? "الأرام منصة حلول أعمال ومحاسبة تركّز على تقديم تجربة مرنة وسهلة للقطاعات المختلفة داخل السعودية."
+                      : "ALaram is a business and accounting solutions platform focused on delivering a flexible, easy-to-use experience for multiple industries in Saudi Arabia."}
                   </p>
                   <p>
                     {locale === "ar"
-                      ? "نحن نفخر بتقديم حلول مبتكرة تساعد الشركات على إدارة أعمالها بكفاءة وفعالية، مع التركيز على سهولة الاستخدام والأداء العالي. فريقنا المتخصص يعمل بشكل مستمر على تطوير وتحسين منتجاتنا لتواكب أحدث المتطلبات والتقنيات."
-                      : "We are proud to provide innovative solutions that help companies manage their business efficiently and effectively, with a focus on ease of use and high performance. Our specialized team works continuously to develop and improve our products to keep pace with the latest requirements and technologies."}
+                      ? "نطوّر حلولنا بشكل مستمر بناءً على احتياجات الاستخدام الفعلية، مع اهتمام خاص بسرعة الأداء، دقة التقارير، وسهولة التشغيل اليومي."
+                      : "We continuously refine our platform based on real usage needs, with a strong focus on fast performance, accurate reporting, and smooth day-to-day operations."}
                   </p>
                 </div>
               </div>

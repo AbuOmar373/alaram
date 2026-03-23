@@ -1,11 +1,11 @@
 import { MetadataRoute } from "next";
+import { brand } from "@/lib/brand";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "ALaram | الأرام - منصة برامج محاسبية متخصصة",
+    name: `${brand.name.en} | ${brand.name.ar}`,
     short_name: "ALaram",
-    description:
-      "منصة برامج محاسبية متعددة القطاعات — نقاط بيع، محاسبة، مستودعات، وموارد بشرية في نظام واحد",
+    description: brand.description.ar,
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

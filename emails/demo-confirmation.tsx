@@ -315,10 +315,10 @@ export default function DemoConfirmationEmail({
             >
               {t.contactHelp}{" "}
               <Link
-                href="mailto:wzw808@gmail.com"
+                href="mailto:info@alaram.net"
                 className="text-[rgb(0,115,255)]"
               >
-                wzw808@gmail.com
+                info@alaram.net
               </Link>
             </Text>
 
@@ -327,7 +327,7 @@ export default function DemoConfirmationEmail({
                 {t.website}
               </Link>{" "}
               •{" "}
-              <Link href="mailto:wzw808@gmail.com">
+              <Link href="mailto:info@alaram.net">
                 {t.support}
               </Link>{" "}
               •{" "}
@@ -337,7 +337,7 @@ export default function DemoConfirmationEmail({
             </Text>
 
             <Text className="m-0 mt-[25px] text-center text-[12px] leading-[24px] text-[rgb(102,102,102)]">
-              Copyright © 2026 Your Company
+              Copyright © 2026 ALaram
               <br />
               {t.copyright}
             </Text>

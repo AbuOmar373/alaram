@@ -28,7 +28,7 @@ Create `.env.local` file and copy content from `.env.local.example`:
 NEXT_PUBLIC_SITE_NAME="ALaram | الأرام"
 NEXT_PUBLIC_DEFAULT_MARKET="KSA"
 NEXT_PUBLIC_ANALYTICS_ENABLED="false"
-CONTACT_INBOX="sales@alaram.example"
+CONTACT_INBOX="info@alaram.net"
 ```
 
 ### 3. تشغيل المشروع | Run Development Server
@@ -165,8 +165,8 @@ pnpm start
 ### ✅ جاهز لـ KSA | KSA Ready
 - ضريبة القيمة المضافة 15%
 - 15% VAT
-- الفوترة الإلكترونية (placeholder)
-- E-invoicing (placeholder)
+- الفوترة الإلكترونية (تحتاج إعدادًا وتنفيذًا فنيًا حسب نطاق المشروع)
+- E-invoicing (requires technical setup and implementation based on project scope)
 - طرق الدفع المحلية
 - Local payment methods
 

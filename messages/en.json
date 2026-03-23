@@ -1,6 +1,6 @@
 {
   "common": {
-    "siteName": "ALaram | الأرام",
+    "siteName": "ALaram | Business Solutions",
     "loading": "Loading...",
     "error": "An error occurred",
     "submit": "Submit",
@@ -87,7 +87,7 @@
           "company": "Al-Jawharah Salon"
         },
         "alsaeed": {
-          "content": "Integration with e-invoicing was very smooth. We highly recommend it for any business owner in Saudi Arabia.",
+          "content": "The platform helped us organize daily operations and monitor reports more clearly. The experience was practical and easy for our team.",
           "author": "Khaled Al-Saeed",
           "role": "Owner",
           "company": "Al-Saeed Auto Workshop"
@@ -108,15 +108,15 @@
         },
         "zatca": {
           "question": "Is the system compliant with ZATCA requirements?",
-          "answer": "Yes, the system is ready to integrate with ZATCA e-invoicing requirements."
+          "answer": "The platform can be prepared to support e-invoicing requirements depending on the required technical setup and implementation."
         },
         "payments": {
           "question": "What payment methods are supported?",
-          "answer": "We support all common payment methods in Saudi Arabia: Mada, Apple Pay, STC Pay, and credit cards."
+          "answer": "Available payment methods depend on the integrations and technical setup implemented for your project scope."
         },
         "offline": {
           "question": "Does the system work offline?",
-          "answer": "Yes, the system can work offline and sync data when connection is available."
+          "answer": "Offline mode availability depends on your approved technical setup and deployed system configuration."
         }
       }
     },
@@ -179,7 +179,7 @@
     "info": {
       "email": "Email",
       "phone": "Phone",
-      "address": "Address"
+      "address": "Service Coverage"
     }
   },
   "demo": {
@@ -200,7 +200,7 @@
     "recent": "Recent Articles"
   },
   "footer": {
-    "description": "Specialized accounting software platform for all industries",
+    "description": "ALaram is a business solutions platform tailored for multiple industries, with ease of use, fast performance, and accurate real-time reporting.",
     "products": "Products",
     "company": "Company",
     "support": "Support",
@@ -212,8 +212,8 @@
     "madeInKSA": "Made in Saudi Arabia 🇸🇦",
     "country": "Saudi Arabia",
     "brandLine": "ALaram",
-    "certifiedAccounting": "Certified Accounting",
-    "zatcaCompliant": "ZATCA Compliant",
+    "certifiedAccounting": "Business solutions for multiple industries",
+    "zatcaCompliant": "E-invoicing-ready setup support",
     "paymentMethodsLabel": "Available payment methods:"
   },
   "logo": {
@@ -238,8 +238,8 @@
     "zatca": {
       "title": "E-Invoicing Ready",
       "ready": "Ready",
-      "description": "Our system is ready to integrate with ZATCA (Zakat, Tax and Customs Authority)",
-      "note": "Note: This is a placeholder, actual integration requires additional setup"
+      "description": "The platform can be prepared to support e-invoicing requirements depending on the required technical setup and implementation",
+      "note": "Integration scope depends on the approved technical setup and implementation process"
     },
     "vat": {
       "title": "VAT Management",

@@ -1,9 +1,9 @@
 import { MetadataRoute } from "next";
 import { industries } from "@/data/industries";
+import { getBaseUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl =
-    (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").replace(/\/+$/, "");
+  const baseUrl = getBaseUrl();
   const locales = ["ar", "en"] as const;
   const staticPaths = [
     "",

@@ -11,47 +11,48 @@ import { Testimonials } from "@/components/sections/testimonials";
 import { CTASection } from "@/components/sections/cta-section";
 import { industries } from "@/data/industries";
 import { Badge } from "@/components/ui/badge";
+import { brand } from "@/lib/brand";
+import { getBaseUrl } from "@/lib/site-url";
+import { getLocaleFromParam, languageAlternates, localizedPath } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const tHome = await getTranslations({ locale, namespace: "home" });
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-  const canonical = `${baseUrl}/${locale}`;
-  const socialImage = `${baseUrl}/${locale}/opengraph-image`;
+  const currentLocale = getLocaleFromParam(locale);
+  const baseUrl = getBaseUrl();
+  const canonical = `${baseUrl}${localizedPath(currentLocale)}`;
+  const socialImage = `${baseUrl}${localizedPath(currentLocale, "/opengraph-image")}`;
+  const title = currentLocale === "ar" ? brand.title.ar : brand.title.en;
+  const description = brand.description[currentLocale];
 
   return {
-    title: tHome("hero.headline"),
-    description: tHome("hero.subheadline"),
+    title,
+    description,
     alternates: {
       canonical,
-      languages: {
-        ar: `${baseUrl}/ar`,
-        en: `${baseUrl}/en`,
-        "x-default": `${baseUrl}/ar`,
-      },
+      languages: languageAlternates(),
     },
     openGraph: {
       type: "website",
       url: canonical,
-      title: tHome("hero.headline"),
-      description: tHome("hero.subheadline"),
-      siteName: "ALaram",
-      locale: locale === "ar" ? "ar_SA" : "en_US",
+      title,
+      description,
+      siteName: currentLocale === "ar" ? brand.name.ar : brand.name.en,
+      locale: currentLocale === "ar" ? "ar_SA" : "en_US",
       images: [
         {
           url: socialImage,
           width: 1200,
           height: 630,
-          alt: "ALaram",
+          alt: title,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: tHome("hero.headline"),
-      description: tHome("hero.subheadline"),
+      title,
+      description,
       images: [socialImage],
     },
   };
@@ -59,15 +60,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
+  const currentLocale = getLocaleFromParam(locale);
   setRequestLocale(locale);
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const baseUrl = getBaseUrl();
 
   const t = await getTranslations("home");
   const tFeatureItems = await getTranslations("home.features.items");
   const tFaqItems = await getTranslations("home.faqs.items");
   const tTestimonialItems = await getTranslations("home.testimonials.items");
   const tSolutions = await getTranslations("solutions");
-  const tStats = await getTranslations("stats");
   const tCompliance = await getTranslations("compliance");
 
   // Match FeatureGrid's expected iconName type (Lucide icon names)
@@ -102,10 +103,22 @@ export default async function HomePage({ params }: PageProps) {
   }));
 
   const stats = [
-    { value: "500+", label: tStats("customers") },
-    { value: "50,000+", label: tStats("transactions") },
-    { value: "24/7", label: tStats("support") },
-    { value: "98%", label: tStats("satisfaction") },
+    {
+      value: currentLocale === "ar" ? "أونلاين" : "Online",
+      label: currentLocale === "ar" ? "نموذج الخدمة" : "Service model",
+    },
+    {
+      value: currentLocale === "ar" ? "السعودية" : "Saudi Arabia",
+      label: currentLocale === "ar" ? "نطاق الخدمة" : "Service coverage",
+    },
+    {
+      value: currentLocale === "ar" ? "AR/EN" : "AR/EN",
+      label: currentLocale === "ar" ? "لغة الدعم" : "Support language",
+    },
+    {
+      value: currentLocale === "ar" ? "متعدد" : "Multi-sector",
+      label: currentLocale === "ar" ? "القطاعات المستهدفة" : "Target industries",
+    },
   ];
 
   const testimonialKeys = ["alotaibi", "aldosari", "alsaeed"] as const;
@@ -124,10 +137,16 @@ export default async function HomePage({ params }: PageProps) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "ALaram",
+    "@id": `${baseUrl}/${locale}#website`,
+    name: currentLocale === "ar" ? brand.name.ar : brand.name.en,
+    alternateName: [brand.name.ar, brand.name.en],
     url: `${baseUrl}/${locale}`,
     inLanguage: locale,
-    description: t("hero.subheadline"),
+    description: brand.description[currentLocale],
+    publisher: {
+      "@type": "Organization",
+      "@id": `${baseUrl}/${locale}#organization`,
+    },
     potentialAction: {
       "@type": "SearchAction",
       target: `${baseUrl}/${locale}/blog?q={search_term_string}`,

@@ -1,3 +1,4 @@
+import { brand } from "@/lib/brand";
 import { ImageResponse } from "next/og";
 
 export const size = {
@@ -15,12 +16,8 @@ export default async function OpenGraphImage({ params }: Props) {
   const { locale } = await params;
   const isArabic = locale === "ar";
 
-  const title = isArabic
-    ? "الأرام | منصة برامج محاسبية متخصصة"
-    : "ALaram | Specialized Accounting Platform";
-  const subtitle = isArabic
-    ? "نقاط بيع، محاسبة، مستودعات، وموارد بشرية في نظام واحد"
-    : "POS, accounting, inventory and HR in one system";
+  const title = isArabic ? brand.title.ar : brand.title.en;
+  const subtitle = isArabic ? brand.description.ar : brand.description.en;
 
   return new ImageResponse(
     (
@@ -47,7 +44,7 @@ export default async function OpenGraphImage({ params }: Props) {
             opacity: 0.9,
           }}
         >
-          {isArabic ? "الأرام | ALaram" : "ALaram"}
+          {isArabic ? `${brand.name.ar} | ${brand.name.en}` : brand.name.en}
         </div>
         <div
           style={{

@@ -1048,7 +1048,7 @@ export default function BlogPostPage({ params: { locale, slug } }: BlogPostPageP
     .filter((p) => p.categorySlug === post.categorySlug && p.slug !== post.slug)
     .slice(0, 3);
 
-  const shareUrl = `https://alaram.example/${locale}/blog/${slug}`;
+  const shareUrl = `https://alaram.net/${locale}/blog/${slug}`;
   const shareTitle = post.title;
 
   const handleShare = (platform: string) => {
@@ -1383,7 +1383,7 @@ export default function BlogPostPage({ params: { locale, slug } }: BlogPostPageP
                   </CardContent>
                 </Card>
 
-                {/* Table of Contents (placeholder) */}
+                {/* Table of Contents */}
                 <Card className="border-2">
                   <CardHeader>
                     <CardTitle className="text-lg">

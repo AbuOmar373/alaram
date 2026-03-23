@@ -4,6 +4,7 @@ import { Mail, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { brand } from "@/lib/brand";
 
 type Props = {
   isRTL: boolean;
@@ -20,16 +21,16 @@ export default function ContactOptionsCard({ isRTL }: Props) {
 
       <CardContent className="space-y-3">
         <Button variant="outline" className="w-full justify-start gap-3" asChild>
-          <a href="tel:+966XXXXXXXX">
+          <a href={brand.telHref}>
             <Phone className="h-5 w-5" />
-            <span dir="ltr">+966 XX XXX XXXX</span>
+            <span dir="ltr">{brand.phoneLocal}</span>
           </a>
         </Button>
 
         <Button variant="outline" className="w-full justify-start gap-3" asChild>
-          <a href="mailto:demo@alaram.example">
+          <a href={brand.mailtoHref}>
             <Mail className="h-5 w-5" />
-            <span dir="ltr">demo@alaram.example</span>
+            <span dir="ltr">{brand.email}</span>
           </a>
         </Button>
       </CardContent>

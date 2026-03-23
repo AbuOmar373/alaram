@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Tajawal } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { brand } from "@/lib/brand";
 import { getBaseUrl } from "@/lib/site-url";
 import "./globals.css";
 
@@ -13,36 +14,42 @@ const tajawal = Tajawal({
 
 export const metadata: Metadata = {
   title: {
-    default: "الأرام | ALaram - منصة برامج محاسبية متخصصة",
-    template: "%s | الأرام | ALaram",
+    default: brand.title.ar,
+    template: brand.titleTemplate.ar,
   },
-  description:
-    "منصة برامج محاسبية متعددة القطاعات — نقاط بيع، محاسبة، مستودعات، وموارد بشرية في نظام واحد",
-  keywords: [
-    "برامج محاسبة",
-    "نقاط البيع",
-    "إدارة المخزون",
-    "الموارد البشرية",
-    "السعودية",
-    "الفوترة الإلكترونية",
-  ],
-  authors: [{ name: "ALaram" }],
-  creator: "ALaram",
+  description: brand.description.ar,
+  authors: [{ name: brand.name.en }],
+  creator: brand.name.en,
+  publisher: brand.name.en,
   metadataBase: new URL(getBaseUrl()),
+  alternates: {
+    canonical: "/ar",
+    languages: {
+      ar: "/ar",
+      en: "/en",
+      "x-default": "/ar",
+    },
+  },
   openGraph: {
     type: "website",
     locale: "ar_SA",
-    url: "/",
-    title: "الأرام | ALaram - منصة برامج محاسبية متخصصة",
-    description:
-      "حلول مُفصّلة للسوبرماركت، الصيانة، ورش السيارات، العطور، والصالونات النسائية",
-    siteName: "الأرام | ALaram",
+    url: "/ar",
+    title: brand.title.ar,
+    description: brand.description.ar,
+    siteName: brand.name.ar,
   },
   twitter: {
     card: "summary_large_image",
-    title: "الأرام | ALaram - منصة برامج محاسبية متخصصة",
-    description:
-      "حلول مُفصّلة للسوبرماركت، الصيانة، ورش السيارات، العطور، والصالونات النسائية",
+    title: brand.title.ar,
+    description: brand.description.ar,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 

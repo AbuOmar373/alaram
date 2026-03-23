@@ -284,7 +284,7 @@ pnpm dev
 NEXT_PUBLIC_SITE_NAME="ALaram | الأرام"
 NEXT_PUBLIC_DEFAULT_MARKET="KSA"
 NEXT_PUBLIC_SITE_URL="https://yourdomain.com"
-CONTACT_INBOX="sales@alaram.com"
+CONTACT_INBOX="info@alaram.net"
 ```
 
 ---
@@ -292,19 +292,17 @@ CONTACT_INBOX="sales@alaram.com"
 ## 📞 اتصل بنا | Contact Us
 
 ### 📧 البريد الإلكتروني
-- **المبيعات:** sales@alaram.example
-- **الدعم الفني:** support@alaram.example
-- **الاستفسارات العامة:** info@alaram.example
+- **البريد الرسمي:** info@alaram.net
 
 ### 📱 الهاتف
-- **السعودية:** +966 XX XXX XXXX
-- **الإمارات:** +971 XX XXX XXXX
+- **السعودية:** 055 123 4848
+- **صيغة دولية:** +966 55 123 4848
 
 ### 🌐 الموقع الإلكتروني
-[www.alaram.example](http://www.alaram.example)
+[alaram.net](https://alaram.net)
 
-### 🏢 المقر الرئيسي
-**الرياض، المملكة العربية السعودية**
+### 🏢 نطاق تقديم الخدمة
+**نقدم خدماتنا إلكترونيًا لعملائنا داخل السعودية**
 
 ---
 
@@ -426,7 +424,7 @@ pnpm start
 - التنفيذ والتدريب
 - التطوير والتخصيص
 
-📧 **للتواصل:** partners@alaram.example
+📧 **للتواصل:** info@alaram.net
 
 ---
 
@@ -452,7 +450,7 @@ pnpm start
 
 👉 **[احجز عرضاً توضيحياً مجانياً](http://localhost:3000/demo)**
 
-أو اتصل بنا على: **+966 XX XXX XXXX**
+أو اتصل بنا على: **055 123 4848**
 
 ---
 
@@ -463,7 +461,7 @@ pnpm start
 
 **ALaram | الأرام - الشريك الذكي لنجاح أعمالك**
 
-[الموقع الإلكتروني](http://www.alaram.example) • [المدونة](http://www.alaram.example/blog) • [الدعم](mailto:support@alaram.example) • [تواصل معنا](http://www.alaram.example/contact)
+[الموقع الإلكتروني](https://alaram.net) • [المدونة](https://alaram.net/ar/blog) • [البريد](mailto:info@alaram.net) • [تواصل معنا](https://alaram.net/ar/contact)
 
 </div>
 

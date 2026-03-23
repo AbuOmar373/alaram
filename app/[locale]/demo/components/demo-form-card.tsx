@@ -30,6 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { brand } from "@/lib/brand";
 
 import { useDemoForm } from "../hooks/use-demo-form";
 
@@ -143,7 +144,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
                 type="email"
                 {...register("email")}
                 className="h-12 rounded-xl border-2"
-                placeholder="example@email.com"
+                placeholder={brand.email}
                 dir="ltr"
               />
               {errors.email && (
@@ -162,7 +163,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
                 type="tel"
                 {...register("phone")}
                 className="h-12 rounded-xl border-2"
-                placeholder="+966 5X XXX XXXX"
+                placeholder={brand.phoneIntlDisplay}
                 dir="ltr"
               />
               {errors.phone && (
