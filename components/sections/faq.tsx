@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 import { HelpCircle } from "lucide-react";
 import {
   Accordion,
@@ -21,26 +22,27 @@ interface FAQProps {
 }
 
 export function FAQ({ title, subtitle, items }: FAQProps) {
+  const locale = useLocale();
+
   return (
-    <section className="relative overflow-hidden py-28">
-      {/* Background gradient */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-accent/5 to-background" />
+    <section className="relative overflow-hidden py-24">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-muted/40 to-background" />
 
       <div className="container mx-auto px-4">
-        <div className="mx-auto mb-20 max-w-4xl text-center">
+        <div className="mx-auto mb-14 max-w-3xl text-center">
           <motion.div
-            className="mb-6 inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-primary/15 via-accent/15 to-primary/15 px-6 py-3 shadow-lg backdrop-blur-sm"
+            className="section-eyebrow mb-5"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <HelpCircle className="h-6 w-6 text-primary" />
-            <span className="text-base font-bold text-primary">الأسئلة الشائعة</span>
+            <HelpCircle className="h-4 w-4" />
+            <span>{locale === "ar" ? "الأسئلة الشائعة" : "Frequently asked questions"}</span>
           </motion.div>
 
           <motion.h2
-            className="bg-gradient-to-br from-gray-900 via-primary to-accent bg-clip-text text-5xl font-black tracking-tight text-transparent dark:from-gray-100 dark:via-primary dark:to-accent sm:text-6xl"
+            className="section-title"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -50,7 +52,7 @@ export function FAQ({ title, subtitle, items }: FAQProps) {
           </motion.h2>
           {subtitle && (
             <motion.p
-              className="mt-6 text-xl font-medium text-muted-foreground"
+              className="section-subtitle"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -68,23 +70,23 @@ export function FAQ({ title, subtitle, items }: FAQProps) {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <Accordion type="single" collapsible className="w-full space-y-4">
+          <Accordion type="single" collapsible className="w-full space-y-3">
             {items.map((item, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="overflow-hidden rounded-2xl border-2 border-transparent bg-white/80 px-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:border-primary/20 hover:shadow-xl dark:bg-gray-900/80"
+                className="surface-card overflow-hidden rounded-3xl px-6"
               >
-                <AccordionTrigger className="text-right text-lg font-bold text-foreground hover:text-primary hover:no-underline">
+                <AccordionTrigger className="text-start text-base font-black text-foreground hover:text-primary hover:no-underline md:text-lg">
                   <span className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-accent/20 text-sm font-bold text-primary">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-black text-primary">
                       {index + 1}
                     </span>
                     {item.question}
                   </span>
                 </AccordionTrigger>
-                <AccordionContent className="text-right text-base leading-relaxed text-muted-foreground">
-                  <div className="border-r-4 border-primary/30 pr-6 pt-2">
+                <AccordionContent className="text-start text-base leading-8 text-muted-foreground">
+                  <div className="border-s-2 border-primary/25 ps-6 pt-2">
                     {item.answer}
                   </div>
                 </AccordionContent>

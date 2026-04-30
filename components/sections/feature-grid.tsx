@@ -21,14 +21,13 @@ interface FeatureGridProps {
 
 export function FeatureGrid({ title, subtitle, features }: FeatureGridProps) {
   return (
-    <section className="relative overflow-hidden py-28">
-      {/* Background gradient */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-primary/5 to-background" />
+    <section className="relative overflow-hidden py-24">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-muted/40 to-background" />
 
       <div className="container mx-auto px-4">
-        <div className="mx-auto mb-20 max-w-4xl text-center">
+        <div className="mx-auto mb-14 max-w-3xl text-center">
           <motion.h2
-            className="bg-gradient-to-br from-gray-900 via-primary to-accent bg-clip-text text-5xl font-black tracking-tight text-transparent dark:from-gray-100 dark:via-primary dark:to-accent sm:text-6xl md:text-7xl"
+            className="section-title"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -38,7 +37,7 @@ export function FeatureGrid({ title, subtitle, features }: FeatureGridProps) {
           </motion.h2>
           {subtitle && (
             <motion.p
-              className="mt-8 text-2xl font-medium text-muted-foreground"
+              className="section-subtitle"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -49,7 +48,7 @@ export function FeatureGrid({ title, subtitle, features }: FeatureGridProps) {
           )}
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, index) => {
             const Icon = (Icons[feature.iconName] as LucideIcon) || Icons.Circle;
             return (
@@ -60,23 +59,18 @@ export function FeatureGrid({ title, subtitle, features }: FeatureGridProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
               >
-                <Card className="group relative h-full overflow-hidden border-2 border-transparent bg-white/80 backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 dark:bg-gray-900/80">
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/0 via-accent/0 to-primary/0 opacity-0 transition-opacity duration-500 group-hover:opacity-10" />
-
-                  <CardHeader className="space-y-6 pb-4">
-                    <div className="relative">
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary to-accent opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-50" />
-                      <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 via-accent/15 to-primary/20 shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
-                        <Icon className="h-8 w-8 text-primary transition-all duration-500 group-hover:scale-110 group-hover:text-accent" />
-                      </div>
+                <Card className="surface-card group relative h-full overflow-hidden rounded-3xl">
+                  <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+                  <CardHeader className="space-y-5 pb-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary ring-1 ring-primary/10 transition-all duration-300 group-hover:bg-primary group-hover:text-white">
+                      <Icon className="h-6 w-6" />
                     </div>
-                    <CardTitle className="text-2xl font-bold transition-colors duration-300 group-hover:text-primary">
+                    <CardTitle className="text-xl font-black leading-8 transition-colors duration-300 group-hover:text-primary">
                       {feature.title}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="pb-8">
-                    <CardDescription className="text-base leading-relaxed">
+                  <CardContent className="pb-7">
+                    <CardDescription className="text-sm leading-7">
                       {feature.description}
                     </CardDescription>
                   </CardContent>

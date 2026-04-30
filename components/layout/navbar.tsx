@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { Menu, Moon, Sun, Globe, X, Sparkles } from "lucide-react";
+import { ArrowUpRight, Globe, Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Logo } from "@/components/logo";
@@ -18,8 +18,6 @@ export function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
-
-  const isRTL = locale === "ar";
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -57,13 +55,10 @@ export function Navbar() {
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
         scrolled
-          ? "border-b border-border/60 bg-background/95 shadow-lg shadow-primary/5 backdrop-blur-2xl supports-[backdrop-filter]:bg-background/75"
-          : "border-b border-border/20 bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/50"
+          ? "border-b border-border/70 bg-background/90 shadow-sm shadow-slate-900/5 backdrop-blur-2xl supports-[backdrop-filter]:bg-background/75"
+          : "border-b border-transparent bg-background/65 backdrop-blur-xl supports-[backdrop-filter]:bg-background/45"
       )}
     >
-      {/* Top Gradient Bar */}
-      <div className="h-0.5 w-full bg-gradient-to-r from-primary via-purple-500 to-primary opacity-70" />
-
       <nav className="container mx-auto flex h-16 items-center justify-between px-4 lg:h-20 lg:px-6">
         <Logo href={withLocale("/")} />
 
@@ -74,20 +69,12 @@ export function Navbar() {
               key={item.href}
               href={withLocale(item.href)}
               className={cn(
-                "group relative overflow-hidden rounded-xl px-4 py-2 text-sm font-medium transition-all duration-300",
+                "group relative rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300",
                 pathname === withLocale(item.href)
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
               )}
             >
-              {/* Hover Effect Background */}
-              <span className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-              {/* Active Indicator */}
-              {pathname === withLocale(item.href) && (
-                <span className="absolute inset-x-1 -bottom-0 h-0.5 rounded-full bg-gradient-to-r from-primary via-purple-500 to-primary" />
-              )}
-
               <span className="relative">{item.name}</span>
             </Link>
           ))}
@@ -101,11 +88,10 @@ export function Navbar() {
             size="icon"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             aria-label="Toggle theme"
-            className="group relative overflow-hidden rounded-xl hover:bg-primary/10"
+            className="rounded-full border border-border/60 bg-background/70 hover:bg-muted"
           >
             <Sun className="h-5 w-5 rotate-0 scale-100 transition-all duration-300 dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all duration-300 dark:rotate-0 dark:scale-100" />
-            <span className="absolute inset-0 -z-10 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-blue-500/20 dark:to-purple-500/20" />
           </Button>
 
           {/* Language Toggle */}
@@ -114,20 +100,19 @@ export function Navbar() {
             size="icon"
             onClick={toggleLanguage}
             aria-label="Toggle language"
-            className="group relative overflow-hidden rounded-xl hover:bg-primary/10"
+            className="rounded-full border border-border/60 bg-background/70 hover:bg-muted"
           >
             <Globe className="h-5 w-5" />
-            <span className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/20 to-purple-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Button>
 
           {/* CTA Button */}
           <Button
             asChild
-            className="group relative hidden overflow-hidden rounded-xl bg-gradient-to-r from-primary via-purple-500 to-primary bg-size-200 font-semibold shadow-lg shadow-primary/30 transition-all duration-500 hover:bg-pos-100 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.02] md:flex"
+            className="hidden rounded-full bg-slate-950 px-5 font-bold shadow-lg shadow-slate-950/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-primary/20 dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-white md:flex"
           >
             <Link href={withLocale("/demo")} className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4" />
               {t("bookDemo")}
+              <ArrowUpRight className="h-4 w-4 rtl:-scale-x-100" />
             </Link>
           </Button>
 
@@ -135,7 +120,7 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            className="group relative overflow-hidden rounded-xl hover:bg-primary/10 lg:hidden"
+            className="rounded-full border border-border/60 bg-background/70 hover:bg-muted lg:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -144,24 +129,23 @@ export function Navbar() {
             ) : (
               <Menu className="h-5 w-5" />
             )}
-            <span className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/20 to-purple-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Button>
         </div>
       </nav>
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="border-t border-border/40 bg-background/95 backdrop-blur-2xl lg:hidden">
+        <div className="border-t border-border/50 bg-background/95 backdrop-blur-2xl lg:hidden">
           <div className="container mx-auto space-y-1 px-4 py-4">
             {navigation.map((item) => (
               <Link
                 key={item.href}
                 href={withLocale(item.href)}
                 className={cn(
-                  "block rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300",
+                  "block rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-300",
                   pathname === withLocale(item.href)
-                    ? "bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 text-primary shadow-lg shadow-primary/10"
-                    : "text-muted-foreground hover:bg-gradient-to-r hover:from-primary/10 hover:via-purple-500/10 hover:to-primary/10 hover:text-foreground"
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -170,11 +154,11 @@ export function Navbar() {
             ))}
             <Button
               asChild
-              className="mt-4 w-full rounded-xl bg-gradient-to-r from-primary via-purple-500 to-primary bg-size-200 font-semibold shadow-lg shadow-primary/30 transition-all duration-500 hover:bg-pos-100 hover:shadow-xl"
+              className="mt-4 w-full rounded-2xl bg-slate-950 font-bold shadow-lg shadow-slate-950/10 hover:bg-primary dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-white"
             >
               <Link href={withLocale("/demo")} onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2">
-                <Sparkles className="h-4 w-4" />
                 {t("bookDemo")}
+                <ArrowUpRight className="h-4 w-4 rtl:-scale-x-100" />
               </Link>
             </Button>
           </div>

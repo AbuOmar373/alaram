@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useLocale } from "next-intl";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Sparkles } from "lucide-react";
+import { ArrowRight, BarChart3, Check, ShieldCheck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface HeroProps {
@@ -22,14 +23,18 @@ export function Hero({
   primaryHref = "/demo",
   secondaryHref = "/solutions",
 }: HeroProps) {
-  return (
-    <section className="relative overflow-hidden py-28 md:py-40 lg:py-48">
-      {/* Enhanced Background with multiple layers */}
-      <div className="absolute inset-0 -z-10 gradient-mesh" />
+  const locale = useLocale();
+  const withLocale = (href: string) => (href.startsWith(`/${locale}`) ? href : `/${locale}${href}`);
+  const trustItems =
+    locale === "ar"
+      ? ["تجربة مجانية 14 يوم", "بدون بطاقة ائتمانية", "إلغاء في أي وقت"]
+      : ["14-day free trial", "No credit card", "Cancel anytime"];
 
-      {/* Animated gradient orbs - more vibrant */}
+  return (
+    <section className="relative overflow-hidden pb-20 pt-16 md:pb-28 md:pt-24 lg:pb-32 lg:pt-28">
+      <div className="absolute inset-0 -z-10 gradient-mesh" />
       <motion.div
-        className="absolute left-1/4 top-0 -z-10 h-[500px] w-[500px] rounded-full bg-primary/25 blur-3xl"
+        className="absolute -top-32 left-1/2 -z-10 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -37,11 +42,11 @@ export function Hero({
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut",
         }}
       />
       <motion.div
-        className="absolute bottom-0 right-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-accent/25 blur-3xl"
+        className="absolute bottom-10 right-0 -z-10 h-[26rem] w-[26rem] rounded-full bg-accent/15 blur-3xl"
         animate={{
           scale: [1.2, 1, 1.2],
           opacity: [0.5, 0.3, 0.5],
@@ -50,89 +55,128 @@ export function Hero({
           duration: 8,
           repeat: Infinity,
           ease: "easeInOut",
-          delay: 1
+          delay: 1,
         }}
       />
 
       <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-6xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary/15 via-accent/15 to-primary/15 px-6 py-3 text-base font-semibold shadow-lg backdrop-blur-sm">
-              <Sparkles className="h-5 w-5 text-primary" />
-              <span className="gradient-primary bg-clip-text text-transparent">
-                حلول محاسبية مدعمة بالذكاء الصناعي
-              </span>
-              <Sparkles className="h-5 w-5 text-accent" />
-            </div>
-
-            <h1 className="bg-gradient-to-br from-gray-900 via-primary/90 to-accent/80 bg-clip-text text-3xl font-black leading-tight tracking-tight text-transparent dark:from-gray-100 dark:via-primary dark:to-accent sm:text-4xl md:text-5xl">
-              {headline}
-            </h1>
-          </motion.div>
-
-          <motion.p
-            className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            {subheadline}
-          </motion.p>
-
-          <motion.div
-            className="mt-14 flex flex-col gap-5 sm:flex-row sm:justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Button
-              size="lg"
-              asChild
-              className="group h-16 rounded-2xl bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 px-12 text-xl font-bold shadow-2xl shadow-primary/40 transition-all duration-500 hover:scale-105 hover:bg-pos-100 hover:shadow-3xl hover:shadow-primary/50"
+        <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              <Link href={primaryHref}>
-                {primaryCta}
-                <ArrowRight className="ms-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
-              </Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              asChild
-              className="h-16 rounded-2xl border-2 border-primary/30 bg-white/50 px-12 text-xl font-bold backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:bg-primary/10 hover:shadow-lg dark:bg-gray-900/50"
-            >
-              <Link href={secondaryHref}>{secondaryCta}</Link>
-            </Button>
-          </motion.div>
+              <div className="section-eyebrow mb-6">
+                <Sparkles className="h-4 w-4" />
+                <span>{locale === "ar" ? "حلول محاسبية مدعمة بالذكاء الصناعي" : "AI-supported accounting platform"}</span>
+              </div>
 
-          {/* Enhanced trust indicators */}
+              <h1 className="max-w-4xl text-4xl font-black leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl">
+                {headline}
+              </h1>
+            </motion.div>
+
+            <motion.p
+              className="mt-6 max-w-2xl text-lg leading-9 text-muted-foreground md:text-xl"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              {subheadline}
+            </motion.p>
+
+            <motion.div
+              className="mt-9 flex flex-col gap-4 sm:flex-row"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Button
+                size="lg"
+                asChild
+                className="group h-14 rounded-full bg-slate-950 px-8 text-base font-bold shadow-xl shadow-slate-950/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-primary/25 dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-white"
+              >
+                <Link href={withLocale(primaryHref)}>
+                  {primaryCta}
+                  <ArrowRight className="ms-2 h-5 w-5 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
+                </Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                asChild
+                className="h-14 rounded-full border-border/70 bg-background/70 px-8 text-base font-bold backdrop-blur hover:bg-muted"
+              >
+                <Link href={withLocale(secondaryHref)}>{secondaryCta}</Link>
+              </Button>
+            </motion.div>
+
+            <motion.div
+              className="mt-8 flex flex-wrap gap-3 text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+            >
+              {trustItems.map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 font-semibold text-emerald-700 dark:text-emerald-300"
+                >
+                  <Check className="h-4 w-4" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
           <motion.div
-            className="mt-20 flex flex-wrap items-center justify-center gap-6 text-base"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            className="relative"
+            initial={{ opacity: 0, y: 28, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <div className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-green-500/20 to-emerald-500/20 px-6 py-3 shadow-lg backdrop-blur-sm transition-all hover:scale-105">
-              <div className="rounded-full bg-green-500 p-1">
-                <Check className="h-4 w-4 text-white" />
+            <div className="absolute -inset-8 -z-10 rounded-[3rem] bg-gradient-to-br from-primary/15 via-accent/10 to-transparent blur-2xl" />
+            <div className="glass-effect overflow-hidden rounded-[2rem] p-3">
+              <div className="rounded-[1.5rem] border border-border/70 bg-card p-5 shadow-2xl shadow-slate-950/10">
+                <div className="mb-6 flex items-center justify-between">
+                  <div>
+                    <div className="text-sm font-bold text-foreground">{locale === "ar" ? "لوحة الأداء" : "Performance dashboard"}</div>
+                    <div className="text-xs text-muted-foreground">{locale === "ar" ? "نظرة يومية على الأعمال" : "Daily business snapshot"}</div>
+                  </div>
+                  <div className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-700 dark:text-emerald-300">
+                    {locale === "ar" ? "مباشر" : "Live"}
+                  </div>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {[
+                    { label: locale === "ar" ? "المبيعات" : "Sales", value: "128K" },
+                    { label: locale === "ar" ? "الفواتير" : "Invoices", value: "842" },
+                    { label: locale === "ar" ? "المخزون" : "Stock", value: "96%" },
+                  ].map((metric) => (
+                    <div key={metric.label} className="rounded-2xl border border-border/70 bg-muted/40 p-4">
+                      <div className="text-xs font-semibold text-muted-foreground">{metric.label}</div>
+                      <div className="mt-2 text-2xl font-black text-foreground">{metric.value}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-5 rounded-2xl border border-border/70 bg-background p-4">
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-sm font-bold">
+                      <BarChart3 className="h-4 w-4 text-primary" />
+                      {locale === "ar" ? "تدفق الإيرادات" : "Revenue flow"}
+                    </div>
+                    <ShieldCheck className="h-5 w-5 text-emerald-500" />
+                  </div>
+                  <div className="flex h-36 items-end gap-2">
+                    {[42, 64, 52, 78, 70, 92, 84, 100].map((height, index) => (
+                      <div key={index} className="flex-1 rounded-t-xl bg-gradient-to-t from-primary to-accent" style={{ height: `${height}%` }} />
+                    ))}
+                  </div>
+                </div>
               </div>
-              <span className="font-bold text-green-700 dark:text-green-400">تجربة مجانية 14 يوم</span>
-            </div>
-            <div className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-green-500/20 to-emerald-500/20 px-6 py-3 shadow-lg backdrop-blur-sm transition-all hover:scale-105">
-              <div className="rounded-full bg-green-500 p-1">
-                <Check className="h-4 w-4 text-white" />
-              </div>
-              <span className="font-bold text-green-700 dark:text-green-400">بدون بطاقة ائتمانية</span>
-            </div>
-            <div className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-green-500/20 to-emerald-500/20 px-6 py-3 shadow-lg backdrop-blur-sm transition-all hover:scale-105">
-              <div className="rounded-full bg-green-500 p-1">
-                <Check className="h-4 w-4 text-white" />
-              </div>
-              <span className="font-bold text-green-700 dark:text-green-400">إلغاء في أي وقت</span>
             </div>
           </motion.div>
         </div>

@@ -183,32 +183,32 @@ export default async function HomePage({ params }: PageProps) {
       <FeatureGrid title={t("features.title")} subtitle={t("features.subtitle")} features={features} />
 
       {/* Compliance Section */}
-      <section className="border-y bg-gradient-to-r from-green-50/50 via-emerald-50/30 to-green-50/50 py-20 dark:from-green-950/20 dark:via-emerald-950/10 dark:to-green-950/20">
+      <section className="border-y border-border/60 bg-background py-20">
         <div className="container mx-auto px-4">
-          <div className="grid gap-10 md:grid-cols-2">
-            <div className="group flex gap-6 rounded-2xl border-2 border-green-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-green-300 hover:shadow-xl dark:border-green-800/50 dark:bg-gray-900/80">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 shadow-md">
-                <Badge variant="success" className="text-base font-bold">
+          <div className="grid gap-5 md:grid-cols-2">
+            <div className="surface-card group flex gap-5 rounded-3xl p-7">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/10">
+                <Badge variant="success" className="text-sm font-black">
                   {tCompliance("zatca.ready")}
                 </Badge>
               </div>
               <div>
-                <h3 className="mb-3 text-2xl font-bold text-foreground">{tCompliance("zatca.title")}</h3>
-                <p className="text-base leading-relaxed text-muted-foreground">{tCompliance("zatca.description")}</p>
-                <p className="mt-3 text-sm font-medium italic text-green-600 dark:text-green-400">
+                <h3 className="mb-3 text-2xl font-black text-foreground">{tCompliance("zatca.title")}</h3>
+                <p className="text-base leading-8 text-muted-foreground">{tCompliance("zatca.description")}</p>
+                <p className="mt-3 text-sm font-bold text-emerald-600 dark:text-emerald-400">
                   {tCompliance("zatca.note")}
                 </p>
               </div>
             </div>
-            <div className="group flex gap-6 rounded-2xl border-2 border-green-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-green-300 hover:shadow-xl dark:border-green-800/50 dark:bg-gray-900/80">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 shadow-md">
-                <Badge variant="success" className="text-base font-bold">
+            <div className="surface-card group flex gap-5 rounded-3xl p-7">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/10">
+                <Badge variant="success" className="text-sm font-black">
                   15%
                 </Badge>
               </div>
               <div>
-                <h3 className="mb-3 text-2xl font-bold text-foreground">{tCompliance("vat.title")}</h3>
-                <p className="text-base leading-relaxed text-muted-foreground">{tCompliance("vat.description")}</p>
+                <h3 className="mb-3 text-2xl font-black text-foreground">{tCompliance("vat.title")}</h3>
+                <p className="text-base leading-8 text-muted-foreground">{tCompliance("vat.description")}</p>
               </div>
             </div>
           </div>

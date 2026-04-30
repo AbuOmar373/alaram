@@ -19,11 +19,11 @@ interface TestimonialsProps {
 
 export function Testimonials({ title, subtitle, testimonials }: TestimonialsProps) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background via-muted/30 to-background py-28">
+    <section className="relative overflow-hidden bg-muted/35 py-24">
       <div className="container mx-auto px-4">
-        <div className="mx-auto mb-20 max-w-4xl text-center">
+        <div className="mx-auto mb-14 max-w-3xl text-center">
           <motion.h2
-            className="bg-gradient-to-br from-gray-900 via-primary to-accent bg-clip-text text-5xl font-black tracking-tight text-transparent dark:from-gray-100 dark:via-primary dark:to-accent sm:text-6xl"
+            className="section-title"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -33,7 +33,7 @@ export function Testimonials({ title, subtitle, testimonials }: TestimonialsProp
           </motion.h2>
           {subtitle && (
             <motion.p
-              className="mt-6 text-xl font-medium text-muted-foreground"
+              className="section-subtitle"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -44,7 +44,7 @@ export function Testimonials({ title, subtitle, testimonials }: TestimonialsProp
           )}
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
@@ -53,29 +53,26 @@ export function Testimonials({ title, subtitle, testimonials }: TestimonialsProp
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="group relative h-full overflow-hidden border-2 border-transparent bg-white/80 backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/10 dark:bg-gray-900/80">
-                {/* Gradient accent bar */}
-                <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-primary via-accent to-primary" />
+              <Card className="surface-card group relative h-full overflow-hidden rounded-3xl">
+                <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
                 <CardContent className="p-8">
-                  {/* Quote icon with gradient background */}
-                  <div className="mb-6 inline-flex rounded-2xl bg-gradient-to-br from-primary/20 via-accent/15 to-primary/20 p-4">
-                    <Quote className="h-8 w-8 text-primary" />
+                  <div className="mb-6 inline-flex rounded-2xl bg-primary/10 p-3 text-primary">
+                    <Quote className="h-6 w-6" />
                   </div>
 
-                  {/* Star rating */}
                   <div className="mb-4 flex gap-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                      <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
 
-                  <p className="mb-8 text-lg leading-relaxed text-muted-foreground">
-                    "{testimonial.content}"
+                  <p className="mb-8 text-base leading-8 text-muted-foreground">
+                    &ldquo;{testimonial.content}&rdquo;
                   </p>
 
                   <div className="border-t pt-6">
-                    <div className="font-bold text-foreground text-lg">
+                    <div className="text-lg font-black text-foreground">
                       {testimonial.author}
                     </div>
                     <div className="mt-1 text-sm font-medium text-primary">

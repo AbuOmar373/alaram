@@ -4,48 +4,48 @@
 
 @layer base {
   :root {
-    --background: 0 0% 99%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 43 45% 98%;
+    --foreground: 225 34% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 225 34% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 250 70% 65%;
+    --popover-foreground: 225 34% 12%;
+    --primary: 210 92% 33%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 280 65% 60%;
+    --secondary: 210 38% 94%;
+    --secondary-foreground: 225 34% 12%;
+    --muted: 210 34% 94%;
+    --muted-foreground: 220 12% 42%;
+    --accent: 166 86% 34%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 250 70% 65%;
-    --radius: 1.25rem;
+    --border: 220 24% 88%;
+    --input: 220 24% 88%;
+    --ring: 210 92% 33%;
+    --radius: 1rem;
   }
 
   .dark {
-    --background: 222.2 84% 3%;
+    --background: 222 47% 5%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 6%;
+    --card: 222 42% 8%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 6%;
+    --popover: 222 42% 8%;
     --popover-foreground: 210 40% 98%;
-    --primary: 250 70% 65%;
+    --primary: 203 91% 56%;
     --primary-foreground: 0 0% 100%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 280 65% 60%;
+    --accent: 166 84% 42%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 250 70% 65%;
+    --ring: 203 91% 56%;
   }
 }
 
@@ -56,6 +56,9 @@
 
   body {
     @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at top left, hsl(var(--primary) / 0.12), transparent 28rem),
+      radial-gradient(circle at top right, hsl(var(--accent) / 0.10), transparent 28rem);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
@@ -82,11 +85,11 @@ html {
 /* Custom gradient utilities */
 @layer utilities {
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(250 70% 65%) 0%, hsl(280 65% 60%) 100%);
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
   }
 
   .gradient-secondary {
-    background: linear-gradient(135deg, hsl(280 65% 60%) 0%, hsl(340 75% 65%) 100%);
+    background: linear-gradient(135deg, hsl(215 92% 40%) 0%, hsl(166 86% 34%) 100%);
   }
 
   .gradient-accent {
@@ -95,18 +98,14 @@ html {
 
   .gradient-mesh {
     background:
-      radial-gradient(at 40% 20%, hsla(250, 70%, 65%, 0.12) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, hsla(280, 65%, 60%, 0.10) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, hsla(340, 75%, 65%, 0.08) 0px, transparent 50%),
-      radial-gradient(at 80% 50%, hsla(30, 95%, 65%, 0.06) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, hsla(250, 70%, 65%, 0.08) 0px, transparent 50%),
-      radial-gradient(at 80% 100%, hsla(280, 65%, 60%, 0.06) 0px, transparent 50%);
+      radial-gradient(at 20% 10%, hsl(var(--primary) / 0.16) 0px, transparent 42%),
+      radial-gradient(at 80% 0%, hsl(var(--accent) / 0.12) 0px, transparent 42%),
+      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.45) 100%);
   }
 
   .glass-effect {
-    @apply backdrop-blur-xl bg-white/80 dark:bg-gray-900/80;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    @apply border border-white/60 bg-white/75 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60;
+    box-shadow: 0 24px 80px -45px hsl(var(--primary) / 0.45);
   }
 
   .glow-primary {
@@ -137,7 +136,23 @@ html {
 
   /* Text gradient utilities */
   .text-gradient {
-    @apply bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-4 py-2 text-sm font-semibold text-primary shadow-sm;
+  }
+
+  .section-title {
+    @apply text-3xl font-black tracking-tight text-foreground sm:text-4xl lg:text-5xl;
+  }
+
+  .section-subtitle {
+    @apply mt-4 text-base leading-8 text-muted-foreground md:text-lg;
+  }
+
+  .surface-card {
+    @apply border border-border/70 bg-card/85 shadow-sm shadow-slate-900/5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-xl hover:shadow-primary/10 dark:bg-card/80;
   }
 
   /* Smooth hover transitions */
