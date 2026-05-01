@@ -15,7 +15,7 @@ export function Navbar() {
   const t = useTranslations("nav");
   const pathname = usePathname();
   const locale = useLocale();
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
 
@@ -86,7 +86,7 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
             aria-label="Toggle theme"
             className="rounded-full border border-border/60 bg-background/70 hover:bg-muted"
           >
