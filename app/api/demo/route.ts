@@ -4,7 +4,7 @@ import React from "react";
 
 import DemoConfirmationEmail from "@/emails/demo-confirmation";
 import { TURNSTILE_ACTION, isTurnstileConfigured, verifyTurnstileToken } from "@/lib/turnstile";
-import { demoSubmissionSchema } from "@/lib/validations/demo-schema";
+import { demoSubmissionSchema, type DemoFormData } from "@/lib/validations/demo-schema";
 
 function getResendClient() {
   const apiKey = process.env.RESEND_API_KEY;
@@ -22,6 +22,90 @@ function getClientIp(request: NextRequest) {
     request.headers.get("x-real-ip") ||
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
   );
+}
+
+function stripHtml(value?: string) {
+  if (!value?.trim()) return undefined;
+
+  return value
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/p>/gi, "\n")
+    .replace(/<[^>]+>/g, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function createDemoEmailElement(data: DemoFormData) {
+  return React.createElement(DemoConfirmationEmail, {
+    locale: data.locale,
+    name: data.name,
+    email: data.email,
+    phone: data.phone,
+    company: data.company,
+    industry: data.industry,
+    employeeCount: data.employeeCount,
+    preferredDate: data.preferredDate,
+    preferredTime: data.preferredTime,
+    currentSolution: data.currentSolution,
+    message: stripHtml(data.message),
+  });
+}
+
+function buildPlainTextEmail(data: DemoFormData) {
+  const message = stripHtml(data.message);
+
+  return [
+    `Demo request from ${data.name}`,
+    `Email: ${data.email}`,
+    `Phone: ${data.phone}`,
+    `Company: ${data.company}`,
+    `Industry: ${data.industry}`,
+    data.employeeCount ? `Employees: ${data.employeeCount}` : null,
+    data.preferredDate ? `Preferred date: ${data.preferredDate}` : null,
+    data.preferredTime ? `Preferred time: ${data.preferredTime}` : null,
+    data.currentSolution ? `Current solution: ${data.currentSolution}` : null,
+    message ? `Message:\n${message}` : null,
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+async function sendDemoEmail(
+  resend: Resend,
+  options: {
+    from: string;
+    to: string;
+    subject: string;
+    data: DemoFormData;
+    replyTo?: string;
+  }
+) {
+  const { from, to, subject, data, replyTo } = options;
+  const react = createDemoEmailElement(data);
+  const text = buildPlainTextEmail(data);
+
+  const reactResult = await resend.emails.send({
+    from,
+    to,
+    replyTo,
+    subject,
+    react,
+    text,
+  });
+
+  if (!reactResult.error) {
+    return reactResult;
+  }
+
+  console.error("Resend react email error:", reactResult.error);
+
+  return resend.emails.send({
+    from,
+    to,
+    replyTo,
+    subject,
+    text,
+  });
 }
 
 export async function POST(request: NextRequest) {
@@ -97,27 +181,16 @@ export async function POST(request: NextRequest) {
       data.locale === "ar"
         ? `طلب عرض توضيحي جديد - ${data.company}`
         : `New Demo Request - ${data.company}`;
-    const emailContent = React.createElement(DemoConfirmationEmail, {
-      locale: data.locale,
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      company: data.company,
-      industry: data.industry,
-      employeeCount: data.employeeCount,
-      preferredDate: data.preferredDate,
-      preferredTime: data.preferredTime,
-      currentSolution: data.currentSolution,
-      message: data.message,
-    });
+
+    let adminSent = false;
 
     if (adminEmail) {
-      const adminResult = await resend.emails.send({
+      const adminResult = await sendDemoEmail(resend, {
         from: fromEmail,
         to: adminEmail,
         replyTo: data.email,
         subject,
-        react: emailContent,
+        data,
       });
 
       if (adminResult.error) {
@@ -132,18 +205,31 @@ export async function POST(request: NextRequest) {
           { status: 500 }
         );
       }
+
+      adminSent = true;
     }
 
-    const customerResult = await resend.emails.send({
+    const customerResult = await sendDemoEmail(resend, {
       from: fromEmail,
       to: data.email,
       replyTo: adminEmail || fromEmail,
       subject,
-      react: emailContent,
+      data,
     });
 
     if (customerResult.error) {
       console.error("Resend customer confirmation error:", customerResult.error);
+
+      if (adminSent) {
+        return NextResponse.json(
+          {
+            success: true,
+            message: "Demo booked successfully",
+            warning: "CUSTOMER_EMAIL_FAILED",
+          },
+          { status: 200 }
+        );
+      }
 
       return NextResponse.json(
         {
@@ -165,9 +251,14 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Demo booking error:", error);
 
+    const message = error instanceof Error ? error.message : "Unknown error";
+    const isConfigError =
+      message.includes("RESEND_API_KEY") || message.includes("RESEND_FROM_EMAIL");
+
     return NextResponse.json(
       {
         success: false,
+        code: isConfigError ? "CONFIG_ERROR" : "SERVER_ERROR",
         message: "An error occurred. Please try again later.",
       },
       { status: 500 }

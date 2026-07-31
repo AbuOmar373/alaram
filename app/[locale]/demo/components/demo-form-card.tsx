@@ -107,9 +107,18 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
           return;
         }
 
-        turnstile.reset();
-        turnstile.execute();
-        turnstileToken = await turnstile.getResponsePromise();
+        if (requiresVisibleVerification) {
+          turnstileToken =
+            turnstile.getResponse() ?? (await turnstile.getResponsePromise());
+        } else {
+          turnstile.execute();
+          turnstileToken = await turnstile.getResponsePromise();
+        }
+
+        if (!turnstileToken) {
+          setVerificationError(true);
+          return;
+        }
       }
 
       const wasSent = await onSubmit(
@@ -443,8 +452,9 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
                 options={{
                   action: "demo_form",
                   appearance: requiresVisibleVerification ? "always" : "interaction-only",
-                  execution: "execute",
-                  language: locale === "ar" ? "ar" : "en",
+                  execution: requiresVisibleVerification ? "render" : "execute",
+                  language: locale === "ar" ? "ar" : "auto",
+                  refreshExpired: "auto",
                   theme: "auto",
                 }}
                 onError={() => setVerificationError(true)}
