@@ -194,6 +194,12 @@
       "verificationDescription": "Verification is required for additional requests to reduce automated spam.",
       "verificationError": "Human verification could not be completed. Please try again.",
       "verificationUnavailable": "Human verification is not configured. Please contact us directly."
+    },
+    "success": {
+      "title": "Your request was sent successfully",
+      "thankYou": "Thank you for using our demo booking form.",
+      "followUp": "Our team will contact you within 24 hours to confirm your appointment and answer any questions.",
+      "backHome": "Back to Home"
     }
   },
   "blog": {

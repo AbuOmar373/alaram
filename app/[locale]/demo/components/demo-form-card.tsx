@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { Calendar, ArrowRight, CheckCircle2, Bold, Italic, Underline, List } from "lucide-react";
+import { Calendar, ArrowRight, CheckCircle2, Bold, Italic, Underline, List, Home } from "lucide-react";
 
 import { industries } from "@/data/industries";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { brand } from "@/lib/brand";
+import { getTurnstileSiteKey, isTurnstileConfigured } from "@/lib/turnstile";
 
 import { useDemoForm } from "../hooks/use-demo-form";
 
@@ -27,7 +29,6 @@ type Props = {
 };
 
 const SUBMISSION_COUNT_KEY = "demo_successful_submissions";
-const DEVELOPMENT_SITE_KEY = "1x00000000000000000000AA";
 
 export default function DemoFormCard({ locale, isRTL }: Props) {
   const t = useTranslations("demo");
@@ -38,9 +39,8 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
   const [isVerifying, setIsVerifying] = React.useState(false);
   const [verificationError, setVerificationError] = React.useState(false);
   const [requiresVisibleVerification, setRequiresVisibleVerification] = React.useState(false);
-  const turnstileSiteKey =
-    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
-    (process.env.NODE_ENV === "development" ? DEVELOPMENT_SITE_KEY : "");
+  const isTurnstileEnabled = isTurnstileConfigured();
+  const turnstileSiteKey = getTurnstileSiteKey();
 
   const {
     register,
@@ -55,10 +55,12 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
   const messageValue = watch("message") ?? "";
 
   React.useEffect(() => {
+    if (!isTurnstileEnabled) return;
+
     const submissionCount = Number(window.localStorage.getItem(SUBMISSION_COUNT_KEY) ?? 0);
 
     setRequiresVisibleVerification(submissionCount >= 1);
-  }, []);
+  }, [isTurnstileEnabled]);
 
   React.useEffect(() => {
     const editor = editorRef.current;
@@ -91,31 +93,36 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
   };
 
   const submitDemo = async (data: Parameters<typeof onSubmit>[0]) => {
-    const turnstile = turnstileRef.current;
-
-    if (!turnstile || !turnstileSiteKey) {
-      setVerificationError(true);
-      return;
-    }
-
     setIsVerifying(true);
     setVerificationError(false);
 
     try {
-      turnstile.reset();
-      turnstile.execute();
-      const token = await turnstile.getResponsePromise();
+      let turnstileToken: string | undefined;
+
+      if (isTurnstileEnabled) {
+        const turnstile = turnstileRef.current;
+
+        if (!turnstile) {
+          setVerificationError(true);
+          return;
+        }
+
+        turnstile.reset();
+        turnstile.execute();
+        turnstileToken = await turnstile.getResponsePromise();
+      }
+
       const wasSent = await onSubmit(
         {
           ...data,
           locale: locale === "ar" ? "ar" : "en",
         },
-        token
+        turnstileToken
       );
 
       turnstileRef.current?.reset();
 
-      if (wasSent) {
+      if (wasSent && isTurnstileEnabled) {
         const submissionCount = Number(window.localStorage.getItem(SUBMISSION_COUNT_KEY) ?? 0) + 1;
 
         window.localStorage.setItem(SUBMISSION_COUNT_KEY, String(submissionCount));
@@ -128,6 +135,33 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
       setIsVerifying(false);
     }
   };
+
+  if (submitStatus === "success") {
+    return (
+      <Card className="border-2 shadow-xl">
+        <CardContent className="flex flex-col items-center px-6 py-16 text-center">
+          <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
+            <CheckCircle2 className="h-10 w-10 text-green-600 dark:text-green-400" />
+          </div>
+
+          <h2 className="mb-3 text-2xl font-bold">{t("success.title")}</h2>
+          <p className="mb-2 max-w-md text-base text-muted-foreground">{t("success.thankYou")}</p>
+          <p className="mb-8 max-w-md text-base text-muted-foreground">{t("success.followUp")}</p>
+
+          <Button
+            asChild
+            size="lg"
+            className="h-12 rounded-xl bg-gradient-to-r from-primary to-blue-600 px-8 text-base font-semibold shadow-lg shadow-primary/30"
+          >
+            <Link href={`/${locale}`}>
+              <Home className="me-2 h-5 w-5" />
+              {t("success.backHome")}
+            </Link>
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="border-2 shadow-xl">
@@ -386,20 +420,22 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
             </div>
           </div>
 
-          <div
-            className={
-              requiresVisibleVerification
-                ? "space-y-3 rounded-xl border-2 border-primary/20 bg-muted/40 p-4"
-                : ""
-            }
-          >
-            {requiresVisibleVerification && (
-              <div>
-                <p className="font-semibold">{t("form.verificationTitle")}</p>
-                <p className="text-sm text-muted-foreground">{t("form.verificationDescription")}</p>
-              </div>
-            )}
-            {turnstileSiteKey ? (
+          {isTurnstileEnabled && (
+            <div
+              className={
+                requiresVisibleVerification
+                  ? "space-y-3 rounded-xl border-2 border-primary/20 bg-muted/40 p-4"
+                  : ""
+              }
+            >
+              {requiresVisibleVerification && (
+                <div>
+                  <p className="font-semibold">{t("form.verificationTitle")}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {t("form.verificationDescription")}
+                  </p>
+                </div>
+              )}
               <Turnstile
                 key={requiresVisibleVerification ? "visible" : "silent"}
                 ref={turnstileRef}
@@ -413,18 +449,14 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
                 }}
                 onError={() => setVerificationError(true)}
               />
-            ) : (
-              <p className="text-sm font-medium text-destructive">
-                {t("form.verificationUnavailable")}
-              </p>
-            )}
-          </div>
+            </div>
+          )}
 
           <Button
             type="submit"
             size="lg"
             className="h-14 w-full rounded-xl bg-gradient-to-r from-primary to-blue-600 text-lg font-semibold shadow-lg shadow-primary/30 transition-all hover:shadow-xl"
-            disabled={isSubmitting || isVerifying || !turnstileSiteKey}
+            disabled={isSubmitting || isVerifying}
           >
             {isSubmitting || isVerifying ? (
               <>
@@ -438,17 +470,6 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
               </>
             )}
           </Button>
-
-          {submitStatus === "success" && (
-            <div className="rounded-xl bg-green-50 p-4 dark:bg-green-900/20">
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-6 w-6 text-green-600 dark:text-green-400" />
-                <p className="text-sm font-medium text-green-800 dark:text-green-300">
-                  {tContact("form.success")}
-                </p>
-              </div>
-            </div>
-          )}
 
           {submitStatus === "error" && (
             <div className="rounded-xl bg-red-50 p-4 dark:bg-red-900/20">

@@ -20,7 +20,7 @@ export function useDemoForm() {
     },
   });
 
-  const onSubmit = async (data: DemoFormData, turnstileToken: string) => {
+  const onSubmit = async (data: DemoFormData, turnstileToken?: string) => {
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
@@ -30,7 +30,10 @@ export function useDemoForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...data, turnstileToken }),
+        body: JSON.stringify({
+          ...data,
+          ...(turnstileToken ? { turnstileToken } : {}),
+        }),
       });
 
       if (response.ok) {

@@ -3,7 +3,7 @@ import { Resend } from "resend";
 import React from "react";
 
 import DemoConfirmationEmail from "@/emails/demo-confirmation";
-import { TURNSTILE_ACTION, verifyTurnstileToken } from "@/lib/turnstile";
+import { TURNSTILE_ACTION, isTurnstileConfigured, verifyTurnstileToken } from "@/lib/turnstile";
 import { demoSubmissionSchema } from "@/lib/validations/demo-schema";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -41,18 +41,36 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data;
-    const isHuman = await verifyTurnstileToken(data.turnstileToken, getClientIp(request));
 
-    if (!isHuman) {
-      return NextResponse.json(
-        {
-          success: false,
-          code: "TURNSTILE_FAILED",
-          message: "Human verification failed",
-          action: TURNSTILE_ACTION,
-        },
-        { status: 403 }
+    if (isTurnstileConfigured({ server: true })) {
+      if (!data.turnstileToken) {
+        return NextResponse.json(
+          {
+            success: false,
+            code: "TURNSTILE_FAILED",
+            message: "Human verification is required",
+            action: TURNSTILE_ACTION,
+          },
+          { status: 403 }
+        );
+      }
+
+      const isHuman = await verifyTurnstileToken(
+        data.turnstileToken,
+        getClientIp(request)
       );
+
+      if (!isHuman) {
+        return NextResponse.json(
+          {
+            success: false,
+            code: "TURNSTILE_FAILED",
+            message: "Human verification failed",
+            action: TURNSTILE_ACTION,
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const result = await resend.emails.send({
