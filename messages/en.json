@@ -189,7 +189,11 @@
       "preferredDate": "Preferred Date",
       "preferredTime": "Preferred Time",
       "employeeCount": "Number of Employees",
-      "currentSolution": "Current Solution (if any)"
+      "currentSolution": "Current Solution (if any)",
+      "verificationTitle": "Please confirm you are human",
+      "verificationDescription": "Verification is required for additional requests to reduce automated spam.",
+      "verificationError": "Human verification could not be completed. Please try again.",
+      "verificationUnavailable": "Human verification is not configured. Please contact us directly."
     }
   },
   "blog": {
@@ -251,4 +255,3 @@
     "selectMarket": "Select Market"
   }
 }
-

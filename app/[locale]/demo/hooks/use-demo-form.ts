@@ -10,7 +10,7 @@ import type { DemoFormData } from "@/lib/validations/demo-schema";
 export function useDemoForm() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitStatus, setSubmitStatus] = React.useState<
-    "idle" | "success" | "error"
+    "idle" | "success" | "error" | "verification-error"
   >("idle");
 
   const form = useForm<DemoFormData>({
@@ -20,7 +20,7 @@ export function useDemoForm() {
     },
   });
 
-  const onSubmit = async (data: DemoFormData) => {
+  const onSubmit = async (data: DemoFormData, turnstileToken: string) => {
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
@@ -30,17 +30,24 @@ export function useDemoForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, turnstileToken }),
       });
 
       if (response.ok) {
         setSubmitStatus("success");
         form.reset({ locale: data.locale });
+        return true;
       } else {
-        setSubmitStatus("error");
+        const result = (await response.json().catch(() => null)) as {
+          code?: string;
+        } | null;
+
+        setSubmitStatus(result?.code === "TURNSTILE_FAILED" ? "verification-error" : "error");
+        return false;
       }
     } catch {
       setSubmitStatus("error");
+      return false;
     } finally {
       setIsSubmitting(false);
     }

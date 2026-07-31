@@ -189,7 +189,11 @@
       "preferredDate": "التاريخ المفضل",
       "preferredTime": "الوقت المفضل",
       "employeeCount": "عدد الموظفين",
-      "currentSolution": "الحل الحالي (إن وُجد)"
+      "currentSolution": "الحل الحالي (إن وُجد)",
+      "verificationTitle": "يرجى تأكيد أنك شخص حقيقي",
+      "verificationDescription": "يلزم التحقق عند إرسال طلب إضافي للحد من الرسائل الآلية.",
+      "verificationError": "تعذر إتمام التحقق البشري. يرجى إعادة المحاولة.",
+      "verificationUnavailable": "التحقق البشري غير مهيأ حالياً. يرجى التواصل معنا مباشرة."
     }
   },
   "blog": {
@@ -251,4 +255,3 @@
     "selectMarket": "اختر السوق"
   }
 }
-

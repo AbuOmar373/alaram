@@ -14,4 +14,8 @@ export const demoSchema = z.object({
   message: z.string().optional(),
 });
 
+export const demoSubmissionSchema = demoSchema.extend({
+  turnstileToken: z.string().min(1).max(2048),
+});
+
 export type DemoFormData = z.infer<typeof demoSchema>;

@@ -1,28 +1,15 @@
 "use client";
 
 import * as React from "react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useTranslations } from "next-intl";
-import {
-  Calendar,
-  ArrowRight,
-  CheckCircle2,
-  Bold,
-  Italic,
-  Underline,
-  List,
-} from "lucide-react";
+import { Calendar, ArrowRight, CheckCircle2, Bold, Italic, Underline, List } from "lucide-react";
 
 import { industries } from "@/data/industries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -39,11 +26,21 @@ type Props = {
   isRTL: boolean;
 };
 
+const SUBMISSION_COUNT_KEY = "demo_successful_submissions";
+const DEVELOPMENT_SITE_KEY = "1x00000000000000000000AA";
+
 export default function DemoFormCard({ locale, isRTL }: Props) {
   const t = useTranslations("demo");
   const tContact = useTranslations("contact");
   const editorRef = React.useRef<HTMLDivElement>(null);
+  const turnstileRef = React.useRef<TurnstileInstance>(null);
   const [isMessageEmpty, setIsMessageEmpty] = React.useState(true);
+  const [isVerifying, setIsVerifying] = React.useState(false);
+  const [verificationError, setVerificationError] = React.useState(false);
+  const [requiresVisibleVerification, setRequiresVisibleVerification] = React.useState(false);
+  const turnstileSiteKey =
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+    (process.env.NODE_ENV === "development" ? DEVELOPMENT_SITE_KEY : "");
 
   const {
     register,
@@ -56,6 +53,12 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
     submitStatus,
   } = useDemoForm();
   const messageValue = watch("message") ?? "";
+
+  React.useEffect(() => {
+    const submissionCount = Number(window.localStorage.getItem(SUBMISSION_COUNT_KEY) ?? 0);
+
+    setRequiresVisibleVerification(submissionCount >= 1);
+  }, []);
 
   React.useEffect(() => {
     const editor = editorRef.current;
@@ -87,6 +90,45 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
     syncEditorValue();
   };
 
+  const submitDemo = async (data: Parameters<typeof onSubmit>[0]) => {
+    const turnstile = turnstileRef.current;
+
+    if (!turnstile || !turnstileSiteKey) {
+      setVerificationError(true);
+      return;
+    }
+
+    setIsVerifying(true);
+    setVerificationError(false);
+
+    try {
+      turnstile.reset();
+      turnstile.execute();
+      const token = await turnstile.getResponsePromise();
+      const wasSent = await onSubmit(
+        {
+          ...data,
+          locale: locale === "ar" ? "ar" : "en",
+        },
+        token
+      );
+
+      turnstileRef.current?.reset();
+
+      if (wasSent) {
+        const submissionCount = Number(window.localStorage.getItem(SUBMISSION_COUNT_KEY) ?? 0) + 1;
+
+        window.localStorage.setItem(SUBMISSION_COUNT_KEY, String(submissionCount));
+        setRequiresVisibleVerification(true);
+      }
+    } catch {
+      turnstileRef.current?.reset();
+      setVerificationError(true);
+    } finally {
+      setIsVerifying(false);
+    }
+  };
+
   return (
     <Card className="border-2 shadow-xl">
       <CardHeader className="space-y-4">
@@ -110,15 +152,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
       </CardHeader>
 
       <CardContent>
-      <form
-        onSubmit={handleSubmit((data) =>
-            onSubmit({
-            ...data,
-            locale: locale === "ar" ? "ar" : "en",
-            })
-        )}
-        className="space-y-6"
-        >
+        <form onSubmit={handleSubmit(submitDemo)} className="space-y-6">
           <div className="grid gap-6 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-base font-semibold">
@@ -130,9 +164,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
                 className="h-12 rounded-xl border-2"
                 placeholder={isRTL ? "أدخل اسمك الكامل" : "Enter your full name"}
               />
-              {errors.name && (
-                <p className="text-sm text-destructive">{errors.name.message}</p>
-              )}
+              {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
             </div>
 
             <div className="space-y-2">
@@ -147,9 +179,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
                 placeholder={brand.email}
                 dir="ltr"
               />
-              {errors.email && (
-                <p className="text-sm text-destructive">{errors.email.message}</p>
-              )}
+              {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
             </div>
           </div>
 
@@ -166,9 +196,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
                 placeholder={brand.phoneIntlDisplay}
                 dir="ltr"
               />
-              {errors.phone && (
-                <p className="text-sm text-destructive">{errors.phone.message}</p>
-              )}
+              {errors.phone && <p className="text-sm text-destructive">{errors.phone.message}</p>}
             </div>
 
             <div className="space-y-2">
@@ -193,14 +221,10 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
                 {tContact("form.industry")} <span className="text-destructive">*</span>
               </Label>
               <Select
-                onValueChange={(value) =>
-                  setValue("industry", value, { shouldValidate: true })
-                }
+                onValueChange={(value) => setValue("industry", value, { shouldValidate: true })}
               >
                 <SelectTrigger className="h-12 rounded-xl border-2">
-                  <SelectValue
-                    placeholder={locale === "ar" ? "اختر القطاع" : "Select Industry"}
-                  />
+                  <SelectValue placeholder={locale === "ar" ? "اختر القطاع" : "Select Industry"} />
                 </SelectTrigger>
                 <SelectContent>
                   {industries.map((industry) => (
@@ -225,9 +249,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
                 }
               >
                 <SelectTrigger className="h-12 rounded-xl border-2">
-                  <SelectValue
-                    placeholder={locale === "ar" ? "اختر العدد" : "Select Count"}
-                  />
+                  <SelectValue placeholder={locale === "ar" ? "اختر العدد" : "Select Count"} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="1-5">1-5</SelectItem>
@@ -263,9 +285,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
                 }
               >
                 <SelectTrigger className="h-12 rounded-xl border-2">
-                  <SelectValue
-                    placeholder={locale === "ar" ? "اختر الوقت" : "Select Time"}
-                  />
+                  <SelectValue placeholder={locale === "ar" ? "اختر الوقت" : "Select Time"} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="morning" dir="ltr">
@@ -366,13 +386,47 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
             </div>
           </div>
 
+          <div
+            className={
+              requiresVisibleVerification
+                ? "space-y-3 rounded-xl border-2 border-primary/20 bg-muted/40 p-4"
+                : ""
+            }
+          >
+            {requiresVisibleVerification && (
+              <div>
+                <p className="font-semibold">{t("form.verificationTitle")}</p>
+                <p className="text-sm text-muted-foreground">{t("form.verificationDescription")}</p>
+              </div>
+            )}
+            {turnstileSiteKey ? (
+              <Turnstile
+                key={requiresVisibleVerification ? "visible" : "silent"}
+                ref={turnstileRef}
+                siteKey={turnstileSiteKey}
+                options={{
+                  action: "demo_form",
+                  appearance: requiresVisibleVerification ? "always" : "interaction-only",
+                  execution: "execute",
+                  language: locale === "ar" ? "ar" : "en",
+                  theme: "auto",
+                }}
+                onError={() => setVerificationError(true)}
+              />
+            ) : (
+              <p className="text-sm font-medium text-destructive">
+                {t("form.verificationUnavailable")}
+              </p>
+            )}
+          </div>
+
           <Button
             type="submit"
             size="lg"
             className="h-14 w-full rounded-xl bg-gradient-to-r from-primary to-blue-600 text-lg font-semibold shadow-lg shadow-primary/30 transition-all hover:shadow-xl"
-            disabled={isSubmitting}
+            disabled={isSubmitting || isVerifying || !turnstileSiteKey}
           >
-            {isSubmitting ? (
+            {isSubmitting || isVerifying ? (
               <>
                 <div className="me-2 h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
                 {tContact("form.sending")}
@@ -400,6 +454,14 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
             <div className="rounded-xl bg-red-50 p-4 dark:bg-red-900/20">
               <p className="text-sm font-medium text-red-800 dark:text-red-300">
                 {tContact("form.error")}
+              </p>
+            </div>
+          )}
+
+          {(submitStatus === "verification-error" || verificationError) && (
+            <div className="rounded-xl bg-red-50 p-4 dark:bg-red-900/20">
+              <p className="text-sm font-medium text-red-800 dark:text-red-300">
+                {t("form.verificationError")}
               </p>
             </div>
           )}
