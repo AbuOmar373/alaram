@@ -57,6 +57,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
+      <head>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="0233ac1a-eb20-41a6-8c09-75af7318be76"
+        />
+      </head>
       <body className={tajawal.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
