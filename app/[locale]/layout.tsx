@@ -7,7 +7,7 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { brand } from "@/lib/brand";
 import { getBaseUrl } from "@/lib/site-url";
-import { getLocaleFromParam, languageAlternates, localizedPath } from "@/lib/seo";
+import { getLocaleFromParam } from "@/lib/seo";
 
 export function generateStaticParams() {
   return [{ locale: "ar" }, { locale: "en" }];
@@ -31,13 +31,8 @@ export async function generateMetadata({
       template: currentLocale === "ar" ? `${brand.name.ar} - %s` : `${brand.name.en} - %s`,
     },
     description: pageDescription,
-    alternates: {
-      canonical: localizedPath(currentLocale),
-      languages: languageAlternates(),
-    },
     openGraph: {
       type: "website",
-      url: localizedPath(currentLocale),
       title: tCommon("siteName"),
       description: pageDescription,
       siteName: currentLocale === "ar" ? brand.name.ar : brand.name.en,

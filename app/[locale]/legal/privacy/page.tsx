@@ -1,8 +1,29 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { setRequestLocale } from "next-intl/server";
 import { brand } from "@/lib/brand";
+import { buildPageMetadata, getLocaleFromParam } from "@/lib/seo";
 
 const LAST_UPDATED = "2026-03-23";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const currentLocale = getLocaleFromParam(locale);
+
+  return buildPageMetadata({
+    locale: currentLocale,
+    path: "/legal/privacy",
+    title: currentLocale === "ar" ? "سياسة الخصوصية" : "Privacy Policy",
+    description:
+      currentLocale === "ar"
+        ? "سياسة الخصوصية الخاصة بموقع الأرام والخدمات الإلكترونية المقدمة داخل السعودية."
+        : "Privacy policy for ALaram website and online services provided in Saudi Arabia.",
+  });
+}
 
 export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -1,6 +1,28 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { setRequestLocale } from "next-intl/server";
+import { buildPageMetadata, getLocaleFromParam } from "@/lib/seo";
+
 const LAST_UPDATED = "2026-03-23";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const currentLocale = getLocaleFromParam(locale);
+
+  return buildPageMetadata({
+    locale: currentLocale,
+    path: "/legal/terms",
+    title: currentLocale === "ar" ? "الشروط والأحكام" : "Terms & Conditions",
+    description:
+      currentLocale === "ar"
+        ? "الشروط والأحكام الخاصة باستخدام موقع الأرام وخدماته الإلكترونية."
+        : "Terms and conditions for using ALaram website and online services.",
+  });
+}
 
 export default async function TermsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -19,18 +19,9 @@ export const metadata: Metadata = {
   creator: brand.name.en,
   publisher: brand.name.en,
   metadataBase: new URL(getBaseUrl()),
-  alternates: {
-    canonical: "/ar",
-    languages: {
-      ar: "/ar",
-      en: "/en",
-      "x-default": "/ar",
-    },
-  },
   openGraph: {
     type: "website",
     locale: "ar_SA",
-    url: "/ar",
     title: brand.title.ar,
     description: brand.description.ar,
     siteName: brand.name.ar,

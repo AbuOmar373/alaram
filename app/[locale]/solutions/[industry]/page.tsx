@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
@@ -10,6 +11,28 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FAQ } from "@/components/sections/faq";
+import { buildPageMetadata, getLocaleFromParam } from "@/lib/seo";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; industry: string }>;
+}): Promise<Metadata> {
+  const { locale, industry: industryId } = await params;
+  const currentLocale = getLocaleFromParam(locale);
+  const industry = getIndustryById(industryId);
+
+  if (!industry) {
+    return {};
+  }
+
+  return buildPageMetadata({
+    locale: currentLocale,
+    path: `/solutions/${industryId}`,
+    title: currentLocale === "ar" ? industry.nameAR : industry.nameEN,
+    description: currentLocale === "ar" ? industry.summaryAR : industry.summaryEN,
+  });
+}
 
 export default async function IndustryPage({
   params,
