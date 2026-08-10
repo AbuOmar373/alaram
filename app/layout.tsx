@@ -56,7 +56,12 @@ export default function RootLayout({
         />
       </head>
       <body className={tajawal.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          storageKey="alaram-theme"
+        >
           {children}
         </ThemeProvider>
       </body>
