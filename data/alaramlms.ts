@@ -11,8 +11,8 @@ export const alaramLms = {
     en: "Own your training platform instead of staying locked into subscriptions",
   },
   summary: {
-    ar: "نظام تدريب إلكتروني مستقل باسمك وهويتك، يُركَّب على حساباتك الخاصة. لا اشتراك شهري في النظام، ولا عمولة على مبيعاتك.",
-    en: "An independent LMS under your name and brand, installed on your own accounts. No monthly software subscription, and no commission on your sales.",
+    ar: "نظام تدريب إلكتروني مستقل باسمك وهويتك، مع مساحة مجانية حتى ١٠ جيجابايت. لا اشتراك شهري في النظام، ولا عمولة على مبيعاتك.",
+    en: "An independent LMS under your name and brand, with free storage up to 10 GB. No monthly software subscription, and no commission on your sales.",
   },
   description: {
     ar: "إذا كنت مدربًا وتبيع دوراتك عبر واتساب، تيليجرام، روابط درايف، أو منصة تأخذ منك اشتراكًا شهريًا، فـ ALaramLMS يمنحك طريقة أكثر احترافية واستقلالية.",
@@ -28,8 +28,8 @@ export const alaramLms = {
       en: "A training academy with your name on it",
     },
     subheadline: {
-      ar: "بدل أن تدفع كل شهر مقابل استخدام منصة لا تملكها، امتلك نظام تدريب إلكتروني مستقل يتم تركيبه على حساباتك، وتصبح أنت المتحكم الكامل في الدورات والطلاب والمحتوى.",
-      en: "Instead of paying every month for a platform you do not own, get an independent LMS installed on your accounts so you fully control courses, students, and content.",
+      ar: "بدل أن تدفع كل شهر مقابل استخدام منصة لا تملكها، امتلك نظام تدريب إلكتروني مستقل مع مساحة مجانية حتى ١٠ جيجابايت، وتصبح أنت المتحكم الكامل في الدورات والطلاب والمحتوى.",
+      en: "Instead of paying every month for a platform you do not own, get an independent LMS with free storage up to 10 GB so you fully control courses, students, and content.",
     },
     primaryCta: {
       ar: "اطلب نسخة تجريبية",
@@ -43,7 +43,7 @@ export const alaramLms = {
     trustItems: [
       { ar: "لا اشتراك شهري في النظام", en: "No monthly software fee" },
       { ar: "لا عمولة على مبيعاتك", en: "No commission on sales" },
-      { ar: "أنت تملك المنصة بعد التسليم", en: "You own the platform after delivery" },
+      { ar: "مجانًا حتى ١٠ جيجابايت", en: "Free up to 10 GB" },
     ],
   },
   highlights: [
@@ -57,15 +57,15 @@ export const alaramLms = {
     {
       title: { ar: "ادفع مرة واحدة", en: "Pay once for setup" },
       description: {
-        ar: "تدفع مقابل تركيب النظام وتجهيزه. بعد ذلك تستمر فقط في تكاليف الاستضافة وقاعدة البيانات والتخزين والنطاق.",
-        en: "You pay for installation and setup. After that you only cover hosting, database, storage, and your domain.",
+        ar: "تدفع مقابل تركيب النظام وتجهيزه. الاستضافة والتخزين مجانًا حتى ١٠ جيجابايت، وبعد تجاوز هذه المساحة تدفع فقط مقابل الاستخدام الإضافي.",
+        en: "You pay for installation and setup. Hosting and storage are free up to 10 GB, and you only pay if you go beyond that.",
       },
     },
     {
       title: { ar: "بياناتك تحت سيطرتك", en: "Your data stays with you" },
       description: {
-        ar: "الطلاب والدورات والتقدم والاختبارات تبقى داخل حساباتك. لا تبني نشاطك على منصة قد ترفع أسعارها لاحقًا.",
-        en: "Students, courses, progress, and quizzes stay in your accounts. You are not building on a vendor that can raise prices later.",
+        ar: "الطلاب والدورات والتقدم والاختبارات تبقى تحت سيطرتك. لا تبني نشاطك على منصة قد ترفع أسعارها لاحقًا.",
+        en: "Students, courses, progress, and quizzes stay under your control. You are not building on a vendor that can raise prices later.",
       },
     },
   ],
@@ -152,21 +152,21 @@ export const alaramLms = {
   ownership: {
     title: { ar: "أنت تملك المنصة", en: "You own the platform" },
     intro: {
-      ar: "هذه ليست خدمة اشتراك شهرية. يتم تركيب النظام على حساباتك أنت، وبعد التسليم تصبح المنصة مستقلة.",
-      en: "This is not a monthly SaaS. The system is installed on your accounts, and after delivery the platform runs independently.",
+      ar: "هذه ليست خدمة اشتراك شهرية. تحصل على المنصة مع مساحة مجانية حتى ١٠ جيجابايت، وبعد التسليم تبقى متحكمًا في دوراتك وطلابك ومحتواك.",
+      en: "This is not a monthly SaaS. You get the platform with free storage up to 10 GB, and after delivery you stay in control of your courses, students, and content.",
     },
     accounts: [
-      { ar: "حساب Vercel الخاص بك", en: "Your Vercel account" },
-      { ar: "حساب قاعدة البيانات الخاص بك", en: "Your database account" },
-      { ar: "حساب Cloudflare الخاص بك", en: "Your Cloudflare account" },
+      { ar: "مساحة مجانية حتى ١٠ جيجابايت", en: "Free storage up to 10 GB" },
+      { ar: "استضافة المنصة", en: "Platform hosting" },
+      { ar: "تخزين الفيديو والملفات", en: "Video and file storage" },
       { ar: "نطاقك الخاص", en: "Your own domain" },
     ],
     youOwn: [
-      { ar: "أنت تملك حساباتك", en: "You own your accounts" },
+      { ar: "مجانًا حتى ١٠ جيجابايت", en: "Free up to 10 GB" },
       { ar: "أنت تملك بيانات طلابك", en: "You own your student data" },
       { ar: "أنت تملك محتواك", en: "You own your content" },
       { ar: "أنت تملك نطاقك", en: "You own your domain" },
-      { ar: "وأنت المسؤول عن تشغيل النظام", en: "And you operate the system" },
+      { ar: "وأنت المتحكم في تشغيل المنصة", en: "And you control how the platform runs" },
     ],
   },
   pricing: {
@@ -176,18 +176,18 @@ export const alaramLms = {
       en: "Many LMS platforms charge monthly × months × years. Cost can rise as your student count grows, or take a cut of your sales.",
     },
     after: {
-      ar: "أما هنا فأنت تدفع مقابل تركيب النظام وتجهيزه لك. بعد ذلك تستمر فقط في دفع تكاليف الخدمات التي تستخدمها فعليًا.",
-      en: "Here you pay for installing and preparing the system. After that you only pay for the infrastructure you actually use.",
+      ar: "أما هنا فأنت تدفع مقابل تركيب النظام وتجهيزه لك. الاستضافة والتخزين مجانًا حتى ١٠ جيجابايت، ولا تدفع مقابل المساحة إلا إذا تجاوزت هذا الحد.",
+      en: "Here you pay for installing and preparing the system. Hosting and storage are free up to 10 GB, and you only pay for storage if you exceed that limit.",
     },
     costs: [
+      { ar: "مجانًا حتى ١٠ جيجابايت", en: "Free up to 10 GB" },
       { ar: "الاستضافة", en: "Hosting" },
-      { ar: "قاعدة البيانات", en: "Database" },
       { ar: "تخزين الملفات", en: "File storage" },
       { ar: "النطاق", en: "Domain" },
     ],
     note: {
-      ar: "وغالبًا تكون هذه التكاليف منخفضة جدًا للمدربين الصغار والمتوسطين.",
-      en: "For small and mid-size trainers these costs are usually very low.",
+      ar: "وغالبًا لا يتجاوز المدربون الصغار والمتوسطون ١٠ جيجابايت في البداية.",
+      en: "Small and mid-size trainers often stay within 10 GB at the start.",
     },
     commission: {
       title: { ar: "لا توجد عمولة على مبيعات دوراتك", en: "No commission on course sales" },
@@ -363,8 +363,8 @@ export const alaramLms = {
     saas: { ar: "منصة اشتراك تقليدية", en: "Traditional subscription LMS" },
     rows: [
       {
-        independent: { ar: "تعمل على حساباتك", en: "Runs on your accounts" },
-        saas: { ar: "تعمل على حساب الشركة", en: "Runs on the vendor’s account" },
+        independent: { ar: "مجانًا حتى ١٠ جيجابايت", en: "Free up to 10 GB" },
+        saas: { ar: "اشتراك مستمر مقابل المساحة والاستخدام", en: "Ongoing fees for storage and usage" },
       },
       {
         independent: { ar: "لا يوجد اشتراك للنظام نفسه", en: "No software subscription" },
@@ -493,8 +493,8 @@ export const alaramLms = {
       {
         question: { ar: "ماذا عن الاستضافة؟", en: "What about hosting?" },
         answer: {
-          ar: "يتم تركيب النظام على خدمات حديثة ومناسبة للتطبيقات. الهدف أن تكون التكلفة منخفضة عند البداية، وأن تستطيع الخدمة التوسع عند الحاجة، وأن تكون الحسابات باسمك، وأن تستطيع الانتقال أو التطوير مستقبلًا.",
-          en: "The system is installed on modern services suited to apps. The aim is low starting cost, room to scale, accounts in your name, and the ability to move or extend later.",
+          ar: "تُجهَّز المنصة على خدمات حديثة ومناسبة للتطبيقات، مع مساحة مجانية حتى ١٠ جيجابايت. الهدف أن تكون التكلفة منخفضة عند البداية، وأن تستطيع الخدمة التوسع عند الحاجة إذا تجاوزت هذه المساحة.",
+          en: "The platform is set up on modern services suited to apps, with free storage up to 10 GB. The aim is a low starting cost, with room to scale if you go beyond that storage.",
         },
       },
       {

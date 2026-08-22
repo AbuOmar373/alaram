@@ -46,8 +46,8 @@ export default async function LmsPage({ params }: PageProps) {
       priceCurrency: "SAR",
       description:
         currentLocale === "ar"
-          ? "تركيب وتجهيز لمرة واحدة بدون اشتراك شهري في النظام نفسه"
-          : "One-time setup with no monthly software subscription",
+          ? "تركيب وتجهيز لمرة واحدة مع مساحة مجانية حتى ١٠ جيجابايت وبدون اشتراك شهري في النظام نفسه"
+          : "One-time setup with free storage up to 10 GB and no monthly software subscription",
     },
   };
 
