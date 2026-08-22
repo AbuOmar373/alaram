@@ -16,6 +16,7 @@ export function Footer() {
       title: t("products"),
       links: [
         { name: nav("solutions"), href: "/solutions" },
+        { name: nav("lms"), href: "/lms" },
         { name: nav("pricing"), href: "/pricing" },
       ],
     },

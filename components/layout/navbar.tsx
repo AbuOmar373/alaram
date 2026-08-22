@@ -30,6 +30,7 @@ export function Navbar() {
   const navigation = [
     { name: t("home"), href: "/" },
     { name: t("solutions"), href: "/solutions" },
+    { name: t("lms"), href: "/lms" },
     { name: t("pricing"), href: "/pricing" },
     { name: t("about"), href: "/about" },
     { name: t("contact"), href: "/contact" },
