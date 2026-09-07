@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { usePageTitle } from "@/lib/use-page-title";
 import { LmsProductCard } from "@/components/sections/lms-product-card";
+import { SamtProductCard } from "@/components/sections/samt-product-card";
 
 export default function SolutionsPage() {
   const params = useParams<{ locale: string }>();
@@ -163,6 +164,14 @@ export default function SolutionsPage() {
               transition={{ duration: 0.5 }}
             >
               <LmsProductCard viewDetailsText={t("viewDetails")} />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+            >
+              <SamtProductCard viewDetailsText={t("viewDetails")} />
             </motion.div>
             {industries.map((industry, index) => (
               <motion.div

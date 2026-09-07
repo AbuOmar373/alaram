@@ -276,6 +276,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
                     </SelectItem>
                   ))}
                   <SelectItem value="alaramlms">ALaramLMS</SelectItem>
+                  <SelectItem value="samt">{locale === "ar" ? "سَمْت" : "Samt"}</SelectItem>
                 </SelectContent>
               </Select>
               {errors.industry && (

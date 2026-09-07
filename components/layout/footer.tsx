@@ -17,6 +17,7 @@ export function Footer() {
       links: [
         { name: nav("solutions"), href: "/solutions" },
         { name: nav("lms"), href: "/lms" },
+        { name: nav("samt"), href: "/samt" },
         { name: nav("pricing"), href: "/pricing" },
       ],
     },

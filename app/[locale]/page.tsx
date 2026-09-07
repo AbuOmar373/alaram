@@ -10,6 +10,7 @@ import { FAQ } from "@/components/sections/faq";
 import { Testimonials } from "@/components/sections/testimonials";
 import { CTASection } from "@/components/sections/cta-section";
 import { LmsProductCard } from "@/components/sections/lms-product-card";
+import { SamtProductCard } from "@/components/sections/samt-product-card";
 import { industries } from "@/data/industries";
 import { Badge } from "@/components/ui/badge";
 import { brand } from "@/lib/brand";
@@ -182,6 +183,8 @@ export default async function HomePage({ params }: PageProps) {
       />
 
       <LmsProductCard variant="featured" viewDetailsText={tSolutions("viewDetails")} />
+
+      <SamtProductCard variant="featured" viewDetailsText={tSolutions("viewDetails")} />
 
       <FeatureGrid title={t("features.title")} subtitle={t("features.subtitle")} features={features} />
 
