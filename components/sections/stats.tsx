@@ -47,7 +47,7 @@ export function Stats({ stats }: StatsProps) {
                   <TrendingUp className="h-5 w-5" />
                 </div>
               </div>
-              <div className="text-2xl font-black tracking-tight text-foreground md:text-3xl">
+              <div className="text-xl font-black tracking-tight text-subheading md:text-2xl">
                 {stat.value}
               </div>
               <div className="mt-2 text-sm font-semibold leading-6 text-muted-foreground md:text-base">

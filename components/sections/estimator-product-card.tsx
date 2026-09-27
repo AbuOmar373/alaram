@@ -65,7 +65,7 @@ export function EstimatorProductCard({ viewDetailsText, variant = "grid" }: Esti
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
           <Calculator className="h-6 w-6" />
         </div>
-        <CardTitle className="text-2xl font-black">{copy(locale, estimator.name)}</CardTitle>
+        <CardTitle className="text-xl font-black">{copy(locale, estimator.name)}</CardTitle>
         <CardDescription className="mt-3 text-base leading-relaxed">
           {copy(locale, estimator.summary)}
         </CardDescription>
@@ -125,10 +125,10 @@ function FeaturedInner({
                 {estimator.productLine}
               </Badge>
             </div>
-            <CardTitle className="text-3xl font-black tracking-tight md:text-4xl">
+            <CardTitle className="text-2xl font-black tracking-tight md:text-3xl">
               {copy(locale, estimator.name)}
             </CardTitle>
-            <p className="text-lg font-bold leading-8 text-foreground">
+            <p className="text-lg font-bold leading-8 text-subheading">
               {copy(locale, estimator.hero.headline)}
             </p>
             <CardDescription className="text-base leading-8">
@@ -149,7 +149,7 @@ function FeaturedInner({
             <div className="flex flex-col gap-3 pt-2 sm:flex-row">
               <Button
                 asChild
-                className="h-12 rounded-full bg-slate-950 px-7 font-bold shadow-lg hover:bg-primary dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-white"
+                className="h-12 rounded-full bg-slate-950 px-7 font-bold shadow-lg hover:bg-primary dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-primary-foreground"
               >
                 <Link href={href}>
                   {viewDetailsText}
@@ -157,7 +157,7 @@ function FeaturedInner({
                 </Link>
               </Button>
               <Button asChild variant="outline" className="h-12 rounded-full font-bold">
-                <Link href={`/${locale}/demo`}>{copy(locale, estimator.cta.primary)}</Link>
+                <Link href={`${href}#pricing`}>{copy(locale, estimator.pricing.eyebrow)}</Link>
               </Button>
             </div>
           </CardHeader>

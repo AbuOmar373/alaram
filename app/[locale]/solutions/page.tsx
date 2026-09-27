@@ -65,11 +65,11 @@ export default function SolutionsPage() {
               <span>{isRTL ? "حلول متخصصة لكل قطاع" : "Specialized Solutions"}</span>
             </div>
             
-            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-5xl font-bold leading-tight tracking-tight text-transparent dark:from-gray-100 dark:via-white dark:to-gray-100 sm:text-6xl md:text-7xl">
+            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent dark:from-white dark:via-slate-100 dark:to-slate-400 sm:text-5xl md:text-6xl">
               {t("title")}
             </h1>
             
-            <p className="mt-6 text-xl leading-relaxed text-muted-foreground md:text-2xl">
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
               {t("subtitle")}
             </p>
 
@@ -81,7 +81,7 @@ export default function SolutionsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className="mb-2 text-4xl font-bold text-primary">5+</div>
+                <div className="mb-2 text-3xl font-bold text-primary">5+</div>
                 <div className="text-sm text-muted-foreground">
                   {isRTL ? "قطاعات" : "Industries"}
                 </div>
@@ -92,7 +92,7 @@ export default function SolutionsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <div className="mb-2 text-4xl font-bold text-primary">500+</div>
+                <div className="mb-2 text-3xl font-bold text-primary">500+</div>
                 <div className="text-sm text-muted-foreground">
                   {isRTL ? "عميل" : "Clients"}
                 </div>
@@ -103,7 +103,7 @@ export default function SolutionsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <div className="mb-2 text-4xl font-bold text-primary">98%</div>
+                <div className="mb-2 text-3xl font-bold text-primary">98%</div>
                 <div className="text-sm text-muted-foreground">
                   {isRTL ? "رضا" : "Satisfaction"}
                 </div>
@@ -130,7 +130,7 @@ export default function SolutionsPage() {
                   <Check className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="mb-2 font-semibold">
+                  <h3 className="mb-2 font-semibold text-subheading">
                     {isRTL ? benefit.titleAR : benefit.titleEN}
                   </h3>
                   <p className="text-sm text-muted-foreground">
@@ -147,7 +147,7 @@ export default function SolutionsPage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto mb-12 max-w-2xl text-center">
-            <h2 className="mb-4 text-3xl font-bold">
+            <h2 className="mb-4 text-2xl font-bold text-heading">
               {isRTL ? "اختر الحل المناسب لقطاعك" : "Choose Your Industry Solution"}
             </h2>
             <p className="text-muted-foreground">
@@ -172,7 +172,7 @@ export default function SolutionsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.05 }}
             >
-              <SamtProductCard viewDetailsText={t("viewDetails")} />
+              <EstimatorProductCard viewDetailsText={t("viewDetails")} />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -180,7 +180,7 @@ export default function SolutionsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <EstimatorProductCard viewDetailsText={t("viewDetails")} />
+              <SamtProductCard viewDetailsText={t("viewDetails")} />
             </motion.div>
             {industries.map((industry, index) => (
               <motion.div
@@ -205,7 +205,7 @@ export default function SolutionsPage() {
                   )}
 
                   <CardHeader className="relative pb-4">
-                    <CardTitle className="text-2xl font-bold">
+                    <CardTitle className="text-xl font-bold">
                       {locale === "ar" ? industry.nameAR : industry.nameEN}
                     </CardTitle>
                     <CardDescription className="mt-3 text-base leading-relaxed">
@@ -288,12 +288,12 @@ export default function SolutionsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold md:text-5xl">
+            <h2 className="text-3xl font-bold md:text-4xl">
               {isRTL
                 ? "جاهز لتحويل عملك؟"
                 : "Ready to Transform Your Business?"}
             </h2>
-            <p className="mt-6 text-xl opacity-90">
+            <p className="mt-6 text-lg opacity-90">
               {isRTL
                 ? "ابدأ تجربتك المجانية اليوم ولا حاجة لبطاقة ائتمانية"
                 : "Start your free trial today with no credit card required"}

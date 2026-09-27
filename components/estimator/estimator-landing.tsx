@@ -115,12 +115,12 @@ function Hero({
               <p className="mb-3 text-sm font-black tracking-wide text-primary">
                 {copy(locale, estimator.name)} · {estimator.productLine}
               </p>
-              <h1 className="max-w-4xl text-4xl font-black leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              <h1 className="max-w-4xl text-3xl font-black leading-[1.08] tracking-tight text-heading sm:text-4xl lg:text-5xl">
                 {copy(locale, estimator.hero.headline)}
               </h1>
             </motion.div>
             <motion.p
-              className="mt-6 max-w-2xl text-lg leading-9 text-muted-foreground md:text-xl"
+              className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg"
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -136,7 +136,7 @@ function Hero({
               <Button
                 size="lg"
                 asChild
-                className="group h-14 rounded-full bg-slate-950 px-8 text-base font-bold shadow-xl shadow-slate-950/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-primary/25 dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-white"
+                className="group h-14 rounded-full bg-slate-950 px-8 text-base font-bold shadow-xl shadow-slate-950/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-primary/25 dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-primary-foreground"
               >
                 <Link href={withLocale("/demo")}>
                   {copy(locale, estimator.hero.primaryCta)}
@@ -190,7 +190,7 @@ function Hero({
               <div className="rounded-[1.5rem] border border-border/70 bg-card p-5 shadow-2xl shadow-slate-950/10">
                 <div className="mb-5 flex items-center justify-between gap-3">
                   <div className="min-w-0">
-                    <div className="truncate text-sm font-bold text-foreground">
+                    <div className="truncate text-sm font-bold text-subheading">
                       {isAr ? "تجديد فيلا — حي النرجس" : "Villa renovation — Al Narjis"}
                     </div>
                     <div className="text-xs text-muted-foreground">
@@ -223,7 +223,7 @@ function Hero({
                   ].map((kpi) => (
                     <div key={kpi.label}>
                       <div className="text-[11px] font-semibold text-muted-foreground">{kpi.label}</div>
-                      <div className="text-sm font-black tabular-nums text-foreground">{kpi.value}</div>
+                      <div className="text-sm font-black tabular-nums text-subheading">{kpi.value}</div>
                     </div>
                   ))}
                 </div>
@@ -263,7 +263,7 @@ function Highlights({ locale }: { locale: string }) {
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mb-3 text-xl font-black">{copy(locale, item.title)}</h3>
+                <h3 className="mb-3 text-lg font-black text-subheading">{copy(locale, item.title)}</h3>
                 <p className="text-base leading-8 text-muted-foreground">{copy(locale, item.description)}</p>
               </motion.div>
             );
@@ -322,7 +322,7 @@ function Lifecycle({ locale }: { locale: string }) {
                   {stage.code}
                 </span>
               </div>
-              <h3 className="mb-2 text-lg font-black">{copy(locale, stage.name)}</h3>
+              <h3 className="mb-2 text-lg font-black text-subheading">{copy(locale, stage.name)}</h3>
               <p className="text-sm leading-7 text-muted-foreground">{copy(locale, stage.desc)}</p>
               {index < estimator.lifecycle.stages.length - 1 && (
                 <ArrowRight className="absolute -end-3 top-1/2 hidden h-6 w-6 -translate-y-1/2 rounded-full bg-background p-1 text-primary md:block rtl:rotate-180" />
@@ -348,7 +348,7 @@ function Costing({ locale }: { locale: string }) {
         <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-2">
           <Card className="surface-card rounded-3xl">
             <CardHeader>
-              <CardTitle className="text-xl font-black">{copy(locale, costing.example.title)}</CardTitle>
+              <CardTitle className="text-lg font-black">{copy(locale, costing.example.title)}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-5">
               <div className="space-y-2">
@@ -380,7 +380,7 @@ function Costing({ locale }: { locale: string }) {
 
           <Card className="surface-card rounded-3xl">
             <CardHeader>
-              <CardTitle className="text-xl font-black">{copy(locale, calc.title)}</CardTitle>
+              <CardTitle className="text-lg font-black">{copy(locale, calc.title)}</CardTitle>
               <CardDescription className="leading-7">{copy(locale, calc.subtitle)}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -474,7 +474,7 @@ function Documents({ locale }: { locale: string }) {
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
               <Link2 className="h-5 w-5" />
             </div>
-            <h3 className="mb-3 text-xl font-black">{copy(locale, documents.share.title)}</h3>
+            <h3 className="mb-3 text-lg font-black text-subheading">{copy(locale, documents.share.title)}</h3>
             <p className="text-base leading-8 text-muted-foreground">{copy(locale, documents.share.body)}</p>
             <div className="mt-5 rounded-2xl border border-border/70 bg-card px-4 py-3 font-mono text-sm text-muted-foreground" dir="ltr">
               /s/Xk29fQ…
@@ -517,7 +517,7 @@ function Roles({ locale }: { locale: string }) {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {roles.items.map((item) => (
             <div key={item.role.en} className="surface-card rounded-3xl p-6">
-              <h3 className="mb-2 text-lg font-black">{copy(locale, item.role)}</h3>
+              <h3 className="mb-2 text-lg font-black text-subheading">{copy(locale, item.role)}</h3>
               <p className="text-sm leading-7 text-muted-foreground">{copy(locale, item.use)}</p>
             </div>
           ))}
@@ -538,18 +538,18 @@ function DataAndTrust({ locale }: { locale: string }) {
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
               <FileSpreadsheet className="h-5 w-5" />
             </div>
-            <h2 className="mb-4 text-2xl font-black md:text-3xl">{copy(locale, data.title)}</h2>
+            <h2 className="mb-4 text-xl font-black md:text-2xl text-heading">{copy(locale, data.title)}</h2>
             <p className="text-base leading-8 text-muted-foreground">{copy(locale, data.body)}</p>
           </div>
           <div className="rounded-[2rem] border border-border/70 bg-card p-8 md:p-10">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
               <ShieldCheck className="h-5 w-5" />
             </div>
-            <h2 className="mb-6 text-2xl font-black md:text-3xl">{copy(locale, trust.title)}</h2>
+            <h2 className="mb-6 text-xl font-black md:text-2xl text-heading">{copy(locale, trust.title)}</h2>
             <div className="grid grid-cols-2 gap-3">
               {trust.items.map((item) => (
                 <div key={item.label.en} className="rounded-2xl bg-muted/50 px-4 py-3">
-                  <div className="text-2xl font-black text-primary">{item.value}</div>
+                  <div className="text-xl font-black text-primary">{item.value}</div>
                   <div className="text-xs font-semibold text-muted-foreground">{copy(locale, item.label)}</div>
                 </div>
               ))}
@@ -606,7 +606,7 @@ function Audience({ locale }: { locale: string }) {
         <div className="grid gap-6 lg:grid-cols-2">
           <Card className="rounded-3xl border-emerald-500/20 bg-emerald-500/5">
             <CardHeader>
-              <CardTitle className="text-2xl font-black">{copy(locale, audience.yesTitle)}</CardTitle>
+              <CardTitle className="text-xl font-black">{copy(locale, audience.yesTitle)}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {audience.yes.map((item) => (
@@ -619,7 +619,7 @@ function Audience({ locale }: { locale: string }) {
           </Card>
           <Card className="rounded-3xl">
             <CardHeader>
-              <CardTitle className="text-2xl font-black">{copy(locale, audience.noTitle)}</CardTitle>
+              <CardTitle className="text-xl font-black">{copy(locale, audience.noTitle)}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-base leading-8 text-muted-foreground">{copy(locale, audience.noIntro)}</p>
@@ -640,14 +640,14 @@ function Closing({
 }) {
   return (
     <section className="relative overflow-hidden py-24">
-      <div className="absolute inset-0 -z-10 bg-slate-950" />
+      <div className="absolute inset-0 -z-10 bg-slate-950 dark:border-y dark:border-white/[0.06] dark:bg-[hsl(224_60%_6%)]" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(14,165,233,0.28),transparent_32rem),radial-gradient(circle_at_80%_70%,rgba(20,184,166,0.22),transparent_28rem)]" />
       <div className="container relative mx-auto px-4">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-white/[0.06] p-8 text-center shadow-2xl shadow-black/20 backdrop-blur md:p-12">
-          <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl md:text-4xl">
             {copy(locale, estimator.closing.slogan)}
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/75 md:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/75">
             {copy(locale, estimator.closing.body)}
           </p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:justify-center">

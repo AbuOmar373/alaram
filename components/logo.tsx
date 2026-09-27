@@ -35,7 +35,7 @@ export function Logo({ className, variant = "default", href = "/" }: LogoProps) 
       
       {variant === "default" && (
         <div className="flex flex-col">
-          <span className="text-lg font-black leading-none tracking-tight text-foreground transition-all">
+          <span className="text-lg font-black leading-none tracking-tight text-subheading transition-all">
             {t("primary")}
           </span>
           <span className="text-xs font-semibold leading-none text-muted-foreground transition-colors group-hover:text-primary">

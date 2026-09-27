@@ -65,7 +65,7 @@ export function FeatureGrid({ title, subtitle, features }: FeatureGridProps) {
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary ring-1 ring-primary/10 transition-all duration-300 group-hover:bg-primary group-hover:text-white">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <CardTitle className="text-xl font-black leading-8 transition-colors duration-300 group-hover:text-primary">
+                    <CardTitle className="text-lg font-black leading-8 transition-colors duration-300 group-hover:text-primary">
                       {feature.title}
                     </CardTitle>
                   </CardHeader>

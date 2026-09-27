@@ -66,7 +66,7 @@ export default async function IndustryPage({
       {/* Description */}
       <section className="border-b py-12">
         <div className="container mx-auto px-4">
-          <p className="mx-auto max-w-3xl text-center text-lg text-muted-foreground">
+          <p className="mx-auto max-w-3xl text-center text-base text-muted-foreground">
             {isArabic ? industry.descriptionAR : industry.descriptionEN}
           </p>
         </div>
@@ -75,7 +75,7 @@ export default async function IndustryPage({
       {/* Core Modules */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold">{t("coreModules")}</h2>
+          <h2 className="mb-12 text-center text-2xl font-bold text-heading">{t("coreModules")}</h2>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2 lg:grid-cols-3">
             {industry.coreModules.map((module) => (
               <Card key={module}>
@@ -92,7 +92,7 @@ export default async function IndustryPage({
       {/* Specialized Features */}
       <section className="bg-muted/30 py-20">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold">{t("specializedFeatures")}</h2>
+          <h2 className="mb-12 text-center text-2xl font-bold text-heading">{t("specializedFeatures")}</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {industry.specialized.map((feature, index) => (
               <Card key={index}>
@@ -115,7 +115,7 @@ export default async function IndustryPage({
       {/* Use Cases */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold">
+          <h2 className="mb-12 text-center text-2xl font-bold text-heading">
             {isArabic ? "حالات الاستخدام" : "Use Cases"}
           </h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -140,10 +140,10 @@ export default async function IndustryPage({
       {/* CTA Section */}
       <section className="bg-primary py-20 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold sm:text-4xl">
+          <h2 className="text-2xl font-bold sm:text-3xl">
             {isArabic ? "جاهز للبدء؟" : "Ready to Get Started?"}
           </h2>
-          <p className="mt-4 text-lg opacity-90">
+          <p className="mt-4 text-base opacity-90">
             {isArabic
               ? "جرّب النظام مجاناً أو احجز عرضاً توضيحياً الآن"
               : "Try the system for free or book a demo now"}

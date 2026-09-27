@@ -5,7 +5,6 @@ import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/sections/hero";
 import { FeatureGrid } from "@/components/sections/feature-grid";
 import { IndustriesCarousel } from "@/components/sections/industries-carousel";
-import { Stats } from "@/components/sections/stats";
 import { FAQ } from "@/components/sections/faq";
 import { Testimonials } from "@/components/sections/testimonials";
 import { CTASection } from "@/components/sections/cta-section";
@@ -106,26 +105,10 @@ export default async function HomePage({ params }: PageProps) {
     id: industry.id,
     name: industry[localizedIndustryFields.name],
     summary: industry[localizedIndustryFields.summary],
+    features: industry.specialized
+      .slice(0, 3)
+      .map((feature) => (currentLocale === "ar" ? feature.nameAR : feature.nameEN)),
   }));
-
-  const stats = [
-    {
-      value: currentLocale === "ar" ? "أونلاين" : "Online",
-      label: currentLocale === "ar" ? "نموذج الخدمة" : "Service model",
-    },
-    {
-      value: currentLocale === "ar" ? "السعودية" : "Saudi Arabia",
-      label: currentLocale === "ar" ? "نطاق الخدمة" : "Service coverage",
-    },
-    {
-      value: currentLocale === "ar" ? "AR/EN" : "AR/EN",
-      label: currentLocale === "ar" ? "لغة الدعم" : "Support language",
-    },
-    {
-      value: currentLocale === "ar" ? "متعدد" : "Multi-sector",
-      label: currentLocale === "ar" ? "القطاعات المستهدفة" : "Target industries",
-    },
-  ];
 
   const testimonialKeys = ["alotaibi", "aldosari", "alsaeed"] as const;
   const testimonials = testimonialKeys.map((key) => ({
@@ -174,8 +157,6 @@ export default async function HomePage({ params }: PageProps) {
         secondaryCta={t("hero.secondaryCta")}
       />
 
-      <Stats stats={stats} />
-
       <IndustriesCarousel
         title={t("industries.title")}
         subtitle={t("industries.subtitle")}
@@ -185,9 +166,9 @@ export default async function HomePage({ params }: PageProps) {
 
       <LmsProductCard variant="featured" viewDetailsText={tSolutions("viewDetails")} />
 
-      <SamtProductCard variant="featured" viewDetailsText={tSolutions("viewDetails")} />
-
       <EstimatorProductCard variant="featured" viewDetailsText={tSolutions("viewDetails")} />
+
+      <SamtProductCard variant="featured" viewDetailsText={tSolutions("viewDetails")} />
 
       <FeatureGrid title={t("features.title")} subtitle={t("features.subtitle")} features={features} />
 
@@ -202,7 +183,7 @@ export default async function HomePage({ params }: PageProps) {
                 </Badge>
               </div>
               <div>
-                <h3 className="mb-3 text-2xl font-black text-foreground">{tCompliance("zatca.title")}</h3>
+                <h3 className="mb-3 text-xl font-black text-subheading">{tCompliance("zatca.title")}</h3>
                 <p className="text-base leading-8 text-muted-foreground">{tCompliance("zatca.description")}</p>
                 <p className="mt-3 text-sm font-bold text-emerald-600 dark:text-emerald-400">
                   {tCompliance("zatca.note")}
@@ -216,7 +197,7 @@ export default async function HomePage({ params }: PageProps) {
                 </Badge>
               </div>
               <div>
-                <h3 className="mb-3 text-2xl font-black text-foreground">{tCompliance("vat.title")}</h3>
+                <h3 className="mb-3 text-xl font-black text-subheading">{tCompliance("vat.title")}</h3>
                 <p className="text-base leading-8 text-muted-foreground">{tCompliance("vat.description")}</p>
               </div>
             </div>

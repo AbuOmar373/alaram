@@ -60,7 +60,7 @@ export function EstimatorPricing({ locale }: { locale: string }) {
                         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                           <Icon className="h-6 w-6" aria-hidden="true" />
                         </div>
-                        <CardTitle className="text-2xl font-black leading-normal">{name}</CardTitle>
+                        <CardTitle className="text-xl font-black leading-normal">{name}</CardTitle>
                       </div>
                       <span
                         className={`shrink-0 rounded-full px-3 py-1 text-xs font-black ${
@@ -80,7 +80,7 @@ export function EstimatorPricing({ locale }: { locale: string }) {
                         </div>
                       )}
                       <div className="flex flex-wrap items-baseline gap-2">
-                        <span className="text-6xl font-black tracking-tight text-foreground">
+                        <span className="text-5xl font-black tracking-tight text-heading">
                           {numberFormat.format(plan.monthlyEquivalent)}
                         </span>
                         <span className="text-lg font-bold text-muted-foreground">
@@ -130,7 +130,7 @@ export function EstimatorPricing({ locale }: { locale: string }) {
         </div>
 
         <div className="mx-auto mt-8 max-w-5xl rounded-2xl border border-border/70 bg-card p-5 text-center sm:p-6">
-          <p className="text-sm font-semibold leading-7 text-foreground">{copy(locale, pricing.request.note)}</p>
+          <p className="text-sm font-semibold leading-7 text-subheading">{copy(locale, pricing.request.note)}</p>
           <p className="mt-2 text-sm leading-7 text-muted-foreground">{copy(locale, pricing.note)}</p>
         </div>
       </div>

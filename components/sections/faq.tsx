@@ -77,7 +77,7 @@ export function FAQ({ title, subtitle, items }: FAQProps) {
                 value={`item-${index}`}
                 className="surface-card overflow-hidden rounded-3xl px-6"
               >
-                <AccordionTrigger className="text-start text-base font-black text-foreground hover:text-primary hover:no-underline md:text-lg">
+                <AccordionTrigger className="text-start text-base font-black text-subheading hover:text-primary hover:no-underline md:text-lg">
                   <span className="flex items-center gap-3">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-black text-primary">
                       {index + 1}

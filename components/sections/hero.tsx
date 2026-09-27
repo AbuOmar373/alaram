@@ -72,13 +72,13 @@ export function Hero({
                 <span>{locale === "ar" ? "حلول محاسبية مدعمة بالذكاء الصناعي" : "AI-supported accounting platform"}</span>
               </div>
 
-              <h1 className="max-w-4xl text-4xl font-black leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl">
+              <h1 className="max-w-4xl text-3xl font-black leading-[1.08] tracking-tight text-heading sm:text-4xl lg:text-5xl xl:text-6xl">
                 {headline}
               </h1>
             </motion.div>
 
             <motion.p
-              className="mt-6 max-w-2xl text-lg leading-9 text-muted-foreground md:text-xl"
+              className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg"
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -95,7 +95,7 @@ export function Hero({
               <Button
                 size="lg"
                 asChild
-                className="group h-14 rounded-full bg-slate-950 px-8 text-base font-bold shadow-xl shadow-slate-950/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-primary/25 dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-white"
+                className="group h-14 rounded-full bg-slate-950 px-8 text-base font-bold shadow-xl shadow-slate-950/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-primary/25 dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-primary-foreground"
               >
                 <Link href={withLocale(primaryHref)}>
                   {primaryCta}
@@ -141,7 +141,7 @@ export function Hero({
               <div className="rounded-[1.5rem] border border-border/70 bg-card p-5 shadow-2xl shadow-slate-950/10">
                 <div className="mb-6 flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-bold text-foreground">{locale === "ar" ? "لوحة الأداء" : "Performance dashboard"}</div>
+                    <div className="text-sm font-bold text-subheading">{locale === "ar" ? "لوحة الأداء" : "Performance dashboard"}</div>
                     <div className="text-xs text-muted-foreground">{locale === "ar" ? "نظرة يومية على الأعمال" : "Daily business snapshot"}</div>
                   </div>
                   <div className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-700 dark:text-emerald-300">
@@ -157,7 +157,7 @@ export function Hero({
                   ].map((metric) => (
                     <div key={metric.label} className="rounded-2xl border border-border/70 bg-muted/40 p-4">
                       <div className="text-xs font-semibold text-muted-foreground">{metric.label}</div>
-                      <div className="mt-2 text-2xl font-black text-foreground">{metric.value}</div>
+                      <div className="mt-2 text-xl font-black text-subheading">{metric.value}</div>
                     </div>
                   ))}
                 </div>

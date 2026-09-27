@@ -49,12 +49,12 @@ export function LmsPricing({ locale }: { locale: string }) {
                     <span className="text-sm font-bold text-primary">{copy(locale, plan.label)}</span>
                   </div>
                   <div>
-                    <CardTitle className="text-2xl font-black leading-normal">{name}</CardTitle>
+                    <CardTitle className="text-xl font-black leading-normal">{name}</CardTitle>
                     <CardDescription className="mt-3 text-base leading-8">{copy(locale, plan.description)}</CardDescription>
                   </div>
                   <div>
                     <div className="flex flex-wrap items-baseline gap-2">
-                      <span className="text-5xl font-black tracking-tight">{price}</span>
+                      <span className="text-4xl font-black tracking-tight">{price}</span>
                       <span className="text-base font-semibold text-muted-foreground">{copy(locale, pricing.currencyLabel)}</span>
                     </div>
                     <p className="mt-2 text-sm font-semibold text-primary">{copy(locale, pricing.period)}</p>
@@ -101,7 +101,7 @@ export function LmsPricing({ locale }: { locale: string }) {
         </div>
         <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-7 text-muted-foreground">{copy(locale, pricing.note)}</p>
         <div className="mx-auto mt-10 max-w-3xl text-center">
-          <h3 className="text-xl font-black">{copy(locale, pricing.commission.title)}</h3>
+          <h3 className="text-lg font-black text-subheading">{copy(locale, pricing.commission.title)}</h3>
           <p className="mt-3 text-base leading-8 text-muted-foreground">{copy(locale, pricing.commission.body)}</p>
         </div>
       </div>

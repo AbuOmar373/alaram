@@ -17,7 +17,7 @@ export function CTASection({ title, subtitle, primaryCta, secondaryCta }: CTASec
 
   return (
     <section className="relative overflow-hidden py-24">
-      <div className="absolute inset-0 -z-10 bg-slate-950" />
+      <div className="absolute inset-0 -z-10 bg-slate-950 dark:border-y dark:border-white/[0.06] dark:bg-[hsl(224_60%_6%)]" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(14,165,233,0.28),transparent_32rem),radial-gradient(circle_at_80%_70%,rgba(20,184,166,0.22),transparent_28rem)]" />
       <motion.div
         className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-white/10 blur-3xl"
@@ -33,7 +33,7 @@ export function CTASection({ title, subtitle, primaryCta, secondaryCta }: CTASec
       <div className="container relative mx-auto px-4">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-white/[0.06] p-8 text-center shadow-2xl shadow-black/20 backdrop-blur md:p-12">
           <motion.h2
-            className="text-3xl font-black tracking-tight text-white sm:text-4xl md:text-5xl"
+            className="text-2xl font-black tracking-tight text-white sm:text-3xl md:text-4xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -42,7 +42,7 @@ export function CTASection({ title, subtitle, primaryCta, secondaryCta }: CTASec
             {title}
           </motion.h2>
           <motion.p
-            className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/75 md:text-lg"
+            className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/75"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

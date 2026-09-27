@@ -17,8 +17,8 @@ export function Footer() {
       links: [
         { name: nav("solutions"), href: "/solutions" },
         { name: nav("lms"), href: "/lms" },
-        { name: nav("samt"), href: "/samt" },
         { name: nav("estimator"), href: "/estimator" },
+        { name: nav("samt"), href: "/samt" },
         { name: nav("pricing"), href: "/pricing" },
       ],
     },
@@ -116,7 +116,7 @@ export function Footer() {
           {/* Footer Links */}
           {footerSections.map((section) => (
             <div key={section.title} className="space-y-4">
-              <h3 className="relative inline-block text-sm font-black">
+              <h3 className="relative inline-block text-sm font-black text-subheading">
                 {section.title}
                 <span className="absolute -bottom-1 left-0 h-0.5 w-8 rounded-full bg-primary rtl:left-auto rtl:right-0" />
               </h3>

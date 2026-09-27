@@ -1105,7 +1105,7 @@ export default function BlogPostPage() {
             </Badge>
 
             {/* Title */}
-            <h1 className="mb-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent dark:from-gray-100 dark:via-white dark:to-gray-100 md:text-5xl lg:text-6xl">
+            <h1 className="mb-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent dark:from-white dark:via-slate-100 dark:to-slate-400 md:text-5xl lg:text-6xl">
               {post.title}
             </h1>
 

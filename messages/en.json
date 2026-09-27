@@ -16,6 +16,12 @@
     "lms": "ALaramLMS",
     "samt": "Samt",
     "estimator": "Cost Estimator",
+    "programs": "Programs",
+    "programsDesc": {
+      "lms": "Your own branded training platform",
+      "samt": "AI resume builder",
+      "estimator": "Project estimates and proposals"
+    },
     "pricing": "Pricing",
     "about": "About",
     "contact": "Contact",
@@ -27,7 +33,7 @@
   "home": {
     "hero": {
       "headline": "ALaram",
-      "subheadline": "Tailored solutions for supermarkets, maintenance, auto workshops, perfume shops, and women's beauty salons. Easy to use, fast performance, and accurate real-time reports.",
+      "subheadline": "Tailored solutions for supermarkets, retail stores, contractors and service providers, perfume shops, and women's beauty salons. Easy to use, fast performance, and accurate real-time reports.",
       "cta": "Try the System Now",
       "secondaryCta": "Book a Demo"
     },

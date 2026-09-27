@@ -31,8 +31,8 @@ export function PricingTable({ title, subtitle, tiers, popularText = "الأكث
     <section className="py-20">
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-12 max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
-          {subtitle && <p className="mt-4 text-lg text-muted-foreground">{subtitle}</p>}
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl text-heading">{title}</h2>
+          {subtitle && <p className="mt-4 text-base text-muted-foreground">{subtitle}</p>}
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -50,7 +50,7 @@ export function PricingTable({ title, subtitle, tiers, popularText = "الأكث
                 <CardTitle>{tier.name}</CardTitle>
                 <CardDescription>{tier.description}</CardDescription>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold">
+                  <span className="text-3xl font-bold">
                     {formatCurrency(tier.price, tier.currency)}
                   </span>
                   <span className="text-muted-foreground">/{tier.period}</span>

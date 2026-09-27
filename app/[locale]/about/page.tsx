@@ -112,8 +112,8 @@ export default function AboutPage() {
       title: locale === "ar" ? "تطوير الحلول القطاعية" : "Industry Expansion",
       description:
         locale === "ar"
-          ? "توسيع الوحدات لتناسب احتياجات قطاعات متعددة مثل السوبرماركت والصيانة والورش."
-          : "Expanding modules to fit multiple industries such as supermarkets, maintenance, and workshops.",
+          ? "توسيع الوحدات لتناسب احتياجات قطاعات متعددة مثل السوبرماركت ومحلات التجزئة والمقاولات."
+          : "Expanding modules to fit multiple industries such as supermarkets, retail stores, and contracting.",
     },
     {
       year: locale === "ar" ? "المرحلة 3" : "Phase 3",
@@ -178,11 +178,11 @@ export default function AboutPage() {
               <span>{isRTL ? "قصتنا" : "Our Story"}</span>
             </div>
 
-            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-5xl font-bold leading-tight tracking-tight text-transparent dark:from-gray-100 dark:via-white dark:to-gray-100 sm:text-6xl md:text-7xl">
+            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent dark:from-white dark:via-slate-100 dark:to-slate-400 sm:text-5xl md:text-6xl">
               {t("title")}
             </h1>
 
-            <p className="mt-6 text-xl leading-relaxed text-muted-foreground md:text-2xl">
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
               {t("subtitle")}
             </p>
           </motion.div>
@@ -207,10 +207,10 @@ export default function AboutPage() {
                 <Badge className="mb-4 bg-primary/10 text-primary hover:bg-primary/20">
                   {isRTL ? "منصة حلول أعمال" : "Business Solutions Platform"}
                 </Badge>
-                <h2 className="mb-6 text-4xl font-bold">
+                <h2 className="mb-6 text-3xl font-bold text-heading">
                   {isRTL ? "رحلتنا نحو التميز" : "Our Journey to Excellence"}
                 </h2>
-                <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
+                <div className="space-y-4 text-base leading-relaxed text-muted-foreground">
                   <p>
                     {locale === "ar"
                       ? "الأرام منصة حلول أعمال ومحاسبة تركّز على تقديم تجربة مرنة وسهلة للقطاعات المختلفة داخل السعودية."
@@ -238,7 +238,7 @@ export default function AboutPage() {
                         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20">
                           <achievement.icon className="h-8 w-8 text-primary" />
                         </div>
-                        <h3 className="mb-2 font-bold">{achievement.title}</h3>
+                        <h3 className="mb-2 font-bold text-subheading">{achievement.title}</h3>
                         <p className="text-sm text-muted-foreground">{achievement.description}</p>
                       </CardContent>
                     </Card>
@@ -267,10 +267,10 @@ export default function AboutPage() {
                     <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-blue-500/20">
                       <Target className="h-7 w-7 text-primary" />
                     </div>
-                    <CardTitle className="text-3xl font-bold">{t("mission")}</CardTitle>
+                    <CardTitle className="text-2xl font-bold">{t("mission")}</CardTitle>
                   </CardHeader>
                   <CardContent className="relative">
-                    <p className="text-lg leading-relaxed text-muted-foreground">
+                    <p className="text-base leading-relaxed text-muted-foreground">
                       {locale === "ar"
                         ? "مهمتنا هي تمكين الشركات السعودية والخليجية من خلال توفير حلول برمجية محاسبية متخصصة وسهلة الاستخدام تساعدهم على النمو والازدهار في عصر التحول الرقمي."
                         : "Our mission is to empower Saudi and Gulf companies by providing specialized and easy-to-use accounting software solutions that help them grow and thrive in the digital transformation era."}
@@ -291,10 +291,10 @@ export default function AboutPage() {
                     <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20">
                       <Eye className="h-7 w-7 text-purple-600 dark:text-purple-400" />
                     </div>
-                    <CardTitle className="text-3xl font-bold">{t("vision")}</CardTitle>
+                    <CardTitle className="text-2xl font-bold">{t("vision")}</CardTitle>
                   </CardHeader>
                   <CardContent className="relative">
-                    <p className="text-lg leading-relaxed text-muted-foreground">
+                    <p className="text-base leading-relaxed text-muted-foreground">
                       {locale === "ar"
                         ? "رؤيتنا أن نكون الخيار الأول للشركات في المنطقة عندما يتعلق الأمر بالحلول البرمجية المحاسبية المتخصصة، وأن نساهم في التحول الرقمي للاقتصاد السعودي والخليجي."
                         : "Our vision is to be the first choice for companies in the region when it comes to specialized accounting software solutions, and to contribute to the digital transformation of the Saudi and Gulf economy."}
@@ -311,10 +311,10 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto mb-16 max-w-2xl text-center">
-            <h2 className="mb-4 text-4xl font-bold">
+            <h2 className="mb-4 text-3xl font-bold text-heading">
               {isRTL ? "مسيرتنا عبر السنين" : "Our Journey Through the Years"}
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base text-muted-foreground">
               {isRTL
                 ? "نظرة على أهم المحطات في رحلتنا"
                 : "A look at key milestones in our journey"}
@@ -371,8 +371,8 @@ export default function AboutPage() {
       <section className="bg-gradient-to-b from-background via-muted/30 to-background py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto mb-16 max-w-2xl text-center">
-            <h2 className="mb-4 text-4xl font-bold">{t("values")}</h2>
-            <p className="text-lg text-muted-foreground">
+            <h2 className="mb-4 text-3xl font-bold text-heading">{t("values")}</h2>
+            <p className="text-base text-muted-foreground">
               {isRTL
                 ? "القيم التي نؤمن بها وتوجه عملنا يومياً"
                 : "The values we believe in and guide our daily work"}
@@ -419,10 +419,10 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold md:text-5xl">
+            <h2 className="text-3xl font-bold md:text-4xl">
               {isRTL ? "انضم إلى رحلتنا" : "Join Our Journey"}
             </h2>
-            <p className="mt-6 text-xl opacity-90">
+            <p className="mt-6 text-lg opacity-90">
               {isRTL
                 ? "كن جزءاً من قصة النجاح وابدأ تجربتك المجانية اليوم"
                 : "Be part of the success story and start your free trial today"}

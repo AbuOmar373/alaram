@@ -24,7 +24,7 @@ export function LogosMarquee({ title, logos }: LogosMarqueeProps) {
                 key={index}
                 className="flex min-w-[120px] items-center justify-center grayscale transition-all hover:grayscale-0"
               >
-                <span className="text-2xl font-bold text-muted-foreground">{logo.name}</span>
+                <span className="text-xl font-bold text-muted-foreground">{logo.name}</span>
               </div>
             ))}
           </div>

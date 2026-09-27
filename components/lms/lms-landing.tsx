@@ -81,12 +81,12 @@ function Hero({
                 <span>{copy(locale, alaramLms.hero.eyebrow)}</span>
               </div>
               <p className="mb-3 text-sm font-black tracking-wide text-primary">{alaramLms.name}</p>
-              <h1 className="max-w-4xl text-4xl font-black leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              <h1 className="max-w-4xl text-3xl font-black leading-[1.08] tracking-tight text-heading sm:text-4xl lg:text-5xl">
                 {copy(locale, alaramLms.hero.headline)}
               </h1>
             </motion.div>
             <motion.p
-              className="mt-6 max-w-2xl text-lg leading-9 text-muted-foreground md:text-xl"
+              className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg"
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -102,7 +102,7 @@ function Hero({
               <Button
                 size="lg"
                 asChild
-                className="group h-14 rounded-full bg-slate-950 px-8 text-base font-bold shadow-xl shadow-slate-950/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-primary/25 dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-white"
+                className="group h-14 rounded-full bg-slate-950 px-8 text-base font-bold shadow-xl shadow-slate-950/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-primary/25 dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-primary-foreground"
               >
                 <Link href="#pricing">
                   {copy(locale, alaramLms.hero.primaryCta)}
@@ -147,7 +147,7 @@ function Hero({
               <div className="rounded-[1.5rem] border border-border/70 bg-card p-5 shadow-2xl shadow-slate-950/10">
                 <div className="mb-6 flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-bold text-foreground">
+                    <div className="text-sm font-bold text-subheading">
                       {locale === "ar" ? "أكاديميتك" : "Your academy"}
                     </div>
                     <div className="text-xs text-muted-foreground" dir="ltr">
@@ -217,12 +217,12 @@ function Highlights({ locale }: { locale: string }) {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                 <Sparkles className="h-5 w-5" />
               </div>
-              <h3 className="mb-3 text-xl font-black">{copy(locale, item.title)}</h3>
+              <h3 className="mb-3 text-lg font-black text-subheading">{copy(locale, item.title)}</h3>
               <p className="text-base leading-8 text-muted-foreground">{copy(locale, item.description)}</p>
             </motion.div>
           ))}
         </div>
-        <h3 className="mb-5 mt-10 text-center text-lg font-black">
+        <h3 className="mb-5 mt-10 text-center text-lg font-black text-subheading">
           {copy(locale, alaramLms.courseTypes.title)}
         </h3>
         <div className="flex flex-wrap justify-center gap-2">
@@ -250,7 +250,7 @@ function Problem({ locale }: { locale: string }) {
           subtitle={copy(locale, alaramLms.problem.intro)}
         />
         <div className="mx-auto max-w-3xl">
-          <blockquote className="surface-card mb-8 rounded-3xl p-8 text-center text-2xl font-black">
+          <blockquote className="surface-card mb-8 rounded-3xl p-8 text-center text-xl font-black">
             “{copy(locale, alaramLms.problem.quote)}”
           </blockquote>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -330,7 +330,7 @@ function Experience({ locale }: { locale: string }) {
       <div className="container mx-auto px-4">
         <SectionIntro title={copy(locale, alaramLms.experience.title)} subtitle={copy(locale, alaramLms.experience.intro)} />
         <div className="mx-auto max-w-3xl space-y-4">
-          <h3 className="text-center text-xl font-black">{copy(locale, alaramLms.experience.exampleTitle)}</h3>
+          <h3 className="text-center text-lg font-black text-subheading">{copy(locale, alaramLms.experience.exampleTitle)}</h3>
           {alaramLms.experience.chapters.map((chapter) => (
             <Card key={chapter.title.en} className="surface-card rounded-3xl">
               <CardHeader>
@@ -367,7 +367,7 @@ function UseCases({ locale }: { locale: string }) {
           {alaramLms.useCases.map((useCase) => (
             <Card key={useCase.title.en} className="surface-card rounded-3xl">
               <CardHeader>
-                <CardTitle className="text-xl font-black">{copy(locale, useCase.title)}</CardTitle>
+                <CardTitle className="text-lg font-black">{copy(locale, useCase.title)}</CardTitle>
                 <CardDescription className="text-base font-bold text-primary">
                   {copy(locale, useCase.example)}
                 </CardDescription>
@@ -485,7 +485,7 @@ function Delivery({ locale }: { locale: string }) {
           ))}
         </div>
         <div className="mx-auto mt-12 max-w-3xl rounded-[2rem] border border-border/70 bg-card p-8">
-          <h3 className="mb-4 text-2xl font-black">{copy(locale, alaramLms.delivery.afterTitle)}</h3>
+          <h3 className="mb-4 text-xl font-black text-subheading">{copy(locale, alaramLms.delivery.afterTitle)}</h3>
           <p className="text-base leading-8 text-muted-foreground">{copy(locale, alaramLms.delivery.afterBody)}</p>
         </div>
       </div>
@@ -500,7 +500,7 @@ function Audience({ locale }: { locale: string }) {
         <div className="grid gap-6 lg:grid-cols-2">
           <Card className="rounded-3xl border-emerald-500/20 bg-emerald-500/5">
             <CardHeader>
-              <CardTitle className="text-2xl font-black">{copy(locale, alaramLms.audience.yesTitle)}</CardTitle>
+              <CardTitle className="text-xl font-black">{copy(locale, alaramLms.audience.yesTitle)}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {alaramLms.audience.yes.map((item) => (
@@ -513,7 +513,7 @@ function Audience({ locale }: { locale: string }) {
           </Card>
           <Card className="rounded-3xl">
             <CardHeader>
-              <CardTitle className="text-2xl font-black">{copy(locale, alaramLms.audience.noTitle)}</CardTitle>
+              <CardTitle className="text-xl font-black">{copy(locale, alaramLms.audience.noTitle)}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-base leading-8 text-muted-foreground">{copy(locale, alaramLms.audience.noIntro)}</p>
@@ -533,7 +533,7 @@ function Example({ locale }: { locale: string }) {
           <h2 className="section-title text-center">{copy(locale, alaramLms.example.title)}</h2>
           <p className="section-subtitle mx-auto max-w-3xl text-center">{copy(locale, alaramLms.example.body)}</p>
           <div className="mt-10 text-center">
-            <div className="text-4xl font-black text-primary md:text-5xl">{copy(locale, alaramLms.example.amount)}</div>
+            <div className="text-3xl font-black text-primary md:text-4xl">{copy(locale, alaramLms.example.amount)}</div>
             <div className="mt-2 text-sm font-bold text-muted-foreground">
               {copy(locale, alaramLms.example.amountLabel)}
             </div>
@@ -578,14 +578,14 @@ function Closing({
 }) {
   return (
     <section className="relative overflow-hidden py-24">
-      <div className="absolute inset-0 -z-10 bg-slate-950" />
+      <div className="absolute inset-0 -z-10 bg-slate-950 dark:border-y dark:border-white/[0.06] dark:bg-[hsl(224_60%_6%)]" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(14,165,233,0.28),transparent_32rem),radial-gradient(circle_at_80%_70%,rgba(20,184,166,0.22),transparent_28rem)]" />
       <div className="container relative mx-auto px-4">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-white/[0.06] p-8 text-center shadow-2xl shadow-black/20 backdrop-blur md:p-12">
-          <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl md:text-4xl">
             {copy(locale, alaramLms.closing.slogan)}
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/75 md:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/75">
             {copy(locale, alaramLms.closing.body)}
           </p>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/70">
@@ -642,7 +642,7 @@ function CapabilityCard({ title, items }: { title: string; items: string[] }) {
   return (
     <Card className="surface-card rounded-3xl">
       <CardHeader>
-        <CardTitle className="text-2xl font-black">{title}</CardTitle>
+        <CardTitle className="text-xl font-black">{title}</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-3 sm:grid-cols-2">
         {items.map((item) => (

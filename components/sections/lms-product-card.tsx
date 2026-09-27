@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, GraduationCap, Sparkles } from "lucide-react";
+import { ArrowRight, Check, GraduationCap, Sparkles, X } from "lucide-react";
 
 import { alaramLms, copy } from "@/data/alaramlms";
 import { Badge } from "@/components/ui/badge";
@@ -18,11 +18,7 @@ type LmsProductCardProps = {
 export function LmsProductCard({ viewDetailsText, variant = "grid" }: LmsProductCardProps) {
   const locale = useLocale();
   const href = `/${locale}/lms`;
-  const chips = [
-    copy(locale, alaramLms.hero.trustItems[0]),
-    copy(locale, alaramLms.hero.trustItems[1]),
-    copy(locale, alaramLms.hero.trustItems[2]),
-  ];
+  const chips = alaramLms.card.chips.map((chip) => copy(locale, chip));
 
   if (variant === "featured") {
     return (
@@ -47,10 +43,10 @@ export function LmsProductCard({ viewDetailsText, variant = "grid" }: LmsProduct
               <span>{locale === "ar" ? "منتج مستقل للمدربين" : "A standalone product for trainers"}</span>
             </div>
             <h2 className="section-title">
-              {locale === "ar" ? "منصة الدورات التدريبية" : "Training course platform"}
+              {copy(locale, alaramLms.card.title)}
             </h2>
             <p className="section-subtitle">
-              {copy(locale, alaramLms.tagline)}
+              {copy(locale, alaramLms.card.subtitle)}
             </p>
           </motion.div>
 
@@ -66,16 +62,16 @@ export function LmsProductCard({ viewDetailsText, variant = "grid" }: LmsProduct
       <div className="absolute end-4 top-4 z-10">
         <Badge variant="default" className="bg-gradient-to-r from-primary to-accent shadow-lg">
           <Sparkles className="me-1 h-3 w-3" />
-          {locale === "ar" ? "منتج جديد" : "New product"}
+          {copy(locale, alaramLms.card.badge)}
         </Badge>
       </div>
       <CardHeader className="relative pb-4">
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
           <GraduationCap className="h-6 w-6" />
         </div>
-        <CardTitle className="text-2xl font-black">{alaramLms.name}</CardTitle>
+        <CardTitle className="text-xl font-black">{alaramLms.name}</CardTitle>
         <CardDescription className="mt-3 text-base leading-relaxed">
-          {copy(locale, alaramLms.summary)}
+          {copy(locale, alaramLms.card.summary)}
         </CardDescription>
       </CardHeader>
       <CardContent className="relative space-y-6">
@@ -126,17 +122,17 @@ function FeaturedInner({
                 <GraduationCap className="h-7 w-7" />
               </div>
               <Badge className="rounded-full bg-primary px-3 py-1 text-xs font-black">
-                {locale === "ar" ? "منتج جديد" : "New product"}
+                {copy(locale, alaramLms.card.badge)}
               </Badge>
             </div>
-            <CardTitle className="text-3xl font-black tracking-tight md:text-4xl">
+            <CardTitle className="text-2xl font-black tracking-tight md:text-3xl">
               {alaramLms.name}
             </CardTitle>
-            <p className="text-lg font-bold leading-8 text-foreground">
-              {copy(locale, alaramLms.hero.headline)}
+            <p className="text-lg font-bold leading-8 text-subheading">
+              {copy(locale, alaramLms.card.headline)}
             </p>
             <CardDescription className="text-base leading-8">
-              {copy(locale, alaramLms.summary)}
+              {copy(locale, alaramLms.card.summary)}
             </CardDescription>
             <div className="flex flex-wrap gap-2">
               {chips.map((chip) => (
@@ -152,7 +148,7 @@ function FeaturedInner({
             <div className="flex flex-col gap-3 pt-2 sm:flex-row">
               <Button
                 asChild
-                className="h-12 rounded-full bg-slate-950 px-7 font-bold shadow-lg hover:bg-primary dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-white"
+                className="h-12 rounded-full bg-slate-950 px-7 font-bold shadow-lg hover:bg-primary dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-primary-foreground"
               >
                 <Link href={href}>
                   {viewDetailsText}
@@ -160,36 +156,34 @@ function FeaturedInner({
                 </Link>
               </Button>
               <Button asChild variant="outline" className="h-12 rounded-full font-bold">
-                <Link href={`/${locale}/demo`}>{copy(locale, alaramLms.cta.primary)}</Link>
+                <Link href={`${href}#pricing`}>{copy(locale, alaramLms.pricing.eyebrow)}</Link>
               </Button>
             </div>
           </CardHeader>
-          <div className="relative border-t border-border/60 bg-muted/30 p-8 lg:border-s lg:border-t-0">
+          <div className="relative border-t border-border/60 bg-muted/30 p-6 md:p-8 lg:border-s lg:border-t-0">
             <div className="rounded-[1.5rem] border border-border/70 bg-card p-5 shadow-xl">
-              <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <div className="text-sm font-black">{alaramLms.name}</div>
-                  <div className="text-xs text-muted-foreground" dir="ltr">
-                    {alaramLms.hero.domainExample}
-                  </div>
-                </div>
-                <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-700 dark:text-emerald-300">
-                  {locale === "ar" ? "أكاديميتك" : "Your academy"}
-                </span>
+              <div className="mb-4 text-sm font-black text-subheading">
+                {copy(locale, alaramLms.card.compare.title)}
               </div>
-              <div className="space-y-2">
-                {(locale === "ar"
-                  ? ["مقدمة في أدوات الصيانة", "التعرف على مكونات الهاتف", "تشخيص الأعطال"]
-                  : ["Intro to repair tools", "Phone components", "Fault diagnosis"]
-                ).map((lesson, index) => (
-                  <div
-                    key={lesson}
-                    className="flex items-center justify-between rounded-2xl border border-border/70 bg-muted/40 px-4 py-3 text-sm font-semibold"
-                  >
-                    <span>
-                      {index + 1}. {lesson}
-                    </span>
-                    <Check className="h-4 w-4 text-emerald-500" />
+              <div className="grid grid-cols-[1fr_1fr_1fr] gap-2 text-xs font-bold">
+                <div />
+                <div className="rounded-xl bg-muted/60 px-2 py-2 text-center text-muted-foreground">
+                  {copy(locale, alaramLms.card.compare.othersLabel)}
+                </div>
+                <div className="rounded-xl bg-primary px-2 py-2 text-center text-primary-foreground" dir="ltr">
+                  {copy(locale, alaramLms.card.compare.oursLabel)}
+                </div>
+                {alaramLms.card.compare.rows.map((row) => (
+                  <div key={row.label.en} className="contents">
+                    <div className="flex items-center py-2.5 text-subheading">{copy(locale, row.label)}</div>
+                    <div className="flex items-center justify-center gap-1.5 rounded-xl border border-border/60 px-2 py-2.5 text-center font-semibold text-muted-foreground">
+                      <X className="h-3.5 w-3.5 shrink-0 text-rose-500" />
+                      <span>{copy(locale, row.others)}</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-1.5 rounded-xl border border-emerald-500/25 bg-emerald-500/10 px-2 py-2.5 text-center text-emerald-700 dark:text-emerald-300">
+                      <Check className="h-3.5 w-3.5 shrink-0" />
+                      <span>{copy(locale, row.ours)}</span>
+                    </div>
                   </div>
                 ))}
               </div>

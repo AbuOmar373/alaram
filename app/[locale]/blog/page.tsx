@@ -201,11 +201,11 @@ export default function BlogPage() {
               <span>{isRTL ? "مدونة الأرام" : "ALaram Blog"}</span>
             </div>
 
-            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-5xl font-bold leading-tight tracking-tight text-transparent dark:from-gray-100 dark:via-white dark:to-gray-100 sm:text-6xl md:text-7xl">
+            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent dark:from-white dark:via-slate-100 dark:to-slate-400 sm:text-5xl md:text-6xl">
               {t("title")}
             </h1>
 
-            <p className="mt-6 text-xl leading-relaxed text-muted-foreground md:text-2xl">
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
               {t("subtitle")}
             </p>
 
@@ -279,7 +279,7 @@ export default function BlogPage() {
             >
               <div className="mb-6 flex items-center gap-2">
                 <TrendingUp className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold">
+                <h2 className="text-xl font-bold text-heading">
                   {isRTL ? "المقال المميز" : "Featured Article"}
                 </h2>
               </div>
@@ -324,11 +324,11 @@ export default function BlogPage() {
                         </div>
                       </div>
 
-                      <h3 className="mb-4 text-3xl font-bold leading-tight md:text-4xl">
+                      <h3 className="mb-4 text-2xl font-bold leading-tight md:text-3xl text-subheading">
                         {featuredPost.title}
                       </h3>
 
-                      <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
+                      <p className="mb-6 text-base leading-relaxed text-muted-foreground">
                         {featuredPost.excerpt}
                       </p>
 
@@ -441,7 +441,7 @@ export default function BlogPage() {
             ) : (
               <div className="py-20 text-center">
                 <BookOpen className="mx-auto mb-4 h-16 w-16 text-muted-foreground/30" />
-                <p className="text-xl text-muted-foreground">
+                <p className="text-lg text-muted-foreground">
                   {isRTL
                     ? "لا توجد مقالات في هذه الفئة حالياً"
                     : "No articles in this category yet"}
@@ -471,13 +471,13 @@ export default function BlogPage() {
               <span>{isRTL ? "النشرة البريدية" : "Newsletter"}</span>
             </div>
 
-            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
               {isRTL
                 ? "اشترك في نشرتنا البريدية"
                 : "Subscribe to Our Newsletter"}
             </h2>
 
-            <p className="mb-10 text-lg opacity-90 md:text-xl">
+            <p className="mb-10 text-base opacity-90 md:text-lg">
               {isRTL
                 ? "احصل على أحدث المقالات والنصائح مباشرة في بريدك الإلكتروني"
                 : "Get the latest articles and tips directly in your inbox"}
@@ -533,12 +533,12 @@ export default function BlogPage() {
           >
             <Card className="overflow-hidden border-2 border-primary/50 bg-gradient-to-br from-primary/5 via-purple-500/5 to-background shadow-2xl">
               <CardContent className="p-10 text-center">
-                <h3 className="mb-4 text-3xl font-bold md:text-4xl">
+                <h3 className="mb-4 text-2xl font-bold md:text-3xl text-subheading">
                   {isRTL
                     ? "هل أنت مستعد لتطوير عملك؟"
                     : "Ready to Grow Your Business?"}
                 </h3>
-                <p className="mb-8 text-lg text-muted-foreground">
+                <p className="mb-8 text-base text-muted-foreground">
                   {isRTL
                     ? "جرب الأرام مجاناً لمدة 14 يوماً واكتشف كيف يمكننا مساعدتك"
                     : "Try ALaram free for 14 days and discover how we can help you"}

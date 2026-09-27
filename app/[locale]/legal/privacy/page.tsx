@@ -34,7 +34,7 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
     <div className="py-20">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl">
-          <h1 className="mb-8 text-4xl font-bold">
+          <h1 className="mb-8 text-3xl font-bold text-heading">
             {isArabic ? "سياسة الخصوصية" : "Privacy Policy"}
           </h1>
 

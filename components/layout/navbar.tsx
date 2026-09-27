@@ -4,7 +4,20 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowUpRight, Globe, Menu, Moon, Sun, X } from "lucide-react";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import {
+  ArrowUpRight,
+  Calculator,
+  ChevronDown,
+  FileText,
+  Globe,
+  GraduationCap,
+  LayoutGrid,
+  Menu,
+  Moon,
+  Sun,
+  X,
+} from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Logo } from "@/components/logo";
@@ -27,12 +40,21 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navigation = [
+  const [programsOpen, setProgramsOpen] = React.useState(false);
+  const [mobileProgramsOpen, setMobileProgramsOpen] = React.useState(true);
+
+  const primaryNavigation = [
     { name: t("home"), href: "/" },
     { name: t("solutions"), href: "/solutions" },
-    { name: t("lms"), href: "/lms" },
-    { name: t("samt"), href: "/samt" },
-    { name: t("estimator"), href: "/estimator" },
+  ];
+
+  const programs = [
+    { name: t("lms"), description: t("programsDesc.lms"), href: "/lms", icon: GraduationCap },
+    { name: t("estimator"), description: t("programsDesc.estimator"), href: "/estimator", icon: Calculator },
+    { name: t("samt"), description: t("programsDesc.samt"), href: "/samt", icon: FileText },
+  ];
+
+  const secondaryNavigation = [
     { name: t("pricing"), href: "/pricing" },
     { name: t("about"), href: "/about" },
     { name: t("contact"), href: "/contact" },
@@ -40,6 +62,20 @@ export function Navbar() {
   ];
 
   const withLocale = (href: string) => (href === "/" ? `/${locale}` : `/${locale}${href}`);
+  const isActive = (href: string) => pathname === withLocale(href);
+  const programsActive = programs.some((program) => isActive(program.href));
+
+  const desktopLinkClass = (active: boolean) =>
+    cn(
+      "group relative rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300",
+      active ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+    );
+
+  const mobileLinkClass = (active: boolean) =>
+    cn(
+      "block rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-300",
+      active ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+    );
 
   const toggleLanguage = () => {
     const newLocale = locale === "ar" ? "en" : "ar";
@@ -67,17 +103,67 @@ export function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-1 lg:flex lg:gap-2">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={withLocale(item.href)}
+          {primaryNavigation.map((item) => (
+            <Link key={item.href} href={withLocale(item.href)} className={desktopLinkClass(isActive(item.href))}>
+              <span className="relative">{item.name}</span>
+            </Link>
+          ))}
+
+          <DropdownMenu.Root
+            open={programsOpen}
+            onOpenChange={setProgramsOpen}
+            modal={false}
+            dir={locale === "ar" ? "rtl" : "ltr"}
+          >
+            <DropdownMenu.Trigger
               className={cn(
-                "group relative rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300",
-                pathname === withLocale(item.href)
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                desktopLinkClass(programsActive || programsOpen),
+                "inline-flex items-center gap-1.5 outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               )}
             >
+              {t("programs")}
+              <ChevronDown
+                className={cn("h-4 w-4 transition-transform duration-200", programsOpen && "rotate-180")}
+                aria-hidden="true"
+              />
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Portal>
+              <DropdownMenu.Content
+                align="center"
+                sideOffset={10}
+                className="z-[60] w-80 rounded-3xl border border-border/70 bg-background/95 p-2 shadow-2xl shadow-slate-950/10 backdrop-blur-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+              >
+                {programs.map((program) => {
+                  const Icon = program.icon;
+                  const active = isActive(program.href);
+                  return (
+                    <DropdownMenu.Item key={program.href} asChild>
+                      <Link
+                        href={withLocale(program.href)}
+                        className={cn(
+                          "flex cursor-pointer items-center gap-3 rounded-2xl p-3 outline-none transition-colors",
+                          active ? "bg-primary/10" : "hover:bg-muted focus:bg-muted"
+                        )}
+                      >
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                          <Icon className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                        <span className="min-w-0">
+                          <span className={cn("block text-sm font-black", active ? "text-primary" : "text-foreground")}>
+                            {program.name}
+                          </span>
+                          <span className="block text-xs leading-5 text-muted-foreground">{program.description}</span>
+                        </span>
+                      </Link>
+                    </DropdownMenu.Item>
+                  );
+                })}
+              </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
+
+          {secondaryNavigation.map((item) => (
+            <Link key={item.href} href={withLocale(item.href)} className={desktopLinkClass(isActive(item.href))}>
               <span className="relative">{item.name}</span>
             </Link>
           ))}
@@ -111,7 +197,7 @@ export function Navbar() {
           {/* CTA Button */}
           <Button
             asChild
-            className="hidden rounded-full bg-slate-950 px-5 font-bold shadow-lg shadow-slate-950/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-primary/20 dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-white md:flex"
+            className="hidden rounded-full bg-slate-950 px-5 font-bold shadow-lg shadow-slate-950/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-primary/20 dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-primary-foreground md:flex"
           >
             <Link href={withLocale("/demo")} className="flex items-center gap-2">
               {t("bookDemo")}
@@ -140,16 +226,69 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="border-t border-border/50 bg-background/95 backdrop-blur-2xl lg:hidden">
           <div className="container mx-auto space-y-1 px-4 py-4">
-            {navigation.map((item) => (
+            {primaryNavigation.map((item) => (
               <Link
                 key={item.href}
                 href={withLocale(item.href)}
-                className={cn(
-                  "block rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-300",
-                  pathname === withLocale(item.href)
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                )}
+                className={mobileLinkClass(isActive(item.href))}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+
+            <div>
+              <button
+                type="button"
+                onClick={() => setMobileProgramsOpen((open) => !open)}
+                aria-expanded={mobileProgramsOpen}
+                className={cn(mobileLinkClass(programsActive), "flex w-full items-center justify-between")}
+              >
+                <span className="flex items-center gap-2">
+                  <LayoutGrid className="h-4 w-4" aria-hidden="true" />
+                  {t("programs")}
+                </span>
+                <ChevronDown
+                  className={cn("h-4 w-4 transition-transform duration-200", mobileProgramsOpen && "rotate-180")}
+                  aria-hidden="true"
+                />
+              </button>
+              {mobileProgramsOpen && (
+                <div className="mt-1 space-y-1 border-s-2 border-primary/15 ps-3 ms-4">
+                  {programs.map((program) => {
+                    const Icon = program.icon;
+                    const active = isActive(program.href);
+                    return (
+                      <Link
+                        key={program.href}
+                        href={withLocale(program.href)}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={cn(
+                          "flex items-center gap-3 rounded-2xl px-3 py-2.5 transition-colors",
+                          active ? "bg-primary/10" : "hover:bg-muted"
+                        )}
+                      >
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                          <Icon className="h-4 w-4" aria-hidden="true" />
+                        </span>
+                        <span className="min-w-0">
+                          <span className={cn("block text-sm font-bold", active ? "text-primary" : "text-foreground")}>
+                            {program.name}
+                          </span>
+                          <span className="block text-xs text-muted-foreground">{program.description}</span>
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {secondaryNavigation.map((item) => (
+              <Link
+                key={item.href}
+                href={withLocale(item.href)}
+                className={mobileLinkClass(isActive(item.href))}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
@@ -157,7 +296,7 @@ export function Navbar() {
             ))}
             <Button
               asChild
-              className="mt-4 w-full rounded-2xl bg-slate-950 font-bold shadow-lg shadow-slate-950/10 hover:bg-primary dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-white"
+              className="mt-4 w-full rounded-2xl bg-slate-950 font-bold shadow-lg shadow-slate-950/10 hover:bg-primary dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-primary-foreground"
             >
               <Link href={withLocale("/demo")} onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2">
                 {t("bookDemo")}

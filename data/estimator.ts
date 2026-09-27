@@ -40,8 +40,8 @@ export const estimator = {
       en: "See pricing",
     },
     priceTeaser: {
-      ar: "من 99 ريالاً شهرياً بالاشتراك السنوي",
-      en: "From SAR 99/month billed annually",
+      ar: "فقط 99 ريالاً للشهر",
+      en: "Just SAR 99 a month",
     },
     trustItems: [
       { ar: "عروض عربية وإنجليزية", en: "Arabic and English proposals" },

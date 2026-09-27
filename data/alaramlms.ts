@@ -46,6 +46,57 @@ export const alaramLms = {
       { ar: "مجانًا حتى ١٠ جيجابايت", en: "Free up to 10 GB" },
     ],
   },
+  card: {
+    title: {
+      ar: "منصة تدريب تملكها، لا تستأجرها",
+      en: "A training platform you own, not rent",
+    },
+    subtitle: {
+      ar: "ادفع مرة واحدة وامتلك منصتك التدريبية، ثم استخدمها مجانًا بلا اشتراكات شهرية ولا عمولات.",
+      en: "Pay once, own your training platform, then use it free with no monthly subscriptions or commissions.",
+    },
+    badge: { ar: "دفعة واحدة فقط", en: "One-time payment" },
+    headline: {
+      ar: "اشترِها مرة واحدة، واستخدمها مجانًا للأبد",
+      en: "Buy it once, use it free for good",
+    },
+    summary: {
+      ar: "المنصات الأخرى تمنحك اسمًا ونطاقًا خاصًا، لكن مقابل اشتراك شهري مكلف يرتفع مع نمو طلابك. مع ALaramLMS تدفع ثمن النظام مرة واحدة فقط وتملكه، دون رسوم شهرية ولا عمولة على مبيعاتك، مع مساحة مجانية حتى ١٠ جيجابايت.",
+      en: "Other platforms give you a custom name and domain, but for a costly monthly subscription that grows with your students. With ALaramLMS you pay for the system just once and own it, with no monthly fees, no commission on sales, and free storage up to 10 GB.",
+    },
+    chips: [
+      { ar: "سعر شراء لمرة واحدة", en: "One-time purchase price" },
+      { ar: "٠ ريال اشتراك شهري", en: "0 SAR monthly" },
+      { ar: "٠٪ عمولة على المبيعات", en: "0% sales commission" },
+    ],
+    compare: {
+      title: { ar: "ماذا تدفع فعليًا؟", en: "What you actually pay" },
+      othersLabel: { ar: "المنصات المدفوعة", en: "Subscription platforms" },
+      oursLabel: { ar: "ALaramLMS", en: "ALaramLMS" },
+      rows: [
+        {
+          label: { ar: "طريقة الدفع", en: "Payment model" },
+          others: { ar: "اشتراك شهري متكرر", en: "Recurring monthly fee" },
+          ours: { ar: "دفعة واحدة", en: "One-time payment" },
+        },
+        {
+          label: { ar: "عمولة المبيعات", en: "Sales commission" },
+          others: { ar: "غالبًا نسبة من كل بيع", en: "Often a cut of every sale" },
+          ours: { ar: "بدون عمولة", en: "None" },
+        },
+        {
+          label: { ar: "الملكية", en: "Ownership" },
+          others: { ar: "تستأجر ما دمت تدفع", en: "Rented while you pay" },
+          ours: { ar: "النظام ملكك", en: "You own it" },
+        },
+        {
+          label: { ar: "بعد سنة", en: "After a year" },
+          others: { ar: "١٢ فاتورة وتستمر", en: "12 invoices and counting" },
+          ours: { ar: "٠ ريال إضافي", en: "0 SAR extra" },
+        },
+      ],
+    },
+  },
   highlights: [
     {
       title: { ar: "هويتك لا منصة أخرى", en: "Your brand, not someone else’s" },
@@ -57,8 +108,8 @@ export const alaramLms = {
     {
       title: { ar: "ادفع مرة واحدة", en: "Pay once" },
       description: {
-        ar: "اشترِ التطبيق بـ ٦٠٠ ريال، أو اختر باقة ١٥٠٠ ريال لتشمل إنشاء وإعداد تطبيقات الطرف الثالث وتشغيل المشروع بالكامل.",
-        en: "Buy the application for SAR 600, or choose the SAR 1,500 package with third-party application creation, configuration, and full project launch.",
+        ar: "اشترِ التطبيق مرة واحدة فقط، أو اختر باقة التشغيل الكامل لتشمل إنشاء وإعداد تطبيقات الطرف الثالث وتشغيل المشروع بالكامل.",
+        en: "Buy the application just once, or choose the full-launch package with third-party application creation, configuration, and full project launch.",
       },
     },
     {
@@ -517,8 +568,8 @@ export const alaramLms = {
       {
         question: { ar: "ما الفرق بين باقتَي الشراء؟", en: "What is the difference between the purchase packages?" },
         answer: {
-          ar: "الباقة الأولى بسعر ٦٠٠ ريال تشمل شراء التطبيق، وتتولى أنت إعداده وتشغيله. الباقة الثانية بسعر ١٥٠٠ ريال تشمل شراء التطبيق مع إنشاء وإعداد تطبيقات الطرف الثالث وتشغيل المشروع بالكامل.",
-          en: "The SAR 600 package includes the application, with setup and launch handled by you. The SAR 1,500 package includes the application, third-party application creation and configuration, and full project launch.",
+          ar: "الباقة الأولى تشمل شراء التطبيق، وتتولى أنت إعداده وتشغيله. الباقة الثانية تشمل شراء التطبيق مع إنشاء وإعداد تطبيقات الطرف الثالث وتشغيل المشروع بالكامل.",
+          en: "The first package includes the application, with setup and launch handled by you. The second package includes the application, third-party application creation and configuration, and full project launch.",
         },
       },
       {

@@ -72,7 +72,7 @@ export function Testimonials({ title, subtitle, testimonials }: TestimonialsProp
                   </p>
 
                   <div className="border-t pt-6">
-                    <div className="text-lg font-black text-foreground">
+                    <div className="text-lg font-black text-subheading">
                       {testimonial.author}
                     </div>
                     <div className="mt-1 text-sm font-medium text-primary">

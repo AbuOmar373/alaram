@@ -183,11 +183,11 @@ export default function PricingPage() {
               <span>{isRTL ? "أسعار شفافة وواضحة" : "Transparent Pricing"}</span>
             </div>
 
-            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-5xl font-bold leading-tight tracking-tight text-transparent dark:from-gray-100 dark:via-white dark:to-gray-100 sm:text-6xl md:text-7xl">
+            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent dark:from-white dark:via-slate-100 dark:to-slate-400 sm:text-5xl md:text-6xl">
               {t("title")}
             </h1>
 
-            <p className="mt-6 text-xl leading-relaxed text-muted-foreground md:text-2xl">
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
               {t("subtitle")}
             </p>
 
@@ -262,7 +262,7 @@ export default function PricingPage() {
                       </div>
 
                       <div>
-                        <CardTitle className="text-2xl font-bold">{tier.name}</CardTitle>
+                        <CardTitle className="text-xl font-bold">{tier.name}</CardTitle>
                         <CardDescription className="mt-2 text-base">
                           {tier.description}
                         </CardDescription>
@@ -270,10 +270,10 @@ export default function PricingPage() {
 
                       <div className="pt-4">
                         <div className="flex items-baseline gap-2">
-                          <span className="bg-gradient-to-br from-gray-900 to-gray-700 bg-clip-text text-5xl font-bold text-transparent dark:from-gray-100 dark:to-gray-300">
+                          <span className="bg-gradient-to-br from-gray-900 to-gray-700 bg-clip-text text-4xl font-bold text-transparent dark:from-white dark:to-slate-400">
                             {displayPrice.toLocaleString()}
                           </span>
-                          <span className="text-lg text-muted-foreground">
+                          <span className="text-base text-muted-foreground">
                             {market.currencySymbol}
                           </span>
                         </div>
@@ -340,7 +340,7 @@ export default function PricingPage() {
       <section className="border-y bg-muted/30 py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto mb-12 max-w-2xl text-center">
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-2xl font-bold text-heading">
               {isRTL ? "مقارنة تفصيلية للباقات" : "Detailed Plan Comparison"}
             </h2>
             <p className="mt-4 text-muted-foreground">
@@ -399,7 +399,7 @@ export default function PricingPage() {
             <div className="mb-4 inline-flex items-center gap-2 text-primary">
               <HelpCircle className="h-6 w-6" />
             </div>
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-2xl font-bold text-heading">
               {isRTL ? "الأسئلة الشائعة" : "Frequently Asked Questions"}
             </h2>
             <p className="mt-4 text-muted-foreground">
@@ -438,10 +438,10 @@ export default function PricingPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold md:text-5xl">
+            <h2 className="text-3xl font-bold md:text-4xl">
               {isRTL ? "جاهز للبدء؟" : "Ready to Get Started?"}
             </h2>
-            <p className="mt-6 text-xl opacity-90">
+            <p className="mt-6 text-lg opacity-90">
               {isRTL
                 ? "جرّب الأرام مجاناً لمدة 14 يوماً بدون بطاقة ائتمانية"
                 : "Try ALaram free for 14 days with no credit card required"}

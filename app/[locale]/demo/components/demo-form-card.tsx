@@ -153,7 +153,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
             <CheckCircle2 className="h-10 w-10 text-green-600 dark:text-green-400" />
           </div>
 
-          <h2 className="mb-3 text-2xl font-bold">{t("success.title")}</h2>
+          <h2 className="mb-3 text-xl font-bold text-heading">{t("success.title")}</h2>
           <p className="mb-2 max-w-md text-base text-muted-foreground">{t("success.thankYou")}</p>
           <p className="mb-8 max-w-md text-base text-muted-foreground">{t("success.followUp")}</p>
 

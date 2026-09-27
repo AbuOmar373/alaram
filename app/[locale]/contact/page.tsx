@@ -23,10 +23,10 @@ export default function ContactPage() {
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-purple-500/5 to-background py-20 md:py-28">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
-            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-5xl font-bold leading-tight tracking-tight text-transparent dark:from-gray-100 dark:via-white dark:to-gray-100 sm:text-6xl">
+            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent dark:from-white dark:via-slate-100 dark:to-slate-400 sm:text-5xl">
               {t("title")}
             </h1>
-            <p className="mt-6 text-xl leading-relaxed text-muted-foreground md:text-2xl">{t("subtitle")}</p>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">{t("subtitle")}</p>
             <p className="mx-auto mt-4 max-w-3xl text-muted-foreground">
               {isRTL ? brand.serviceArea.ar : brand.serviceArea.en}
             </p>
@@ -111,7 +111,7 @@ export default function ContactPage() {
       <section className="border-y bg-muted/30 py-20">
         <div className="container mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-5">
           <div className="space-y-4 lg:col-span-2">
-            <h2 className="text-2xl font-bold">{isRTL ? "معلومات التواصل" : "Contact Information"}</h2>
+            <h2 className="text-xl font-bold text-heading">{isRTL ? "معلومات التواصل" : "Contact Information"}</h2>
             <p className="text-muted-foreground">{isRTL ? brand.serviceArea.ar : brand.serviceArea.en}</p>
             <p className="text-sm text-muted-foreground">
               {isRTL

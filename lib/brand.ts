@@ -17,8 +17,8 @@ export const brand = {
     en: `${brandNameEn} - %s`,
   },
   description: {
-    ar: "حلول مُفصّلة للسوبرماركت، الصيانة، ورش السيارات، العطور، والصالونات النسائية. سهولة الاستخدام، سرعة الأداء، وتقارير دقيقة لحظيًا.",
-    en: "Tailored solutions for supermarkets, maintenance companies, auto workshops, perfume shops, and women’s beauty salons. Easy to use, fast performance, and accurate real-time reports.",
+    ar: "حلول مُفصّلة للسوبرماركت، محلات التجزئة، المقاولات ومزودي الخدمات، العطور، والصالونات النسائية. سهولة الاستخدام، سرعة الأداء، وتقارير دقيقة لحظيًا.",
+    en: "Tailored solutions for supermarkets, retail stores, contractors and service providers, perfume shops, and women’s beauty salons. Easy to use, fast performance, and accurate real-time reports.",
   },
   footerDescription: {
     ar: "الأرام منصة لحلول الأعمال والمحاسبة مخصصة لعدة قطاعات مع تجربة سهلة وتقارير دقيقة لحظيًا.",
