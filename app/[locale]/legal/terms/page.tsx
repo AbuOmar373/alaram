@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { setRequestLocale } from "next-intl/server";
 import { buildPageMetadata, getLocaleFromParam } from "@/lib/seo";
+import { PurchaseLinks } from "@/components/commerce/purchase-links";
 
-const LAST_UPDATED = "2026-03-23";
+const LAST_UPDATED = "2026-09-27";
 
 export async function generateMetadata({
   params,
@@ -42,7 +43,7 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
                 {isArabic ? `آخر تحديث: ${LAST_UPDATED}` : `Last Updated: ${LAST_UPDATED}`}
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-gray dark:prose-invert max-w-none">
+            <CardContent className="space-y-4 text-muted-foreground [&_h2]:pt-4 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-foreground [&_p]:leading-8">
               {isArabic ? (
                 <>
                   <p>
@@ -59,6 +60,10 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
                   <p>حقوق المحتوى والعلامة والتصاميم المرتبطة بالموقع محفوظة للأرام ما لم يُذكر خلاف ذلك.</p>
                   <h2>5. التعديلات</h2>
                   <p>يجوز تحديث هذه الشروط عند الحاجة، ويُعتمد تاريخ آخر تحديث المنشور في أعلى الصفحة.</p>
+                  <h2>6. الطلب والدفع والتسليم</h2>
+                  <p>يُوضح وصف الباقة وسعرها ومدة الاشتراك أو طبيعة الشراء لمرة واحدة قبل إتمام الطلب. يُؤكد الإجمالي وأي ضريبة أو رسوم إضافية وموعد التسليم قبل السداد، وتُسلّم المنتجات والخدمات إلكترونيًا وفق سياسة التسليم والتفعيل.</p>
+                  <h2>7. الاستبدال والاسترجاع</h2>
+                  <p>تخضع طلبات تغيير الباقات وإلغاء التجديد والاسترداد لسياسة الاستبدال والاسترجاع المرتبطة أدناه. وتبقى حقوق المستهلك النظامية نافذة، ولا تسري التحديثات بأثر رجعي على طلب مكتمل بما ينتقص من حقوقه.</p>
                 </>
               ) : (
                 <>
@@ -76,13 +81,17 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
                   <p>Website content, branding, and design rights belong to ALaram unless explicitly stated otherwise.</p>
                   <h2>5. Updates</h2>
                   <p>These terms may be updated when needed. The last updated date at the top of this page applies.</p>
+                  <h2>6. Ordering, Payment, and Delivery</h2>
+                  <p>The package description, price, and subscription term or one-time purchase details are provided before ordering. The total, any tax or extra fees, and delivery date are confirmed before payment. Products and services are delivered electronically under the delivery and activation policy.</p>
+                  <h2>7. Exchanges and Refunds</h2>
+                  <p>Plan changes, renewal cancellations, and refunds are governed by the exchange and refund policy linked below. Statutory consumer rights remain in effect, and updates do not retroactively reduce rights for completed orders.</p>
                 </>
               )}
             </CardContent>
           </Card>
+          <PurchaseLinks locale={locale} />
         </div>
       </div>
     </div>
   );
 }
-

@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { Facebook, Mail, MessageCircle, Phone } from "lucide-react";
 
 import { ContactForm } from "@/components/forms/contact-form";
+import { PurchaseLinks } from "@/components/commerce/purchase-links";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { brand } from "@/lib/brand";
@@ -118,6 +119,10 @@ export default function ContactPage() {
                 ? "لا يوجد عنوان مكتبي ثابت حالياً، ويتم تقديم الخدمات بالكامل عن بُعد."
                 : "There is currently no fixed office address; all services are provided remotely."}
             </p>
+            <p className="text-sm leading-7 text-muted-foreground">
+              {isRTL ? "لطلب استرجاع أو استبدال أو متابعة تفعيل، أرسل رقم الطلب أو مرجع الدفع واسم الباقة عبر البريد أو واتساب." : "For refunds, plan changes, or activation support, send your order or payment reference and package name by email or WhatsApp."}
+            </p>
+            <PurchaseLinks locale={locale} />
             <div className="pt-2">
               <Button asChild variant="outline">
                 <Link href={`/${locale}/demo`}>{isRTL ? "احجز عرضًا توضيحيًا" : "Book a Demo"}</Link>

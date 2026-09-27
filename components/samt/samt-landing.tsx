@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import { copy, samt, samtAppUrl } from "@/data/samt";
+import { PurchaseLinks } from "@/components/commerce/purchase-links";
 import { FAQ } from "@/components/sections/faq";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -349,7 +350,7 @@ function Export({ locale }: { locale: string }) {
 
 function Pricing({ locale }: { locale: string }) {
   return (
-    <section className="py-24">
+    <section id="pricing" className="scroll-mt-28 py-24">
       <div className="container mx-auto px-4">
         <SectionIntro title={copy(locale, samt.pricing.title)} subtitle={copy(locale, samt.pricing.subtitle)} />
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -386,6 +387,7 @@ function Pricing({ locale }: { locale: string }) {
         <p className="mt-8 text-center text-sm font-semibold text-muted-foreground">
           {copy(locale, samt.pricing.note)}
         </p>
+        <PurchaseLinks locale={locale} />
       </div>
     </section>
   );

@@ -49,6 +49,7 @@ export function Navbar() {
   ];
 
   const programs = [
+    { name: t("products"), description: t("programsDesc.products"), href: "/products", icon: LayoutGrid },
     { name: t("lms"), description: t("programsDesc.lms"), href: "/lms", icon: GraduationCap },
     { name: t("estimator"), description: t("programsDesc.estimator"), href: "/estimator", icon: Calculator },
     { name: t("samt"), description: t("programsDesc.samt"), href: "/samt", icon: FileText },
@@ -309,4 +310,3 @@ export function Navbar() {
     </header>
   );
 }
-

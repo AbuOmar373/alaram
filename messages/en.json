@@ -17,7 +17,9 @@
     "samt": "Samt",
     "estimator": "Cost Estimator",
     "programs": "Programs",
+    "products": "Products & Services",
     "programsDesc": {
+      "products": "All products, packages, and prices",
       "lms": "Your own branded training platform",
       "samt": "AI resume builder",
       "estimator": "Project estimates and proposals"
@@ -226,6 +228,8 @@
     "legal": "Legal",
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy",
+    "refund": "Exchange & Refund Policy",
+    "delivery": "Delivery & Activation Policy",
     "followUs": "Follow Us",
     "allRightsReserved": "All Rights Reserved",
     "madeInKSA": "Made in Saudi Arabia 🇸🇦",

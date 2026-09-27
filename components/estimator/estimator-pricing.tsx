@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { BadgePercent, CalendarCheck, CalendarDays, Check, MessageCircle, Package } from "lucide-react";
 
 import { copy, estimator } from "@/data/estimator";
+import { PurchaseLinks } from "@/components/commerce/purchase-links";
 import { brand } from "@/lib/brand";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -132,6 +133,7 @@ export function EstimatorPricing({ locale }: { locale: string }) {
         <div className="mx-auto mt-8 max-w-5xl rounded-2xl border border-border/70 bg-card p-5 text-center sm:p-6">
           <p className="text-sm font-semibold leading-7 text-subheading">{copy(locale, pricing.request.note)}</p>
           <p className="mt-2 text-sm leading-7 text-muted-foreground">{copy(locale, pricing.note)}</p>
+          <PurchaseLinks locale={locale} />
         </div>
       </div>
     </section>

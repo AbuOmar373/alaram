@@ -3,6 +3,7 @@
 import { Check, CreditCard, ExternalLink, MessageCircle, Package, Rocket } from "lucide-react";
 
 import { alaramLms, copy } from "@/data/alaramlms";
+import { PurchaseLinks } from "@/components/commerce/purchase-links";
 import { brand } from "@/lib/brand";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -100,6 +101,7 @@ export function LmsPricing({ locale }: { locale: string }) {
           </div>
         </div>
         <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-7 text-muted-foreground">{copy(locale, pricing.note)}</p>
+        <PurchaseLinks locale={locale} />
         <div className="mx-auto mt-10 max-w-3xl text-center">
           <h3 className="text-lg font-black text-subheading">{copy(locale, pricing.commission.title)}</h3>
           <p className="mt-3 text-base leading-8 text-muted-foreground">{copy(locale, pricing.commission.body)}</p>

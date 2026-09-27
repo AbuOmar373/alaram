@@ -26,6 +26,8 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { usePageTitle } from "@/lib/use-page-title";
+import { PurchaseLinks } from "@/components/commerce/purchase-links";
+import { accountingPrices, annualAccountingPrice } from "@/data/accounting-pricing";
 
 export default function PricingPage() {
   const params = useParams<{ locale: string }>();
@@ -38,7 +40,7 @@ export default function PricingPage() {
 
   const calculatePrice = (monthlyPrice: number) => {
     if (isAnnual) {
-      return Math.round(monthlyPrice * 12 * 0.8); // 20% discount
+      return annualAccountingPrice(monthlyPrice);
     }
     return monthlyPrice;
   };
@@ -47,7 +49,7 @@ export default function PricingPage() {
     {
       name: locale === "ar" ? "الباقة الأساسية" : "Basic",
       description: locale === "ar" ? "للأعمال الصغيرة والناشئة" : "For small startups",
-      monthlyPrice: 299,
+      monthlyPrice: accountingPrices.basic,
       icon: Zap,
       features: [
         { text: locale === "ar" ? "مستخدم واحد" : "1 User", included: true },
@@ -65,7 +67,7 @@ export default function PricingPage() {
     {
       name: locale === "ar" ? "الباقة الاحترافية" : "Professional",
       description: locale === "ar" ? "للشركات المتوسطة والمتنامية" : "For growing businesses",
-      monthlyPrice: 699,
+      monthlyPrice: accountingPrices.professional,
       icon: Star,
       features: [
         { text: locale === "ar" ? "5 مستخدمين" : "5 Users", included: true },
@@ -83,7 +85,7 @@ export default function PricingPage() {
     {
       name: locale === "ar" ? "باقة المؤسسات" : "Enterprise",
       description: locale === "ar" ? "للمؤسسات الكبيرة" : "For large enterprises",
-      monthlyPrice: 1999,
+      monthlyPrice: accountingPrices.enterprise,
       icon: Shield,
       features: [
         { text: locale === "ar" ? "مستخدمون غير محدودين" : "Unlimited Users", included: true },
@@ -105,8 +107,8 @@ export default function PricingPage() {
       question: locale === "ar" ? "هل يمكنني تغيير الباقة لاحقاً؟" : "Can I change my plan later?",
       answer:
         locale === "ar"
-          ? "نعم، يمكنك الترقية أو التخفيض في أي وقت. سيتم احتساب الفرق بشكل تناسبي."
-          : "Yes, you can upgrade or downgrade at any time. The difference will be prorated.",
+          ? "يمكنك طلب تغيير الباقة عبر فريقنا. نوضح فرق السعر وموعد التغيير قبل موافقتك، وفق سياسة الاستبدال والاسترجاع."
+          : "Contact our team to request a plan change. We explain the price difference and effective date before you agree, under our exchange and refund policy.",
     },
     {
       question: locale === "ar" ? "هل التجربة المجانية تتطلب بطاقة ائتمانية؟" : "Does the free trial require a credit card?",
@@ -133,8 +135,8 @@ export default function PricingPage() {
       question: locale === "ar" ? "هل يمكنني إلغاء الاشتراك في أي وقت؟" : "Can I cancel my subscription anytime?",
       answer:
         locale === "ar"
-          ? "نعم، يمكنك إلغاء اشتراكك في أي وقت بدون أي رسوم إضافية."
-          : "Yes, you can cancel your subscription at any time without any additional fees.",
+          ? "نعم، يمكنك طلب إيقاف التجديد دون رسوم إلغاء، وتستمر الخدمة حتى نهاية المدة المدفوعة. تُراجع طلبات الاسترداد وفق سياسة الاستبدال والاسترجاع."
+          : "Yes. You can request cancellation of renewal without a cancellation fee, with access until the paid term ends. Refund requests are reviewed under our exchange and refund policy.",
     },
   ];
 
@@ -190,6 +192,9 @@ export default function PricingPage() {
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
               {t("subtitle")}
             </p>
+            <Link href={`/${locale}/products`} className="mt-5 inline-block font-semibold text-primary underline underline-offset-4">
+              {isRTL ? "تصفح جميع المنتجات والخدمات وأسعارها" : "Browse all products, services, and prices"}
+            </Link>
 
             {/* Billing Toggle */}
             <div className="mt-10 flex items-center justify-center gap-4">
@@ -201,6 +206,7 @@ export default function PricingPage() {
               <Switch
                 checked={isAnnual}
                 onCheckedChange={setIsAnnual}
+                aria-label={isRTL ? "الدفع السنوي" : "Annual billing"}
                 className="data-[state=checked]:bg-primary"
               />
               <span
@@ -299,7 +305,7 @@ export default function PricingPage() {
                         }`}
                         variant={tier.popular ? "default" : "outline"}
                       >
-                        <Link href="/demo">
+                        <Link href={`/${locale}/demo`}>
                           {tier.cta}
                           <ArrowRight className="ms-2 h-4 w-4" />
                         </Link>
@@ -337,6 +343,12 @@ export default function PricingPage() {
       </section>
 
       {/* Comparison Table */}
+      <div className="container mx-auto px-4 pb-12">
+        <p className="text-center text-sm text-muted-foreground">
+          {isRTL ? "الأسعار المعروضة لا تشمل ضريبة القيمة المضافة؛ يُوضح الإجمالي في تأكيد الطلب قبل الدفع." : "Displayed prices exclude VAT; the final total is provided in your order confirmation before payment."}
+        </p>
+        <PurchaseLinks locale={locale} />
+      </div>
       <section className="border-y bg-muted/30 py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto mb-12 max-w-2xl text-center">

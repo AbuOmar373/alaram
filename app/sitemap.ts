@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     "",
     "/solutions",
+    "/products",
     "/lms",
     "/samt",
     "/estimator",
@@ -18,6 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog",
     "/legal/terms",
     "/legal/privacy",
+    "/legal/refund",
+    "/legal/delivery",
   ] as const;
 
   const buildAlternates = (path: string) => ({
@@ -57,4 +60,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return pages;
 }
-

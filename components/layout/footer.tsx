@@ -15,6 +15,7 @@ export function Footer() {
     {
       title: t("products"),
       links: [
+        { name: nav("products"), href: "/products" },
         { name: nav("solutions"), href: "/solutions" },
         { name: nav("lms"), href: "/lms" },
         { name: nav("estimator"), href: "/estimator" },
@@ -42,6 +43,8 @@ export function Footer() {
       links: [
         { name: t("terms"), href: "/legal/terms" },
         { name: t("privacy"), href: "/legal/privacy" },
+        { name: t("refund"), href: "/legal/refund" },
+        { name: t("delivery"), href: "/legal/delivery" },
       ],
     },
   ];
@@ -176,5 +179,4 @@ export function Footer() {
     </footer>
   );
 }
-
 
