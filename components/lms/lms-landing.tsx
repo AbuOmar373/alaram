@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 
 import { alaramLms, copy } from "@/data/alaramlms";
+import { LmsPricing } from "@/components/lms/lms-pricing";
 import { FAQ } from "@/components/sections/faq";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -35,7 +36,7 @@ export function LmsLanding() {
       <Problem locale={locale} />
       <Solution locale={locale} />
       <Ownership locale={locale} />
-      <Pricing locale={locale} />
+      <LmsPricing locale={locale} />
       <Experience locale={locale} />
       <UseCases locale={locale} />
       <Features locale={locale} />
@@ -103,7 +104,7 @@ function Hero({
                 asChild
                 className="group h-14 rounded-full bg-slate-950 px-8 text-base font-bold shadow-xl shadow-slate-950/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-primary/25 dark:bg-white dark:text-slate-950 dark:hover:bg-primary dark:hover:text-white"
               >
-                <Link href={withLocale("/demo")}>
+                <Link href="#pricing">
                   {copy(locale, alaramLms.hero.primaryCta)}
                   <ArrowRight className="ms-2 h-5 w-5 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
                 </Link>
@@ -318,47 +319,6 @@ function Ownership({ locale }: { locale: string }) {
             </div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function Pricing({ locale }: { locale: string }) {
-  return (
-    <section className="relative overflow-hidden bg-muted/30 py-24">
-      <div className="container mx-auto px-4">
-        <SectionIntro title={copy(locale, alaramLms.pricing.title)} subtitle={copy(locale, alaramLms.pricing.contrast)} />
-        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
-          <Card className="surface-card rounded-3xl">
-            <CardHeader>
-              <CardTitle className="text-xl font-black">{copy(locale, alaramLms.pricing.title)}</CardTitle>
-              <CardDescription className="text-base leading-8">
-                {copy(locale, alaramLms.pricing.after)}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-wrap gap-2">
-              {alaramLms.pricing.costs.map((cost) => (
-                <span key={cost.en} className="rounded-full bg-primary/10 px-3 py-1.5 text-sm font-bold text-primary">
-                  {copy(locale, cost)}
-                </span>
-              ))}
-            </CardContent>
-          </Card>
-          <Card className="surface-card rounded-3xl">
-            <CardHeader>
-              <CardTitle className="text-xl font-black">{copy(locale, alaramLms.pricing.commission.title)}</CardTitle>
-              <CardDescription className="text-base leading-8">
-                {copy(locale, alaramLms.pricing.commission.body)}
-              </CardDescription>
-            </CardHeader>
-          </Card>
-        </div>
-        <p className="mt-8 text-center text-sm font-semibold text-muted-foreground">
-          {copy(locale, alaramLms.pricing.note)}
-        </p>
-        <p className="mx-auto mt-6 max-w-3xl text-center text-base leading-8 text-muted-foreground">
-          {copy(locale, alaramLms.serious.body)}
-        </p>
       </div>
     </section>
   );
@@ -636,10 +596,10 @@ function Closing({
           </p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Link
-              href={withLocale("/demo")}
+              href="#pricing"
               className="group inline-flex h-14 items-center justify-center rounded-full bg-white px-8 text-base font-black text-slate-950 shadow-xl shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:text-white"
             >
-              {copy(locale, alaramLms.cta.primary)}
+              {copy(locale, alaramLms.hero.primaryCta)}
               <ArrowRight className="ms-2 h-5 w-5 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
             </Link>
             <Link

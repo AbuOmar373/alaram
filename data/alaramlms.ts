@@ -32,8 +32,8 @@ export const alaramLms = {
       en: "Instead of paying every month for a platform you do not own, get an independent LMS with free storage up to 10 GB so you fully control courses, students, and content.",
     },
     primaryCta: {
-      ar: "اطلب نسخة تجريبية",
-      en: "Request a trial",
+      ar: "اختر باقة الشراء",
+      en: "Choose your package",
     },
     secondaryCta: {
       ar: "ناقش احتياجك معنا",
@@ -55,10 +55,10 @@ export const alaramLms = {
       },
     },
     {
-      title: { ar: "ادفع مرة واحدة", en: "Pay once for setup" },
+      title: { ar: "ادفع مرة واحدة", en: "Pay once" },
       description: {
-        ar: "تدفع مقابل تركيب النظام وتجهيزه. الاستضافة والتخزين مجانًا حتى ١٠ جيجابايت، وبعد تجاوز هذه المساحة تدفع فقط مقابل الاستخدام الإضافي.",
-        en: "You pay for installation and setup. Hosting and storage are free up to 10 GB, and you only pay if you go beyond that.",
+        ar: "اشترِ التطبيق بـ ٦٠٠ ريال، أو اختر باقة ١٥٠٠ ريال لتشمل إنشاء وإعداد تطبيقات الطرف الثالث وتشغيل المشروع بالكامل.",
+        en: "Buy the application for SAR 600, or choose the SAR 1,500 package with third-party application creation, configuration, and full project launch.",
       },
     },
     {
@@ -170,24 +170,69 @@ export const alaramLms = {
     ],
   },
   pricing: {
-    title: { ar: "ادفع مرة واحدة بدل الاشتراك المستمر", en: "Pay once instead of subscribing forever" },
-    contrast: {
-      ar: "العديد من منصات التدريب تعمل بنظام: اشتراك شهري × عدد الأشهر × عدد السنوات. وقد تزيد التكلفة عندما يزيد عدد طلابك، أو تُخصم نسبة من مبيعاتك.",
-      en: "Many LMS platforms charge monthly × months × years. Cost can rise as your student count grows, or take a cut of your sales.",
+    eyebrow: { ar: "باقات الشراء", en: "Purchase packages" },
+    title: { ar: "اختر كيف تبدأ منصتك التدريبية", en: "Choose how to launch your training platform" },
+    subtitle: {
+      ar: "باقتان لشراء تطبيق منصة الدورات التدريبية. اختر التطبيق فقط، أو دعنا نتولى الإعداد والتشغيل الكامل لمشروعك.",
+      en: "Two ways to buy the training course platform. Choose the application on its own, or let us handle setup and launch for you.",
     },
-    after: {
-      ar: "أما هنا فأنت تدفع مقابل تركيب النظام وتجهيزه لك. الاستضافة والتخزين مجانًا حتى ١٠ جيجابايت، ولا تدفع مقابل المساحة إلا إذا تجاوزت هذا الحد.",
-      en: "Here you pay for installing and preparing the system. Hosting and storage are free up to 10 GB, and you only pay for storage if you exceed that limit.",
-    },
-    costs: [
-      { ar: "مجانًا حتى ١٠ جيجابايت", en: "Free up to 10 GB" },
-      { ar: "الاستضافة", en: "Hosting" },
-      { ar: "تخزين الملفات", en: "File storage" },
-      { ar: "النطاق", en: "Domain" },
+    currency: "SAR",
+    currencyLabel: { ar: "ريال سعودي", en: "SAR" },
+    period: { ar: "دفعة واحدة", en: "One-time payment" },
+    packages: [
+      {
+        id: "application",
+        price: 600,
+        featured: false,
+        label: { ar: "الباقة الأولى", en: "Package one" },
+        name: { ar: "شراء التطبيق", en: "Application purchase" },
+        description: {
+          ar: "لمن يريد شراء التطبيق ويتولى إعداد مشروعه وتشغيله بنفسه أو مع فريقه التقني.",
+          en: "For those who want the application and will handle setup and launch themselves or with their technical team.",
+        },
+        features: [
+          { ar: "نسخة من تطبيق منصة الدورات التدريبية", en: "A copy of the training course platform application" },
+          { ar: "إدارة الدورات والدروس والطلاب", en: "Manage courses, lessons, and students" },
+          { ar: "التحكم في محتواك وبياناتك", en: "Control your content and data" },
+          { ar: "شراء لمرة واحدة دون اشتراك شهري في التطبيق", en: "One-time purchase with no monthly application subscription" },
+        ],
+        note: {
+          ar: "تتولى أنت إنشاء وإعداد تطبيقات الطرف الثالث وتشغيل المشروع.",
+          en: "You handle third-party application creation, configuration, and project launch.",
+        },
+      },
+      {
+        id: "full-setup",
+        price: 1500,
+        featured: true,
+        label: { ar: "الباقة الثانية · تشغيل متكامل", en: "Package two · Full launch" },
+        name: { ar: "شراء التطبيق والتشغيل الكامل", en: "Application and full setup" },
+        description: {
+          ar: "لمن يريد شراء التطبيق مع تولّينا إنشاء وإعداد تطبيقات الطرف الثالث وتشغيل المشروع بالكامل.",
+          en: "For those who want the application with third-party applications created and configured, and the entire project launched for them.",
+        },
+        features: [
+          { ar: "جميع مميزات باقة شراء التطبيق", en: "Everything in the application purchase package" },
+          { ar: "إنشاء تطبيقات الطرف الثالث اللازمة للمشروع", en: "Create the third-party applications required by the project" },
+          { ar: "إعداد خدمات الطرف الثالث وربطها بالتطبيق", en: "Configure third-party services and connect them to the application" },
+          { ar: "تشغيل المشروع بالكامل والتحقق من عمله", en: "Launch the entire project and verify it works" },
+        ],
+        note: {
+          ar: "نتولى التجهيز والتشغيل لتبدأ إدارة دوراتك على منصة جاهزة للعمل.",
+          en: "We handle setup and launch so you can manage your courses on a platform ready to use.",
+        },
+      },
     ],
     note: {
-      ar: "وغالبًا لا يتجاوز المدربون الصغار والمتوسطون ١٠ جيجابايت في البداية.",
-      en: "Small and mid-size trainers often stay within 10 GB at the start.",
+      ar: "الأسعار بالريال السعودي، والشراء لمرة واحدة دون اشتراك شهري في التطبيق.",
+      en: "Prices are in Saudi riyals. Both packages are one-time purchases with no monthly application subscription.",
+    },
+    payment: {
+      name: "Tap Payments",
+      url: "https://www.tap.company/ar-sa",
+      label: { ar: "مزوّد الدفع: تاب", en: "Payment provider: Tap" },
+      requestCta: { ar: "اطلب الباقة عبر واتساب", en: "Request via WhatsApp" },
+      requestNote: { ar: "تواصل معنا لطلب الباقة والحصول على رابط الدفع عبر Tap.", en: "Contact us to request this package and receive a Tap payment link." },
     },
     commission: {
       title: { ar: "لا توجد عمولة على مبيعات دوراتك", en: "No commission on course sales" },
@@ -395,8 +440,8 @@ export const alaramLms = {
   delivery: {
     title: { ar: "ماذا تستلم؟", en: "What do you receive?" },
     intro: {
-      ar: "تحصل على منصة تدريب مستقلة يتم تركيبها وتجهيزها للعمل. ويمكن أن يشمل التسليم بحسب الاتفاق:",
-      en: "You receive an independent training platform installed and prepared to run. Delivery can include, by agreement:",
+      ar: "باقة شراء التطبيق تشمل نسخة التطبيق لتتولى إعدادها. أما باقة الشراء والتشغيل الكامل فتشمل إنشاء وإعداد تطبيقات الطرف الثالث وتشغيل المشروع، ويمكن أن تشمل التفاصيل التالية بحسب الاتفاق:",
+      en: "The application purchase package provides the application for you to set up. The full setup package includes third-party application creation, configuration, and project launch, with the following details agreed for your project:",
     },
     items: [
       { ar: "تركيب المشروع", en: "Project installation" },
@@ -469,6 +514,27 @@ export const alaramLms = {
       en: "Clear answers before you decide to own your platform",
     },
     items: [
+      {
+        question: { ar: "ما الفرق بين باقتَي الشراء؟", en: "What is the difference between the purchase packages?" },
+        answer: {
+          ar: "الباقة الأولى بسعر ٦٠٠ ريال تشمل شراء التطبيق، وتتولى أنت إعداده وتشغيله. الباقة الثانية بسعر ١٥٠٠ ريال تشمل شراء التطبيق مع إنشاء وإعداد تطبيقات الطرف الثالث وتشغيل المشروع بالكامل.",
+          en: "The SAR 600 package includes the application, with setup and launch handled by you. The SAR 1,500 package includes the application, third-party application creation and configuration, and full project launch.",
+        },
+      },
+      {
+        question: { ar: "هل الأسعار اشتراك شهري؟", en: "Are these monthly subscription prices?" },
+        answer: {
+          ar: "لا، سعر كل باقة يُدفع مرة واحدة لشراء التطبيق أو لشراء التطبيق مع الإعداد والتشغيل، بحسب الباقة المختارة.",
+          en: "No. Each package is a one-time purchase of the application, or the application with setup and launch, depending on your chosen package.",
+        },
+      },
+      {
+        question: { ar: "ما شركة الدفع المستخدمة؟", en: "Which payment provider is used?" },
+        answer: {
+          ar: "مزوّد الدفع هو تاب (Tap Payments). تتم عملية السداد عبر رابط الدفع الخاص بالباقة من Tap.",
+          en: "The payment provider is Tap Payments. Payment is completed using the package’s Tap payment link.",
+        },
+      },
       {
         question: { ar: "هل أحتاج إلى تطبيق للجوال؟", en: "Do I need a mobile app?" },
         answer: {

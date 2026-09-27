@@ -40,15 +40,15 @@ export default async function LmsPage({ params }: PageProps) {
       "@type": "Brand",
       name: currentLocale === "ar" ? brand.name.ar : brand.name.en,
     },
-    offers: {
+    offers: alaramLms.pricing.packages.map((plan) => ({
       "@type": "Offer",
+      name: copy(currentLocale, plan.name),
+      price: plan.price,
       availability: "https://schema.org/InStock",
-      priceCurrency: "SAR",
-      description:
-        currentLocale === "ar"
-          ? "تركيب وتجهيز لمرة واحدة مع مساحة مجانية حتى ١٠ جيجابايت وبدون اشتراك شهري في النظام نفسه"
-          : "One-time setup with free storage up to 10 GB and no monthly software subscription",
-    },
+      priceCurrency: alaramLms.pricing.currency,
+      description: copy(currentLocale, plan.description),
+      url: `${baseUrl}/${locale}/lms#pricing`,
+    })),
   };
 
   return (
