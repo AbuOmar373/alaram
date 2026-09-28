@@ -13,6 +13,13 @@ export function useDemoForm() {
     "idle" | "success" | "error" | "verification-error"
   >("idle");
 
+  // Time the form was opened; the server rejects submissions that are too fast (bots).
+  const formStartedAtRef = React.useRef<number>(0);
+
+  React.useEffect(() => {
+    formStartedAtRef.current = Date.now();
+  }, []);
+
   const form = useForm<DemoFormData>({
     resolver: zodResolver(demoSchema),
     defaultValues: {
@@ -32,6 +39,7 @@ export function useDemoForm() {
         },
         body: JSON.stringify({
           ...data,
+          formStartedAt: formStartedAtRef.current || undefined,
           ...(turnstileToken ? { turnstileToken } : {}),
         }),
       });
@@ -39,6 +47,7 @@ export function useDemoForm() {
       if (response.ok) {
         setSubmitStatus("success");
         form.reset({ locale: data.locale });
+        formStartedAtRef.current = Date.now();
         return true;
       } else {
         const result = (await response.json().catch(() => null)) as {

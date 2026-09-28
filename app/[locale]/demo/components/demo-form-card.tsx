@@ -21,6 +21,8 @@ import {
 import { brand } from "@/lib/brand";
 import { getTurnstileSiteKey, isTurnstileConfigured } from "@/lib/turnstile";
 
+import type { DemoFormData } from "@/lib/validations/demo-schema";
+
 import { useDemoForm } from "../hooks/use-demo-form";
 
 type Props = {
@@ -196,6 +198,24 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
 
       <CardContent>
         <form onSubmit={handleSubmit(submitDemo)} className="space-y-6">
+          {/* Honeypot: hidden from humans, bots tend to fill it. Do not remove. */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              width: 1,
+              height: 1,
+              overflow: "hidden",
+              clip: "rect(0 0 0 0)",
+              clipPath: "inset(50%)",
+              whiteSpace: "nowrap",
+              opacity: 0,
+              pointerEvents: "none",
+            }}
+          >
+            <label htmlFor="website">Website</label>
+            <input id="website" type="text" tabIndex={-1} autoComplete="off" {...register("website")} />
+          </div>
           <div className="grid gap-6 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-base font-semibold">
@@ -290,7 +310,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
               </Label>
               <Select
                 onValueChange={(value) =>
-                  setValue("employeeCount", value, { shouldValidate: true })
+                  setValue("employeeCount", value as DemoFormData["employeeCount"], { shouldValidate: true })
                 }
               >
                 <SelectTrigger className="h-12 rounded-xl border-2">
@@ -315,6 +335,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
               <Input
                 id="preferredDate"
                 type="date"
+                min={new Date().toISOString().slice(0, 10)}
                 {...register("preferredDate")}
                 className="h-12 rounded-xl border-2"
               />
@@ -326,7 +347,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
               </Label>
               <Select
                 onValueChange={(value) =>
-                  setValue("preferredTime", value, { shouldValidate: true })
+                  setValue("preferredTime", value as DemoFormData["preferredTime"], { shouldValidate: true })
                 }
               >
                 <SelectTrigger className="h-12 rounded-xl border-2">

@@ -4,6 +4,7 @@ import React from "react";
 
 import DemoConfirmationEmail from "@/emails/demo-confirmation";
 import { TURNSTILE_ACTION, isTurnstileConfigured, verifyTurnstileToken } from "@/lib/turnstile";
+import { checkSubmission, isRateLimited } from "@/lib/spam-guard";
 import { demoSubmissionSchema, type DemoFormData } from "@/lib/validations/demo-schema";
 
 function getResendClient() {
@@ -129,6 +130,40 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data;
+    const clientIp = getClientIp(request);
+
+    // Bots get a fake "success" so they don't learn what blocked them.
+    const fakeSuccess = () =>
+      NextResponse.json({ success: true, message: "Demo booked successfully" }, { status: 200 });
+
+    if (isRateLimited(clientIp)) {
+      console.warn("Demo form rate limited:", { ip: clientIp, email: data.email });
+      return NextResponse.json(
+        { success: false, code: "RATE_LIMITED", message: "Too many requests" },
+        { status: 429 }
+      );
+    }
+
+    const spamCheck = checkSubmission(data);
+    if (!spamCheck.ok) {
+      console.warn("Demo form blocked as spam:", {
+        reason: spamCheck.reason,
+        ip: clientIp,
+        email: data.email,
+      });
+      return fakeSuccess();
+    }
+
+    // Fail closed: never send emails in production without human verification.
+    if (process.env.NODE_ENV === "production" && !isTurnstileConfigured({ server: true })) {
+      console.error(
+        "Turnstile is not configured (NEXT_PUBLIC_TURNSTILE_SITE_KEY / TURNSTILE_SECRET_KEY). Refusing demo submission."
+      );
+      return NextResponse.json(
+        { success: false, code: "CONFIG_ERROR", message: "Service temporarily unavailable" },
+        { status: 503 }
+      );
+    }
 
     if (isTurnstileConfigured({ server: true })) {
       if (!data.turnstileToken) {
@@ -146,7 +181,7 @@ export async function POST(request: NextRequest) {
       try {
         const isHuman = await verifyTurnstileToken(
           data.turnstileToken,
-          getClientIp(request)
+          clientIp
         );
 
         if (!isHuman) {
@@ -209,34 +244,13 @@ export async function POST(request: NextRequest) {
       adminSent = true;
     }
 
-    const customerResult = await sendDemoEmail(resend, {
-      from: fromEmail,
-      to: data.email,
-      replyTo: adminEmail || fromEmail,
-      subject,
-      data,
-    });
-
-    if (customerResult.error) {
-      console.error("Resend customer confirmation error:", customerResult.error);
-
-      if (adminSent) {
-        return NextResponse.json(
-          {
-            success: true,
-            message: "Demo booked successfully",
-            warning: "CUSTOMER_EMAIL_FAILED",
-          },
-          { status: 200 }
-        );
-      }
-
+    // NOTE: We intentionally do NOT email the address typed into the form.
+    // Bots abuse that to send mail to victims through our domain, which hurts
+    // deliverability. The team replies to the customer manually instead.
+    if (!adminSent) {
+      console.error("RESEND_TO_EMAIL is missing; demo request was not delivered.");
       return NextResponse.json(
-        {
-          success: false,
-          code: "EMAIL_FAILED",
-          message: "Failed to send email",
-        },
+        { success: false, code: "CONFIG_ERROR", message: "An error occurred. Please try again later." },
         { status: 500 }
       );
     }
