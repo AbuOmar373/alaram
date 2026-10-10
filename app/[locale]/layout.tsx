@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { LocaleDirectionSync } from "@/components/providers/locale-direction-sync";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { JsonLd } from "@/components/seo/json-ld";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { brand } from "@/lib/brand";
+import { tajawal } from "@/lib/fonts";
 import { getBaseUrl } from "@/lib/site-url";
-import { getLocaleFromParam } from "@/lib/seo";
+import { absoluteUrl, getLocaleFromParam, isLocale, locales, organizationId } from "@/lib/seo";
 
 export function generateStaticParams() {
-  return [{ locale: "ar" }, { locale: "en" }];
+  return locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata({
@@ -20,7 +23,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const currentLocale = getLocaleFromParam(locale);
-  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tCommon = await getTranslations({ locale: currentLocale, namespace: "common" });
   const pageDescription = brand.description[currentLocale];
   const baseUrl = getBaseUrl();
 
@@ -28,7 +31,7 @@ export async function generateMetadata({
     metadataBase: new URL(baseUrl),
     title: {
       default: tCommon("siteName"),
-      template: currentLocale === "ar" ? `${brand.name.ar} - %s` : `${brand.name.en} - %s`,
+      template: currentLocale === "ar" ? `%s | ${brand.name.ar}` : `%s | ${brand.name.en}`,
     },
     description: pageDescription,
     openGraph: {
@@ -48,18 +51,27 @@ export async function generateMetadata({
 
 export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const currentLocale = getLocaleFromParam(locale);
+  if (!isLocale(locale)) {
+    notFound();
+  }
   const isRTL = locale === "ar";
   setRequestLocale(locale);
   const baseUrl = getBaseUrl();
-  const organizationName = currentLocale === "ar" ? brand.name.ar : brand.name.en;
   const organizationStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": `${baseUrl}/${locale}#organization`,
-    name: organizationName,
+    "@id": organizationId(),
+    name: locale === "ar" ? brand.name.ar : brand.name.en,
     alternateName: [brand.name.ar, brand.name.en],
     url: `${baseUrl}/${locale}`,
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/logo.png"),
+      width: 512,
+      height: 512,
+    },
+    image: absoluteUrl(`/og/og-${locale}.jpg`),
+    description: brand.description[locale],
     email: brand.email,
     telephone: brand.phoneIntl,
     sameAs: [brand.facebook],
@@ -81,18 +93,26 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   };
   const messages = await getMessages({ locale });
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData) }}
-      />
-      <LocaleDirectionSync locale={locale} />
-      <div lang={locale} dir={isRTL ? "rtl" : "ltr"} className={isRTL ? "text-right" : "text-left"}>
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-      </div>
-    </NextIntlClientProvider>
+    <html lang={locale} dir={isRTL ? "rtl" : "ltr"} suppressHydrationWarning>
+      <head>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="0233ac1a-eb20-41a6-8c09-75af7318be76"
+        />
+      </head>
+      <body className={tajawal.className}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem storageKey="alaram-theme">
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <JsonLd data={organizationStructuredData} />
+            <div className={isRTL ? "text-right" : "text-left"}>
+              <Navbar />
+              <main className="min-h-screen">{children}</main>
+              <Footer />
+            </div>
+          </NextIntlClientProvider>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
-

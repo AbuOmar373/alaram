@@ -2,12 +2,22 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 
 import { SamtLanding } from "@/components/samt/samt-landing";
+import { JsonLd } from "@/components/seo/json-ld";
 import { copy, samt, samtAppUrl } from "@/data/samt";
 import { brand } from "@/lib/brand";
-import { buildPageMetadata, getLocaleFromParam } from "@/lib/seo";
+import {
+  absoluteUrl,
+  breadcrumbJsonLd,
+  buildPageMetadata,
+  faqPageJsonLd,
+  getLocaleFromParam,
+  organizationId,
+} from "@/lib/seo";
 import { getBaseUrl } from "@/lib/site-url";
 
 type PageProps = { params: Promise<{ locale: string }> };
+
+const shareImagePath = (locale: string) => `/og/samt-${locale}.jpg`;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -16,8 +26,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return buildPageMetadata({
     locale: currentLocale,
     path: "/samt",
-    title: copy(currentLocale, samt.name),
-    description: copy(currentLocale, samt.summary),
+    title: copy(currentLocale, samt.seo.title),
+    absoluteTitle: true,
+    description: copy(currentLocale, samt.seo.description),
+    image: { path: shareImagePath(currentLocale), alt: copy(currentLocale, samt.seo.imageAlt) },
   });
 }
 
@@ -26,40 +38,54 @@ export default async function SamtPage({ params }: PageProps) {
   const currentLocale = getLocaleFromParam(locale);
   setRequestLocale(locale);
   const baseUrl = getBaseUrl();
+  const screenshot = absoluteUrl(shareImagePath(currentLocale));
+  const packPrices = samt.pricing.packs.map((pack) => Number(pack.price));
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: `${copy(currentLocale, samt.name)} Resume AI`,
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
-    inLanguage: locale,
-    description: copy(currentLocale, samt.summary),
-    url: `${baseUrl}/${locale}/samt`,
-    applicationSubCategory: "Resume builder",
-    brand: {
-      "@type": "Brand",
-      name: currentLocale === "ar" ? brand.name.ar : brand.name.en,
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: `${copy(currentLocale, samt.name)} Resume AI`,
+      applicationCategory: "BusinessApplication",
+      applicationSubCategory: currentLocale === "ar" ? "منشئ السيرة الذاتية" : "Resume builder",
+      operatingSystem: "Web",
+      inLanguage: ["ar", "en"],
+      description: copy(currentLocale, samt.seo.description),
+      url: `${baseUrl}/${locale}/samt`,
+      sameAs: samtAppUrl,
+      image: screenshot,
+      screenshot,
+      featureList: samt.ai.items.map((item) => copy(currentLocale, item)),
+      publisher: { "@id": organizationId() },
+      brand: {
+        "@type": "Brand",
+        name: currentLocale === "ar" ? brand.name.ar : brand.name.en,
+      },
+      offers: {
+        "@type": "AggregateOffer",
+        priceCurrency: "SAR",
+        lowPrice: Math.min(...packPrices),
+        highPrice: Math.max(...packPrices),
+        offerCount: packPrices.length,
+        url: `${baseUrl}/${locale}/samt#pricing`,
+        availability: "https://schema.org/InStock",
+      },
     },
-    offers: {
-      "@type": "Offer",
-      url: samtAppUrl,
-      availability: "https://schema.org/InStock",
-      priceCurrency: "SAR",
-      price: "29",
-      description:
-        currentLocale === "ar"
-          ? "حزم أرصدة تبدأ من 29 ريالاً لإنشاء وإدارة السير الذاتية"
-          : "Credit packs starting at SAR 29 for creating and managing resumes",
-    },
-  };
+    breadcrumbJsonLd(currentLocale, [
+      { name: currentLocale === "ar" ? "المنتجات" : "Products", path: "/products" },
+      { name: copy(currentLocale, samt.name), path: "/samt" },
+    ]),
+    faqPageJsonLd(
+      samt.faqs.items.map((item) => ({
+        question: copy(currentLocale, item.question),
+        answer: copy(currentLocale, item.answer),
+      }))
+    ),
+  ];
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <JsonLd data={structuredData} />
       <SamtLanding />
     </>
   );

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { accountingPrices } from "@/data/accounting-pricing";
 import { buildPageMetadata, getLocaleFromParam } from "@/lib/seo";
 
 export async function generateMetadata({
@@ -13,11 +14,11 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale: currentLocale,
     path: "/pricing",
-    title: currentLocale === "ar" ? "الأسعار" : "Pricing",
+    title: currentLocale === "ar" ? "أسعار برنامج المحاسبة ونقاط البيع" : "Accounting & POS Software Pricing",
     description:
       currentLocale === "ar"
-        ? "تعرف على خطط أسعار الأرام واختر الباقة المناسبة لنشاطك واحتياجات التشغيل."
-        : "Explore ALaram pricing plans and choose the package that fits your business operations.",
+        ? `باقات برنامج الأرام للمحاسبة ونقاط البيع تبدأ من ${accountingPrices.basic} ريال شهريًا، مع خصم 20% عند الدفع السنوي. قارن المزايا واختر الباقة المناسبة لنشاطك.`
+        : `ALaram accounting and POS plans start at SAR ${accountingPrices.basic}/month, with 20% off when billed annually. Compare features and pick the right plan for your business.`,
   });
 }
 

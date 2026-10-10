@@ -17,8 +17,8 @@ export const brand = {
     en: `${brandNameEn} - %s`,
   },
   description: {
-    ar: "حلول مُفصّلة للسوبرماركت، محلات التجزئة، المقاولات ومزودي الخدمات، العطور، والصالونات النسائية. سهولة الاستخدام، سرعة الأداء، وتقارير دقيقة لحظيًا.",
-    en: "Tailored solutions for supermarkets, retail stores, contractors and service providers, perfume shops, and women’s beauty salons. Easy to use, fast performance, and accurate real-time reports.",
+    ar: "برنامج محاسبة ونقاط بيع وإدارة مخزون للسوبرماركت ومحلات التجزئة والعطور والصالونات النسائية والمقاولات في السعودية، مع تقارير لحظية وإدارة ضريبة القيمة المضافة.",
+    en: "Accounting, POS, and inventory software for supermarkets, retail stores, perfume shops, women’s salons, and contractors in Saudi Arabia, with real-time reports and VAT management.",
   },
   footerDescription: {
     ar: "الأرام منصة لحلول الأعمال والمحاسبة مخصصة لعدة قطاعات مع تجربة سهلة وتقارير دقيقة لحظيًا.",

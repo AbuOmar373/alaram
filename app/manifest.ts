@@ -6,7 +6,9 @@ export default function manifest(): MetadataRoute.Manifest {
     name: `${brand.name.en} | ${brand.name.ar}`,
     short_name: "ALaram",
     description: brand.description.ar,
-    start_url: "/",
+    lang: "ar",
+    dir: "rtl",
+    start_url: "/ar",
     display: "standalone",
     background_color: "#ffffff",
     theme_color: "#1e40af",
@@ -16,7 +18,16 @@ export default function manifest(): MetadataRoute.Manifest {
         sizes: "48x48",
         type: "image/x-icon",
       },
+      {
+        src: "/icon.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        src: "/logo.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
     ],
   };
 }
-

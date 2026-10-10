@@ -28,7 +28,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { usePageTitle } from "@/lib/use-page-title";
 
 export default function BlogPage() {
   const params = useParams<{ locale: string }>();
@@ -37,7 +36,6 @@ export default function BlogPage() {
   const isRTL = locale === "ar";
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [email, setEmail] = useState("");
-  usePageTitle(locale, locale === "ar" ? "المدونة" : "Blog");
 
   // Mock blog posts - in a real app, this would come from a CMS or database
   const posts = [
@@ -95,63 +93,6 @@ export default function BlogPage() {
       views: "1.5K",
       featured: false,
       image: "/images/blog/inventory.jpg", // Placeholder
-    },
-    {
-      slug: "customer-retention-strategies",
-      title:
-        locale === "ar"
-          ? "استراتيجيات فعالة للحفاظ على العملاء"
-          : "Effective Strategies for Customer Retention",
-      excerpt:
-        locale === "ar"
-          ? "تعرف على أفضل الطرق للحفاظ على عملائك الحاليين وبناء ولاء طويل الأمد"
-          : "Learn the best ways to retain your existing customers and build long-term loyalty",
-      category: locale === "ar" ? "نصائح" : "Tips",
-      categorySlug: "tips",
-      date: "2024-01-03",
-      readTime: locale === "ar" ? "5 دقائق" : "5 min read",
-      author: locale === "ar" ? "فريق الأرام" : "ALaram Team",
-      views: "2.1K",
-      featured: false,
-      image: "/images/blog/retention.jpg", // Placeholder
-    },
-    {
-      slug: "financial-reporting-guide",
-      title:
-        locale === "ar"
-          ? "دليل التقارير المالية للشركات الصغيرة"
-          : "Financial Reporting Guide for Small Businesses",
-      excerpt:
-        locale === "ar"
-          ? "كيف تعد تقارير مالية دقيقة وتفهمها لاتخاذ قرارات أعمال أفضل"
-          : "How to prepare accurate financial reports and understand them to make better business decisions",
-      category: locale === "ar" ? "إدارة" : "Management",
-      categorySlug: "management",
-      date: "2023-12-28",
-      readTime: locale === "ar" ? "7 دقائق" : "7 min read",
-      author: locale === "ar" ? "خالد العتيبي" : "Khaled Al-Otaibi",
-      views: "1.2K",
-      featured: false,
-      image: "/images/blog/financial.jpg", // Placeholder
-    },
-    {
-      slug: "vat-compliance-saudi",
-      title:
-        locale === "ar"
-          ? "الامتثال لضريبة القيمة المضافة في السعودية"
-          : "VAT Compliance in Saudi Arabia",
-      excerpt:
-        locale === "ar"
-          ? "خطوات عملية لضمان امتثال شركتك لمتطلبات ضريبة القيمة المضافة"
-          : "Practical steps to ensure your business complies with VAT requirements",
-      category: locale === "ar" ? "الامتثال" : "Compliance",
-      categorySlug: "compliance",
-      date: "2023-12-20",
-      readTime: locale === "ar" ? "6 دقائق" : "6 min read",
-      author: locale === "ar" ? "فريق الأرام" : "ALaram Team",
-      views: "1.9K",
-      featured: false,
-      image: "/images/blog/vat.jpg", // Placeholder
     },
   ];
 
@@ -346,7 +287,7 @@ export default function BlogPage() {
                       asChild
                       className="mt-6 w-full justify-between rounded-xl bg-gradient-to-r from-primary to-blue-600 font-semibold shadow-lg shadow-primary/30 transition-all hover:shadow-xl md:w-auto"
                     >
-                      <Link href={`/blog/${featuredPost.slug}`}>
+                      <Link href={`/${locale}/blog/${featuredPost.slug}`}>
                         {t("readMore")}
                         <ArrowRight className="ms-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                       </Link>
@@ -427,7 +368,7 @@ export default function BlogPage() {
                           </div>
 
                           <Button variant="ghost" size="sm" asChild className="group/btn">
-                            <Link href={`/blog/${post.slug}`}>
+                            <Link href={`/${locale}/blog/${post.slug}`}>
                               {t("readMore")}
                               <ArrowRight className="ms-1 h-3 w-3 transition-transform group-hover/btn:translate-x-1" />
                             </Link>
@@ -549,7 +490,7 @@ export default function BlogPage() {
                     asChild
                     className="rounded-xl bg-gradient-to-r from-primary to-blue-600 font-semibold shadow-lg shadow-primary/30 transition-all hover:shadow-xl"
                   >
-                    <Link href="/demo">
+                    <Link href={`/${locale}/demo`}>
                       {isRTL ? "احجز عرضاً مجانياً" : "Book Free Demo"}
                       <ArrowRight className="ms-2 h-5 w-5" />
                     </Link>
@@ -560,7 +501,7 @@ export default function BlogPage() {
                     asChild
                     className="rounded-xl border-2 font-semibold"
                   >
-                    <Link href="/solutions">
+                    <Link href={`/${locale}/solutions`}>
                       {isRTL ? "تصفح الحلول" : "Browse Solutions"}
                     </Link>
                   </Button>

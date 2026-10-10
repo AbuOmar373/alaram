@@ -13,11 +13,11 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale: currentLocale,
     path: "/solutions",
-    title: currentLocale === "ar" ? "حلولنا المتخصصة" : "Our Specialized Solutions",
+    title: currentLocale === "ar" ? "برامج محاسبة ونقاط بيع حسب القطاع" : "Accounting & POS Software by Industry",
     description:
       currentLocale === "ar"
-        ? "اكتشف حلول الأرام المخصصة لقطاعات متعددة مع تجربة تشغيل سلسة وتقارير دقيقة."
-        : "Discover ALaram tailored solutions for multiple industries with smooth operations and accurate reporting.",
+        ? "حلول الأرام للسوبرماركت ومحلات التجزئة والعطور والصالونات النسائية والمقاولات: نقاط بيع، محاسبة، إدارة مخزون، وتقارير لحظية."
+        : "ALaram solutions for supermarkets, retail stores, perfume shops, women’s salons, and contractors: POS, accounting, inventory, and real-time reports.",
   });
 }
 

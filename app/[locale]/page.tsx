@@ -13,54 +13,27 @@ import { SamtProductCard } from "@/components/sections/samt-product-card";
 import { EstimatorProductCard } from "@/components/sections/estimator-product-card";
 import { industries } from "@/data/industries";
 import { Badge } from "@/components/ui/badge";
+import { JsonLd } from "@/components/seo/json-ld";
+import { accountingPrices } from "@/data/accounting-pricing";
 import { brand } from "@/lib/brand";
 import { getBaseUrl } from "@/lib/site-url";
-import { getLocaleFromParam, languageAlternates, localizedPath } from "@/lib/seo";
+import { buildPageMetadata, faqPageJsonLd, getLocaleFromParam, organizationId } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const currentLocale = getLocaleFromParam(locale);
-  const baseUrl = getBaseUrl();
-  const canonical = `${baseUrl}${localizedPath(currentLocale)}`;
-  const socialImage = `${baseUrl}${localizedPath(currentLocale, "/opengraph-image")}`;
-  const title =
-    currentLocale === "ar"
-      ? `${brand.name.ar} - الصفحة الرئيسية`
-      : `${brand.name.en} - Home`;
-  const description = brand.description[currentLocale];
 
-  return {
-    title: { absolute: title },
-    description,
-    alternates: {
-      canonical,
-      languages: languageAlternates(),
-    },
-    openGraph: {
-      type: "website",
-      url: canonical,
-      title,
-      description,
-      siteName: currentLocale === "ar" ? brand.name.ar : brand.name.en,
-      locale: currentLocale === "ar" ? "ar_SA" : "en_US",
-      images: [
-        {
-          url: socialImage,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [socialImage],
-    },
-  };
+  return buildPageMetadata({
+    locale: currentLocale,
+    title:
+      currentLocale === "ar"
+        ? `برنامج محاسبة ونقاط بيع ومخزون في السعودية | ${brand.name.ar}`
+        : `Accounting, POS & Inventory Software in Saudi Arabia | ${brand.name.en}`,
+    absoluteTitle: true,
+    description: brand.description[currentLocale],
+  });
 }
 
 export default async function HomePage({ params }: PageProps) {
@@ -123,33 +96,44 @@ export default async function HomePage({ params }: PageProps) {
     question: tFaqItems(`${key}.question`),
     answer: tFaqItems(`${key}.answer`),
   }));
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${baseUrl}/${locale}#website`,
-    name: currentLocale === "ar" ? brand.name.ar : brand.name.en,
-    alternateName: [brand.name.ar, brand.name.en],
-    url: `${baseUrl}/${locale}`,
-    inLanguage: locale,
-    description: brand.description[currentLocale],
-    publisher: {
-      "@type": "Organization",
-      "@id": `${baseUrl}/${locale}#organization`,
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${baseUrl}/${locale}#website`,
+      name: currentLocale === "ar" ? brand.name.ar : brand.name.en,
+      alternateName: [brand.name.ar, brand.name.en],
+      url: `${baseUrl}/${locale}`,
+      inLanguage: locale,
+      description: brand.description[currentLocale],
+      publisher: { "@id": organizationId() },
     },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${baseUrl}/${locale}/blog?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: currentLocale === "ar" ? `${brand.name.ar} للمحاسبة ونقاط البيع` : `${brand.name.en} Accounting & POS`,
+      applicationCategory: "BusinessApplication",
+      applicationSubCategory: currentLocale === "ar" ? "برنامج محاسبة ونقاط بيع" : "Accounting and POS software",
+      operatingSystem: "Web",
+      inLanguage: ["ar", "en"],
+      description: brand.description[currentLocale],
+      url: `${baseUrl}/${locale}`,
+      publisher: { "@id": organizationId() },
+      offers: {
+        "@type": "AggregateOffer",
+        priceCurrency: "SAR",
+        lowPrice: accountingPrices.basic,
+        highPrice: accountingPrices.enterprise,
+        offerCount: Object.keys(accountingPrices).length,
+        url: `${baseUrl}/${locale}/pricing`,
+      },
     },
-  };
+    faqPageJsonLd(faqs),
+  ];
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        // JSON-LD helps search engines understand the site entity.
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <JsonLd data={structuredData} />
       <Hero
         headline={t("hero.headline")}
         subheadline={t("hero.subheadline")}

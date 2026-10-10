@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { getBlogPosts } from "@/data/blog-posts";
 import { industries } from "@/data/industries";
 import { getBaseUrl } from "@/lib/site-url";
 
@@ -53,6 +54,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.7,
+        alternates: buildAlternates(path),
+      });
+    }
+  }
+
+  for (const post of getBlogPosts("ar")) {
+    const path = `/blog/${post.slug}`;
+    for (const locale of locales) {
+      pages.push({
+        url: `${baseUrl}/${locale}${path}`,
+        lastModified: new Date(post.date),
+        changeFrequency: "monthly",
+        priority: 0.6,
         alternates: buildAlternates(path),
       });
     }

@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import { Tajawal } from "next/font/google";
-import { ThemeProvider } from "@/components/providers/theme-provider";
 import { brand } from "@/lib/brand";
 import { getBaseUrl } from "@/lib/site-url";
 import "./globals.css";
 
-const tajawal = Tajawal({
-  subsets: ["arabic", "latin"],
-  weight: ["200", "300", "400", "500", "700", "800", "900"],
-  variable: "--font-tajawal",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: brand.title.ar,
   description: brand.description.ar,
+  applicationName: brand.name.en,
   authors: [{ name: brand.name.en }],
   creator: brand.name.en,
   publisher: brand.name.en,
@@ -37,36 +29,21 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
-      <head>
-        <script
-          defer
-          src="https://cloud.umami.is/script.js"
-          data-website-id="0233ac1a-eb20-41a6-8c09-75af7318be76"
-        />
-      </head>
-      <body className={tajawal.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          storageKey="alaram-theme"
-        >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+// <html> lives in app/[locale]/layout.tsx so each locale gets the correct lang/dir.
+// This pass-through layout is still required because of the root not-found page.
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }
-
-

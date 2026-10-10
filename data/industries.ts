@@ -2,6 +2,9 @@ export type Industry = {
   id: string;
   nameAR: string;
   nameEN: string;
+  /** Search-focused page title and H1, e.g. "برنامج كاشير ونقاط بيع للسوبرماركت". */
+  seoTitleAR: string;
+  seoTitleEN: string;
   summaryAR: string;
   summaryEN: string;
   descriptionAR: string;
@@ -38,6 +41,8 @@ export const industries: Industry[] = [
     id: "supermarket",
     nameAR: "السوبرماركت",
     nameEN: "Supermarkets",
+    seoTitleAR: "برنامج كاشير ونقاط بيع للسوبرماركت",
+    seoTitleEN: "Supermarket POS & Inventory Software",
     summaryAR: "نقاط بيع سريعة بالباركود، جرد دقيق، تنبيهات الصلاحية، وتقارير لحظية لكل فرع.",
     summaryEN: "Fast barcode checkout, accurate stock, expiry alerts, and real-time reports for every branch.",
     descriptionAR:
@@ -116,6 +121,8 @@ export const industries: Industry[] = [
     id: "retail",
     nameAR: "محلات التجزئة",
     nameEN: "Retail Stores",
+    seoTitleAR: "برنامج نقاط بيع ومخزون لمحلات التجزئة",
+    seoTitleEN: "Retail POS & Inventory Software",
     summaryAR: "بيع أسرع ومخزون تحت السيطرة لمحلات الملابس والإلكترونيات والجوالات، مع مقاسات وألوان وأرقام تسلسلية.",
     summaryEN: "Faster checkout and full stock control for fashion, electronics, and mobile shops, with sizes, colors, and serial numbers.",
     descriptionAR:
@@ -192,6 +199,8 @@ export const industries: Industry[] = [
     id: "contracting",
     nameAR: "المقاولات ومزودو الخدمات",
     nameEN: "Contractors & Service Providers",
+    seoTitleAR: "برنامج محاسبة وعروض أسعار للمقاولات ومزودي الخدمات",
+    seoTitleEN: "Accounting & Quotation Software for Contractors",
     summaryAR: "من عرض السعر إلى الفاتورة: تسعير دقيق، متابعة المشاريع، وحساب الهامش قبل أن تبدأ.",
     summaryEN: "From quote to invoice: precise pricing, project tracking, and margin visibility before you start.",
     descriptionAR:
@@ -268,6 +277,8 @@ export const industries: Industry[] = [
     id: "perfumes",
     nameAR: "محلات العطور",
     nameEN: "Perfume Shops",
+    seoTitleAR: "برنامج نقاط بيع ومخزون لمحلات العطور",
+    seoTitleEN: "POS & Inventory Software for Perfume Shops",
     summaryAR: "وصفات الخلطات، تتبع الدفعات، طباعة الملصقات، وباقات هدايا تزيد مبيعاتك في المواسم.",
     summaryEN: "Blend recipes, batch tracking, label printing, and gift bundles that lift seasonal sales.",
     descriptionAR:
@@ -344,6 +355,8 @@ export const industries: Industry[] = [
     id: "beauty-salon",
     nameAR: "الصالونات النسائية",
     nameEN: "Women's Beauty Salons",
+    seoTitleAR: "برنامج إدارة الصالونات النسائية والحجوزات",
+    seoTitleEN: "Beauty Salon Booking & Management Software",
     summaryAR: "حجوزات ذكية بتذكير تلقائي، جداول الموظفات، باقات واشتراكات، وبرامج ولاء.",
     summaryEN: "Smart bookings with reminders, staff rosters, packages and subscriptions, and loyalty programs.",
     descriptionAR:

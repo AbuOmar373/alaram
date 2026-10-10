@@ -25,7 +25,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { usePageTitle } from "@/lib/use-page-title";
 import { PurchaseLinks } from "@/components/commerce/purchase-links";
 import { accountingPrices, annualAccountingPrice } from "@/data/accounting-pricing";
 
@@ -36,7 +35,6 @@ export default function PricingPage() {
   const market = getDefaultMarket();
   const isRTL = locale === "ar";
   const [isAnnual, setIsAnnual] = useState(false);
-  usePageTitle(locale, locale === "ar" ? "الأسعار" : "Pricing");
 
   const calculatePrice = (monthlyPrice: number) => {
     if (isAnnual) {
@@ -465,7 +463,7 @@ export default function PricingPage() {
                 asChild
                 className="h-14 rounded-2xl bg-white px-10 text-lg font-semibold text-primary shadow-2xl transition-all hover:scale-105 hover:bg-white/90"
               >
-                <Link href="/demo">
+                <Link href={`/${locale}/demo`}>
                   {isRTL ? "ابدأ تجربتك المجانية" : "Start Free Trial"}
                   <ArrowRight className="ms-2 h-5 w-5" />
                 </Link>
@@ -476,7 +474,7 @@ export default function PricingPage() {
                 asChild
                 className="h-14 rounded-2xl border-2 border-white bg-transparent px-10 text-lg font-semibold text-white hover:bg-white/10"
               >
-                <Link href="/contact">{isRTL ? "تحدث مع المبيعات" : "Talk to Sales"}</Link>
+                <Link href={`/${locale}/contact`}>{isRTL ? "تحدث مع المبيعات" : "Talk to Sales"}</Link>
               </Button>
             </div>
 

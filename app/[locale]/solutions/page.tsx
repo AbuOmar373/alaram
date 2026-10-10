@@ -12,7 +12,6 @@ import { industries } from "@/data/industries";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { usePageTitle } from "@/lib/use-page-title";
 import { LmsProductCard } from "@/components/sections/lms-product-card";
 import { SamtProductCard } from "@/components/sections/samt-product-card";
 import { EstimatorProductCard } from "@/components/sections/estimator-product-card";
@@ -22,7 +21,6 @@ export default function SolutionsPage() {
   const locale = params.locale;
   const t = useTranslations("solutions");
   const isRTL = locale === "ar";
-  usePageTitle(locale, locale === "ar" ? "حلولنا المتخصصة" : "Our Specialized Solutions");
 
   const benefits = [
     {
@@ -260,7 +258,7 @@ export default function SolutionsPage() {
                       asChild
                       className="group/btn w-full rounded-xl bg-gradient-to-r from-primary to-blue-600 font-semibold shadow-lg shadow-primary/30 transition-all hover:scale-105 hover:shadow-xl"
                     >
-                      <Link href={`/solutions/${industry.id}`}>
+                      <Link href={`/${locale}/solutions/${industry.id}`}>
                         {t("viewDetails")}
                         <ArrowRight className="ms-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                       </Link>
@@ -305,7 +303,7 @@ export default function SolutionsPage() {
                 asChild
                 className="h-14 rounded-2xl bg-white px-10 text-lg font-semibold text-primary shadow-2xl transition-all hover:scale-105 hover:bg-white/90"
               >
-                <Link href="/demo">
+                <Link href={`/${locale}/demo`}>
                   {isRTL ? "ابدأ تجربتك المجانية" : "Start Free Trial"}
                   <ArrowRight className="ms-2 h-5 w-5" />
                 </Link>
@@ -316,7 +314,7 @@ export default function SolutionsPage() {
                 asChild
                 className="h-14 rounded-2xl border-2 border-white bg-transparent px-10 text-lg font-semibold text-white hover:bg-white/10"
               >
-                <Link href="/contact">
+                <Link href={`/${locale}/contact`}>
                   {isRTL ? "تحدث مع خبير" : "Talk to Expert"}
                 </Link>
               </Button>

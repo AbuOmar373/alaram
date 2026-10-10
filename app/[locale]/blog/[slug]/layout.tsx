@@ -1,35 +1,96 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-import { buildPageMetadata, getLocaleFromParam } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { blogPostSlugs, getBlogPost } from "@/data/blog-posts";
+import { brand } from "@/lib/brand";
+import {
+  absoluteUrl,
+  breadcrumbJsonLd,
+  buildPageMetadata,
+  getLocaleFromParam,
+  localizedPath,
+  organizationId,
+  socialImageUrl,
+} from "@/lib/seo";
 
-function humanizeSlug(slug: string) {
-  return slug
-    .split("-")
-    .filter(Boolean)
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
+type LayoutParams = { params: Promise<{ locale: string; slug: string }> };
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return blogPostSlugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string; slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: LayoutParams): Promise<Metadata> {
   const { locale, slug } = await params;
   const currentLocale = getLocaleFromParam(locale);
+  const post = getBlogPost(currentLocale, slug);
+
+  if (!post) {
+    return {};
+  }
 
   return buildPageMetadata({
     locale: currentLocale,
     path: `/blog/${slug}`,
-    title: humanizeSlug(slug),
-    description:
-      currentLocale === "ar"
-        ? "مقال من مدونة الأرام حول إدارة الأعمال والحلول التقنية."
-        : "An ALaram blog article about business operations and technical solutions.",
+    title: post.title,
+    description: post.excerpt,
     type: "article",
+    publishedTime: post.date,
+    authors: [post.author],
   });
 }
 
-export default function BlogPostLayout({ children }: { children: React.ReactNode }) {
-  return children;
+export default async function BlogPostLayout({
+  children,
+  params,
+}: LayoutParams & { children: React.ReactNode }) {
+  const { locale, slug } = await params;
+  const currentLocale = getLocaleFromParam(locale);
+  const post = getBlogPost(currentLocale, slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  const url = absoluteUrl(localizedPath(currentLocale, `/blog/${slug}`));
+  const articleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: socialImageUrl(currentLocale),
+    datePublished: post.date,
+    dateModified: post.date,
+    inLanguage: currentLocale,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    // Posts by "فريق الأرام" / "ALaram Team" are attributed to the organization itself.
+    author: /فريق|Team/.test(post.author)
+      ? { "@type": "Organization", "@id": organizationId(), name: post.author }
+      : { "@type": "Person", name: post.author, jobTitle: post.authorRole },
+    publisher: {
+      "@id": organizationId(),
+      "@type": "Organization",
+      name: currentLocale === "ar" ? brand.name.ar : brand.name.en,
+      logo: { "@type": "ImageObject", url: absoluteUrl("/logo.png") },
+    },
+    articleSection: post.category,
+  };
+
+  return (
+    <>
+      <JsonLd
+        data={[
+          articleStructuredData,
+          breadcrumbJsonLd(currentLocale, [
+            { name: currentLocale === "ar" ? "المدونة" : "Blog", path: "/blog" },
+            { name: post.title, path: `/blog/${slug}` },
+          ]),
+        ]}
+      />
+      {children}
+    </>
+  );
 }

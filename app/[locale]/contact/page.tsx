@@ -10,14 +10,12 @@ import { PurchaseLinks } from "@/components/commerce/purchase-links";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { brand } from "@/lib/brand";
-import { usePageTitle } from "@/lib/use-page-title";
 
 export default function ContactPage() {
   const params = useParams<{ locale: string }>();
   const locale = params.locale;
   const isRTL = locale === "ar";
   const t = useTranslations("contact");
-  usePageTitle(locale, locale === "ar" ? "تواصل معنا" : "Contact");
 
   return (
     <div className="min-h-screen">

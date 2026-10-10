@@ -5,13 +5,20 @@ import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { Check } from "lucide-react";
 
-import { getIndustryById } from "@/data/industries";
+import { getIndustryById, industries } from "@/data/industries";
 import { Hero } from "@/components/sections/hero";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FAQ } from "@/components/sections/faq";
-import { buildPageMetadata, getLocaleFromParam } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, buildPageMetadata, getLocaleFromParam } from "@/lib/seo";
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return industries.map((industry) => ({ industry: industry.id }));
+}
 
 export async function generateMetadata({
   params,
@@ -29,7 +36,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale: currentLocale,
     path: `/solutions/${industryId}`,
-    title: currentLocale === "ar" ? industry.nameAR : industry.nameEN,
+    title: currentLocale === "ar" ? industry.seoTitleAR : industry.seoTitleEN,
     description: currentLocale === "ar" ? industry.summaryAR : industry.summaryEN,
   });
 }
@@ -49,14 +56,26 @@ export default async function IndustryPage({
     notFound();
   }
 
-  const isArabic = locale === "ar";
+  const currentLocale = getLocaleFromParam(locale);
+  const isArabic = currentLocale === "ar";
+  const withLocale = (href: string) => `/${currentLocale}${href}`;
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd(currentLocale, [
+          { name: isArabic ? "الحلول" : "Solutions", path: "/solutions" },
+          { name: isArabic ? industry.nameAR : industry.nameEN, path: `/solutions/${industry.id}` },
+        ])}
+      />
       {/* Hero Section */}
       <Hero
-        headline={isArabic ? industry.hero.headlineAR : industry.hero.headlineEN}
-        subheadline={isArabic ? industry.hero.subAR : industry.hero.subEN}
+        headline={isArabic ? industry.seoTitleAR : industry.seoTitleEN}
+        subheadline={
+          isArabic
+            ? `${industry.hero.headlineAR} ${industry.hero.subAR}`
+            : `${industry.hero.headlineEN} ${industry.hero.subEN}`
+        }
         primaryCta={isArabic ? industry.cta.primaryAR : industry.cta.primaryEN}
         secondaryCta={isArabic ? industry.cta.secondaryAR : industry.cta.secondaryEN}
         primaryHref="/demo"
@@ -150,7 +169,7 @@ export default async function IndustryPage({
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Button size="lg" variant="secondary" asChild>
-              <Link href="/demo">{isArabic ? industry.cta.primaryAR : industry.cta.primaryEN}</Link>
+              <Link href={withLocale("/demo")}>{isArabic ? industry.cta.primaryAR : industry.cta.primaryEN}</Link>
             </Button>
             <Button
               size="lg"
@@ -158,7 +177,7 @@ export default async function IndustryPage({
               asChild
               className="border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
             >
-              <Link href="/contact">
+              <Link href={withLocale("/contact")}>
                 {isArabic ? industry.cta.secondaryAR : industry.cta.secondaryEN}
               </Link>
             </Button>

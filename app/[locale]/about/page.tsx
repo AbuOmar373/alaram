@@ -25,14 +25,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Stats } from "@/components/sections/stats";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { usePageTitle } from "@/lib/use-page-title";
 
 export default function AboutPage() {
   const params = useParams<{ locale: string }>();
   const locale = params.locale;
   const t = useTranslations("about");
   const isRTL = locale === "ar";
-  usePageTitle(locale, locale === "ar" ? "من نحن" : "About");
 
   const stats = [
     { value: locale === "ar" ? "أونلاين" : "Online", label: locale === "ar" ? "نموذج الخدمة" : "Service Model" },
@@ -434,7 +432,7 @@ export default function AboutPage() {
                 asChild
                 className="h-14 rounded-2xl bg-white px-10 text-lg font-semibold text-primary shadow-2xl transition-all hover:scale-105 hover:bg-white/90"
               >
-                <Link href="/demo">
+                <Link href={`/${locale}/demo`}>
                   {isRTL ? "ابدأ تجربتك المجانية" : "Start Free Trial"}
                   <ArrowRight className="ms-2 h-5 w-5" />
                 </Link>
@@ -445,7 +443,7 @@ export default function AboutPage() {
                 asChild
                 className="h-14 rounded-2xl border-2 border-white bg-transparent px-10 text-lg font-semibold text-white hover:bg-white/10"
               >
-                <Link href="/contact">{isRTL ? "تواصل معنا" : "Contact Us"}</Link>
+                <Link href={`/${locale}/contact`}>{isRTL ? "تواصل معنا" : "Contact Us"}</Link>
               </Button>
             </div>
           </motion.div>

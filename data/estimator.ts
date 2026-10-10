@@ -18,6 +18,24 @@ export const estimator = {
     ar: "مُقدّر التكلفة تطبيق ويب عربي لتقدير تكاليف المشاريع وإعداد عروض الأسعار بالعربية والإنجليزية، يجمع العملاء والموردين ودليل البنود والمشتريات والمبيعات والمستودعات والمحاسبة بالقيد المزدوج.",
     en: "Cost Estimator is an Arabic-first web app for costing projects and preparing Arabic and English proposals. It brings clients, suppliers, an item catalog, purchasing, sales, warehouses, and double-entry accounting together.",
   },
+  seo: {
+    title: {
+      ar: "برنامج عروض أسعار وتسعير المشاريع | مُقدّر التكلفة من الأرام",
+      en: "Quotation & Project Costing Software | ALaram Cost Estimator",
+    },
+    description: {
+      ar: "سعّر مشاريع المقاولات والخدمات بدقة: تكلفة كاملة وضريبة وهامش ربح، وعروض أسعار PDF وWord حتى الفاتورة، مع المخزون والمحاسبة. من 99 ريالاً شهريًا بالباقة السنوية.",
+      en: "Price projects with full cost, VAT, and margin, send PDF or Word proposals, and track them to invoice, with inventory and accounting. From SAR 99/mo billed yearly.",
+    },
+    h1Label: {
+      ar: "مُقدّر التكلفة · برنامج تسعير المشاريع وعروض الأسعار",
+      en: "Cost Estimator · Project costing and quotation software",
+    },
+    imageAlt: {
+      ar: "لوحة تحكم مُقدّر التكلفة: المبيعات والربح والهامش وأحدث عروض الأسعار",
+      en: "Cost Estimator dashboard: sales, profit, margin, and the latest proposals",
+    },
+  },
   hero: {
     eyebrow: {
       ar: "تقدير المشاريع وعروض الأسعار",

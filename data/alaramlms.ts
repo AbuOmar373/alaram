@@ -14,6 +14,24 @@ export const alaramLms = {
     ar: "نظام تدريب إلكتروني مستقل باسمك وهويتك، مع مساحة مجانية حتى ١٠ جيجابايت. لا اشتراك شهري في النظام، ولا عمولة على مبيعاتك.",
     en: "An independent LMS under your name and brand, with free storage up to 10 GB. No monthly software subscription, and no commission on your sales.",
   },
+  seo: {
+    title: {
+      ar: "ALaramLMS: أنشئ منصة تدريب إلكترونية باسمك بدون اشتراك شهري",
+      en: "ALaramLMS: Launch Your Own Branded LMS With No Monthly Fees",
+    },
+    description: {
+      ar: "أنشئ منصة دورات تدريبية باسمك ونطاقك: دروس فيديو واختبارات ومتابعة تقدم الطلاب من لوحة إدارة واحدة. شراء لمرة واحدة من 600 ريال، بلا اشتراك شهري ولا عمولة.",
+      en: "Your own branded course platform: video lessons, quizzes, and student progress in one admin panel. One-time purchase from SAR 600, no monthly fee or commission.",
+    },
+    h1Label: {
+      ar: "ALaramLMS · منصة تدريب إلكترونية (LMS) للمدربين",
+      en: "ALaramLMS · Branded LMS platform for trainers",
+    },
+    imageAlt: {
+      ar: "لوحة إدارة ALaramLMS: الطلاب المسجلون والدورات ونسبة الإكمال وتقدم الطلاب",
+      en: "ALaramLMS admin dashboard: enrolled students, courses, completion rate, and student progress",
+    },
+  },
   description: {
     ar: "إذا كنت مدربًا وتبيع دوراتك عبر واتساب، تيليجرام، روابط درايف، أو منصة تأخذ منك اشتراكًا شهريًا، فـ ALaramLMS يمنحك طريقة أكثر احترافية واستقلالية.",
     en: "If you sell courses over WhatsApp, Telegram, Drive links, or a platform that charges a monthly fee, ALaramLMS gives you a more professional and independent way to train.",

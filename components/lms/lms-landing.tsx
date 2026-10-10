@@ -80,8 +80,10 @@ function Hero({
                 <GraduationCap className="h-4 w-4" />
                 <span>{copy(locale, alaramLms.hero.eyebrow)}</span>
               </div>
-              <p className="mb-3 text-sm font-black tracking-wide text-primary">{alaramLms.name}</p>
               <h1 className="max-w-4xl text-3xl font-black leading-[1.08] tracking-tight text-heading sm:text-4xl lg:text-5xl">
+                <span className="mb-3 block text-sm font-black tracking-wide text-primary">
+                  {copy(locale, alaramLms.seo.h1Label)}
+                </span>
                 {copy(locale, alaramLms.hero.headline)}
               </h1>
             </motion.div>

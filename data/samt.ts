@@ -21,6 +21,24 @@ export const samt = {
     ar: "سَمْت منصة ويب لإنشاء وإدارة السير الذاتية للباحثين عن عمل في السوق السعودي. ملف مهني مركزي، قوالب ثنائية اللغة، مساعد ذكاء اصطناعي، تحليل ATS، وتصدير PDF.",
     en: "Samt is a web platform for creating and managing resumes for job seekers in the Saudi market. One central career profile, bilingual templates, AI assistance, ATS analysis, and PDF export.",
   },
+  seo: {
+    title: {
+      ar: "سَمْت: إنشاء سيرة ذاتية بالذكاء الاصطناعي بالعربية والإنجليزية",
+      en: "Samt: AI Resume Builder in Arabic & English",
+    },
+    description: {
+      ar: "أنشئ سيرتك الذاتية من ملف مهني واحد وخصّصها لكل وظيفة بمساعدة الذكاء الاصطناعي، مع قوالب عربية وإنجليزية وتحليل ATS إرشادي وتصدير PDF. حزم تبدأ من 29 ريالاً.",
+      en: "Build resumes from one career profile and tailor them for each role with AI: Arabic and English templates, ATS analysis, and PDF export. Packs from SAR 29.",
+    },
+    h1Label: {
+      ar: "سَمْت · منشئ السيرة الذاتية بالذكاء الاصطناعي",
+      en: "Samt · AI resume builder",
+    },
+    imageAlt: {
+      ar: "لوحة سَمْت: اكتمال الملف المهني والسير الذاتية ودرجة تحليل ATS",
+      en: "Samt dashboard: profile completeness, resumes, and ATS analysis score",
+    },
+  },
   hero: {
     eyebrow: {
       ar: "منصة السير الذاتية بالذكاء الاصطناعي",
