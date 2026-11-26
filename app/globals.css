@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Noto Sans Arabic";
+  src: url("./fonts/noto-sans-arabic.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+200C-200E, U+FB50-FDFF,
+    U+FE70-FEFC, U+10EC0-10EFF, U+1EE00-1EEFF;
+}
+
 @layer base {
   :root {
     --background: 43 45% 98%;
@@ -26,6 +36,10 @@
     --input: 220 24% 88%;
     --ring: 210 92% 33%;
     --radius: 1rem;
+  }
+
+  :root:lang(ar) {
+    --tracking-tight: normal;
   }
 
   .dark {
@@ -65,7 +79,6 @@
     background-image:
       radial-gradient(circle at top left, hsl(var(--primary) / 0.12), transparent 28rem),
       radial-gradient(circle at top right, hsl(var(--accent) / 0.10), transparent 28rem);
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   .dark body {
@@ -191,7 +204,7 @@ html {
   }
 
   .section-title {
-    @apply text-2xl font-black leading-tight tracking-tight text-heading sm:text-3xl lg:text-4xl;
+    @apply text-2xl font-semibold leading-tight tracking-tight text-heading sm:text-3xl lg:text-4xl;
   }
 
   .section-subtitle {

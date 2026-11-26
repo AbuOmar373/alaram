@@ -13,7 +13,7 @@ export function PolicyDocument({ locale, policy }: { locale: Locale; policy: Pur
       <header className="border-b bg-gradient-to-br from-primary/5 via-purple-500/5 to-background py-16 sm:py-20">
         <div className="container mx-auto max-w-4xl px-4">
           <ShieldCheck className="mb-5 h-9 w-9 text-primary" aria-hidden="true" />
-          <h1 className="text-3xl font-black leading-tight text-heading sm:text-4xl">
+          <h1 className="text-3xl font-semibold leading-tight text-heading sm:text-4xl">
             {policy.title[locale]}
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted-foreground">

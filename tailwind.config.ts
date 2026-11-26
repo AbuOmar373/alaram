@@ -17,6 +17,20 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Noto Sans Arabic"',
+          "system-ui",
+          '"Helvetica Neue"',
+          "Arial",
+          "sans-serif",
+        ],
+      },
+      letterSpacing: {
+        tight: "var(--tracking-tight, -0.025em)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

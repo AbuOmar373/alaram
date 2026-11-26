@@ -26,7 +26,7 @@ export default function HeroSection({ title, isRTL }: Props) {
             <span>{isRTL ? "عرض توضيحي مجاني" : "Free Demo"}</span>
           </div>
 
-          <h1 className="mb-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent dark:from-white dark:via-slate-100 dark:to-slate-400 sm:text-5xl md:text-6xl">
+          <h1 className="mb-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-4xl font-semibold leading-tight tracking-tight text-transparent dark:from-white dark:via-slate-100 dark:to-slate-400 sm:text-5xl md:text-6xl">
             {title}
           </h1>
         </motion.div>

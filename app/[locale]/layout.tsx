@@ -8,7 +8,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { brand } from "@/lib/brand";
-import { tajawal } from "@/lib/fonts";
 import { getBaseUrl } from "@/lib/site-url";
 import { absoluteUrl, getLocaleFromParam, isLocale, locales, organizationId } from "@/lib/seo";
 
@@ -101,7 +100,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
           data-website-id="0233ac1a-eb20-41a6-8c09-75af7318be76"
         />
       </head>
-      <body className={tajawal.className}>
+      <body>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem storageKey="alaram-theme">
           <NextIntlClientProvider locale={locale} messages={messages}>
             <JsonLd data={organizationStructuredData} />

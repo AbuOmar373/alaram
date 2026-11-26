@@ -33,7 +33,7 @@ export function CTASection({ title, subtitle, primaryCta, secondaryCta }: CTASec
       <div className="container relative mx-auto px-4">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-white/[0.06] p-8 text-center shadow-2xl shadow-black/20 backdrop-blur md:p-12">
           <motion.h2
-            className="text-2xl font-black tracking-tight text-white sm:text-3xl md:text-4xl"
+            className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

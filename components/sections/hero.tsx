@@ -72,7 +72,7 @@ export function Hero({
                 <span>{locale === "ar" ? "حلول محاسبية مدعمة بالذكاء الصناعي" : "AI-supported accounting platform"}</span>
               </div>
 
-              <h1 className="max-w-4xl text-3xl font-black leading-[1.08] tracking-tight text-heading sm:text-4xl lg:text-5xl xl:text-6xl">
+              <h1 className="max-w-4xl text-3xl font-semibold leading-[1.08] tracking-tight text-heading sm:text-4xl lg:text-5xl xl:text-6xl">
                 {headline}
               </h1>
             </motion.div>

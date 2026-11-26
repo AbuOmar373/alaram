@@ -29,7 +29,7 @@ export default async function CheckoutPage({ params, searchParams }: {
   return (
     <section className="container mx-auto max-w-5xl px-4 pb-24 pt-32">
       <Link href={`/${locale}/${plan.product}#pricing`} className="text-sm font-bold text-primary underline">{ar ? "العودة إلى الباقات" : "Back to plans"}</Link>
-      <h1 className="mb-8 mt-5 text-3xl font-black sm:text-4xl">{ar ? "إتمام الشراء" : "Complete your purchase"}</h1>
+      <h1 className="mb-8 mt-5 text-3xl font-semibold sm:text-4xl">{ar ? "إتمام الشراء" : "Complete your purchase"}</h1>
       {checkout ? <TapCheckout locale={locale} plan={plan} {...checkout} /> : (
         <div className="rounded-3xl border bg-card p-8">
           <h2 className="text-xl font-bold">{plan.productName[locale]} · {plan.name[locale]}</h2>

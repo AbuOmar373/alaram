@@ -44,7 +44,7 @@ export default async function PaymentResultPage({ params, searchParams }: {
     <section className="container mx-auto max-w-3xl px-4 pb-24 pt-32">
       <div className="rounded-3xl border bg-card p-6 sm:p-10">
         <p className="mb-3 font-bold text-primary">Tap Payments</p>
-        <h1 className="text-3xl font-black" role="status">{titles[status]}</h1>
+        <h1 className="text-3xl font-semibold" role="status">{titles[status]}</h1>
         <p className="mt-5 leading-8 text-muted-foreground">{descriptions[status]}</p>
         {chargeId && intent && <dl className="my-6 space-y-3 rounded-xl bg-muted/50 p-4 text-sm">
           <div><dt className="font-bold">{ar ? "رقم العملية" : "Payment reference"}</dt><dd dir="ltr" className="mt-1 break-all">{chargeId}</dd></div>

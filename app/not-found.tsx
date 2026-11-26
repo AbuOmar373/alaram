@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Home } from "lucide-react";
-import { tajawal } from "@/lib/fonts";
 
 // Rendered outside app/[locale], so it has to provide its own <html> and <body>.
 export default function NotFound() {
   return (
     <html lang="ar" dir="rtl">
-      <body className={tajawal.className}>
+      <body>
         <div className="flex min-h-screen items-center justify-center px-4">
           <div className="text-center">
             <h1 className="mb-4 text-9xl font-bold text-primary">404</h1>

@@ -71,7 +71,7 @@ function Hero({
                 <FileText className="h-4 w-4" />
                 <span>{copy(locale, samt.hero.eyebrow)}</span>
               </div>
-              <h1 className="max-w-4xl text-3xl font-black leading-[1.08] tracking-tight text-heading sm:text-4xl lg:text-5xl">
+              <h1 className="max-w-4xl text-3xl font-semibold leading-[1.08] tracking-tight text-heading sm:text-4xl lg:text-5xl">
                 <span className="mb-3 block text-sm font-black tracking-wide text-primary">
                   {copy(locale, samt.seo.h1Label)}
                 </span>
@@ -463,7 +463,7 @@ function Closing({
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(14,165,233,0.28),transparent_32rem),radial-gradient(circle_at_80%_70%,rgba(20,184,166,0.22),transparent_28rem)]" />
       <div className="container relative mx-auto px-4">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-white/[0.06] p-8 text-center shadow-2xl shadow-black/20 backdrop-blur md:p-12">
-          <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl md:text-4xl">
+          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
             {copy(locale, samt.closing.slogan)}
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/75">

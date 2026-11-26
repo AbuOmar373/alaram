@@ -122,7 +122,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
             <LayoutGrid className="h-4 w-4" aria-hidden="true" />
             {isArabic ? "برامج وخدمات رقمية" : "Software & digital services"}
           </span>
-          <h1 className="mt-6 text-3xl font-black leading-tight text-heading sm:text-5xl">
+          <h1 className="mt-6 text-3xl font-semibold leading-tight text-heading sm:text-5xl">
             {isArabic ? "منتجاتنا وخدماتنا" : "Our Products & Services"}
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">

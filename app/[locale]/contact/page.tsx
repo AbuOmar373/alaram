@@ -22,7 +22,7 @@ export default function ContactPage() {
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-purple-500/5 to-background py-20 md:py-28">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
-            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent dark:from-white dark:via-slate-100 dark:to-slate-400 sm:text-5xl">
+            <h1 className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-4xl font-semibold leading-tight tracking-tight text-transparent dark:from-white dark:via-slate-100 dark:to-slate-400 sm:text-5xl">
               {t("title")}
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">{t("subtitle")}</p>

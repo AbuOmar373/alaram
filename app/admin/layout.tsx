@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { tajawal } from "@/lib/fonts";
 import { AdminProvider } from "@/components/admin/admin-provider";
 
 export const metadata: Metadata = {
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl">
-      <body className={tajawal.className}>
+      <body>
         <AdminProvider>{children}</AdminProvider>
       </body>
     </html>
