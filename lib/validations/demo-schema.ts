@@ -26,5 +26,6 @@ export const demoSubmissionSchema = demoSchema.extend({
   formStartedAt: z.number().int().positive().optional(),
 });
 
+export type DemoFormInput = z.input<typeof demoSchema>;
 export type DemoFormData = z.infer<typeof demoSchema>;
 export type DemoSubmissionData = z.infer<typeof demoSubmissionSchema>;
