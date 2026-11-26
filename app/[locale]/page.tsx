@@ -136,7 +136,9 @@ export default async function HomePage({ params }: PageProps) {
       <JsonLd data={structuredData} />
       <Hero
         eyebrow={t("hero.eyebrow")}
-        headline={t("hero.headline")}
+        headline={t.rich("hero.headline", {
+          brand: (name) => <strong className="font-bold text-primary">{name}</strong>,
+        })}
         subheadline={t("hero.subheadline")}
         primaryCta={t("hero.cta")}
         secondaryCta={t("hero.secondaryCta")}

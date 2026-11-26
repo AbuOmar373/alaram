@@ -4,11 +4,12 @@ import Link from "next/link";
 import { useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import { ArrowRight, BarChart3, Check, ShieldCheck, Sparkles } from "lucide-react";
+import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 
 interface HeroProps {
   eyebrow?: string;
-  headline: string;
+  headline: ReactNode;
   subheadline: string;
   primaryCta: string;
   secondaryCta: string;
