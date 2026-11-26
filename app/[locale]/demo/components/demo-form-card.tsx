@@ -31,6 +31,24 @@ type Props = {
 };
 
 const SUBMISSION_COUNT_KEY = "demo_successful_submissions";
+const SUBMISSION_COUNT_UPDATED = "demo-submission-count-updated";
+
+function subscribeToSubmissionCount(onChange: () => void) {
+  window.addEventListener("storage", onChange);
+  window.addEventListener(SUBMISSION_COUNT_UPDATED, onChange);
+  return () => {
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener(SUBMISSION_COUNT_UPDATED, onChange);
+  };
+}
+
+function getSubmissionCount() {
+  try {
+    return Number(window.localStorage.getItem(SUBMISSION_COUNT_KEY) ?? 0);
+  } catch {
+    return 0;
+  }
+}
 
 export default function DemoFormCard({ locale, isRTL }: Props) {
   const t = useTranslations("demo");
@@ -40,9 +58,14 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
   const [isMessageEmpty, setIsMessageEmpty] = React.useState(true);
   const [isVerifying, setIsVerifying] = React.useState(false);
   const [verificationError, setVerificationError] = React.useState(false);
-  const [requiresVisibleVerification, setRequiresVisibleVerification] = React.useState(false);
   const isTurnstileEnabled = isTurnstileConfigured();
   const turnstileSiteKey = getTurnstileSiteKey();
+  const submissionCount = React.useSyncExternalStore(
+    subscribeToSubmissionCount,
+    getSubmissionCount,
+    () => 0
+  );
+  const requiresVisibleVerification = isTurnstileEnabled && submissionCount >= 1;
 
   const {
     register,
@@ -55,14 +78,6 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
     submitStatus,
   } = useDemoForm();
   const messageValue = watch("message") ?? "";
-
-  React.useEffect(() => {
-    if (!isTurnstileEnabled) return;
-
-    const submissionCount = Number(window.localStorage.getItem(SUBMISSION_COUNT_KEY) ?? 0);
-
-    setRequiresVisibleVerification(submissionCount >= 1);
-  }, [isTurnstileEnabled]);
 
   React.useEffect(() => {
     const editor = editorRef.current;
@@ -134,10 +149,12 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
       turnstileRef.current?.reset();
 
       if (wasSent && isTurnstileEnabled) {
-        const submissionCount = Number(window.localStorage.getItem(SUBMISSION_COUNT_KEY) ?? 0) + 1;
-
-        window.localStorage.setItem(SUBMISSION_COUNT_KEY, String(submissionCount));
-        setRequiresVisibleVerification(true);
+        try {
+          window.localStorage.setItem(SUBMISSION_COUNT_KEY, String(getSubmissionCount() + 1));
+          window.dispatchEvent(new Event(SUBMISSION_COUNT_UPDATED));
+        } catch {
+          // The request succeeded even if browser storage is unavailable.
+        }
       }
     } catch {
       turnstileRef.current?.reset();
@@ -197,7 +214,7 @@ export default function DemoFormCard({ locale, isRTL }: Props) {
       </CardHeader>
 
       <CardContent>
-        <form onSubmit={handleSubmit(submitDemo)} className="space-y-6">
+        <form onSubmit={(event) => void handleSubmit(submitDemo)(event)} className="space-y-6">
           {/* Honeypot: hidden from humans, bots tend to fill it. Do not remove. */}
           <div
             aria-hidden="true"

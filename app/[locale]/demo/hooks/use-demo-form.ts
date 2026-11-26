@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { demoSchema } from "@/lib/validations/demo-schema";
-import type { DemoFormData } from "@/lib/validations/demo-schema";
+import type { DemoFormData, DemoFormInput } from "@/lib/validations/demo-schema";
 
 export function useDemoForm() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -20,7 +20,7 @@ export function useDemoForm() {
     formStartedAtRef.current = Date.now();
   }, []);
 
-  const form = useForm<DemoFormData>({
+  const form = useForm<DemoFormInput, unknown, DemoFormData>({
     resolver: zodResolver(demoSchema),
     defaultValues: {
       locale: "ar",
