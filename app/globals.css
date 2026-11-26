@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Noto Sans Arabic";
-  src: url("./fonts/noto-sans-arabic.woff2") format("woff2");
+  font-family: "Alexandria";
+  src: url("./fonts/alexandria-arabic.woff2") format("woff2");
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
@@ -205,6 +205,18 @@ html {
 
   .section-title {
     @apply text-2xl font-semibold leading-tight tracking-tight text-heading sm:text-3xl lg:text-4xl;
+  }
+
+  .hero-title:lang(ar),
+  .section-title:lang(ar) {
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  @media (max-width: 639px) {
+    .hero-title:lang(ar) {
+      font-size: 1.75rem;
+    }
   }
 
   .section-subtitle {

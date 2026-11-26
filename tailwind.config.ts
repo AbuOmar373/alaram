@@ -19,9 +19,9 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: [
+          '"Alexandria"',
           "-apple-system",
           "BlinkMacSystemFont",
-          '"Noto Sans Arabic"',
           "system-ui",
           '"Helvetica Neue"',
           "Arial",

@@ -71,7 +71,7 @@ function Hero({
                 <FileText className="h-4 w-4" />
                 <span>{copy(locale, samt.hero.eyebrow)}</span>
               </div>
-              <h1 className="max-w-4xl text-3xl font-semibold leading-[1.08] tracking-tight text-heading sm:text-4xl lg:text-5xl">
+              <h1 className="hero-title max-w-4xl text-3xl font-semibold leading-[1.08] tracking-tight text-heading sm:text-4xl lg:text-5xl">
                 <span className="mb-3 block text-sm font-black tracking-wide text-primary">
                   {copy(locale, samt.seo.h1Label)}
                 </span>
