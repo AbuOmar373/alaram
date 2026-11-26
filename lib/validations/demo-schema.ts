@@ -22,6 +22,7 @@ export const demoSchema = z.object({
 });
 
 export const demoSubmissionSchema = demoSchema.extend({
+  submissionId: z.string().uuid(),
   turnstileToken: z.string().min(1).max(2048).optional(),
   formStartedAt: z.number().int().positive().optional(),
 });

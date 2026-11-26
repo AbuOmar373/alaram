@@ -24,8 +24,8 @@ export const estimator = {
       en: "Quotation & Project Costing Software | ALaram Cost Estimator",
     },
     description: {
-      ar: "سعّر مشاريع المقاولات والخدمات بدقة: تكلفة كاملة وضريبة وهامش ربح، وعروض أسعار PDF وWord حتى الفاتورة، مع المخزون والمحاسبة. من 99 ريالاً شهريًا بالباقة السنوية.",
-      en: "Price projects with full cost, VAT, and margin, send PDF or Word proposals, and track them to invoice, with inventory and accounting. From SAR 99/mo billed yearly.",
+      ar: "سعّر مشاريع المقاولات والخدمات بدقة: تكلفة كاملة وضريبة وهامش ربح، وعروض أسعار PDF وWord حتى الفاتورة، مع المخزون والمحاسبة. باقات شهرية وسنوية تناسب عملك.",
+      en: "Price projects with full cost, VAT, and margin, send PDF or Word proposals, and track them to invoice, with inventory and accounting. Monthly and annual plans for your business.",
     },
     h1Label: {
       ar: "مُقدّر التكلفة · برنامج تسعير المشاريع وعروض الأسعار",
@@ -58,8 +58,8 @@ export const estimator = {
       en: "See pricing",
     },
     priceTeaser: {
-      ar: "فقط 99 ريالاً للشهر",
-      en: "Just SAR 99 a month",
+      ar: "خطط شهرية وسنوية",
+      en: "Monthly and annual plans",
     },
     trustItems: [
       { ar: "عروض عربية وإنجليزية", en: "Arabic and English proposals" },
@@ -431,8 +431,8 @@ export const estimator = {
     featuresTitle: { ar: "يشمل الاشتراك", en: "Every plan includes" },
     request: {
       note: {
-        ar: "اطلب الباقة عبر واتساب، وسنرسل لك رابط الدفع وتفاصيل تفعيل حسابك.",
-        en: "Request your plan on WhatsApp and we will send you the payment link and account activation details.",
+        ar: "ادفع قيمة الباقة عبر صفحة تاب الآمنة، ثم يتولى فريقنا تفعيل حسابك. التجديد يدوي دون خصم تلقائي.",
+        en: "Pay through Tap’s secure checkout, then our team activates your account. Renewals are manual, with no automatic charges.",
       },
     },
     note: {
@@ -464,15 +464,15 @@ export const estimator = {
       {
         question: { ar: "كم سعر الاشتراك؟", en: "How much is the subscription?" },
         answer: {
-          ar: "الباقة الشهرية 129 ريالاً شهرياً. والباقة السنوية 1,190 ريالاً تُدفع مرة واحدة مقدماً عن 12 شهراً، أي ما يعادل نحو 99 ريالاً شهرياً وتوفير 358 ريالاً في السنة.",
-          en: "The monthly plan is SAR 129 per month. The annual plan is SAR 1,190 paid once upfront for 12 months, about SAR 99 per month and a SAR 358 yearly saving.",
+          ar: "تجد الأسعار الحالية ومزايا كل باقة في قسم الباقات. تُدفع الباقة الشهرية عن شهر واحد، والسنوية مقدماً عن 12 شهراً.",
+          en: "See the plans section for current prices and features. Monthly plans cover one month; annual plans are paid upfront for 12 months.",
         },
       },
       {
-        question: { ar: "هل أدفع 99 ريالاً كل شهر في الباقة السنوية؟", en: "Do I pay SAR 99 every month on the annual plan?" },
+        question: { ar: "هل تُدفع الباقة السنوية شهرياً؟", en: "Is the annual plan paid monthly?" },
         answer: {
-          ar: "لا. سعر 99 ريالاً هو المعادل الشهري فقط؛ الباقة السنوية تُدفع دفعة واحدة بقيمة 1,190 ريالاً عند الاشتراك.",
-          en: "No. SAR 99 is the monthly equivalent only; the annual plan is a single SAR 1,190 payment when you subscribe.",
+          ar: "لا. تُدفع القيمة السنوية المعروضة كاملة عند الاشتراك عن 12 شهراً. التجديد يدوي دون خصم تلقائي.",
+          en: "The displayed annual total is paid upfront for 12 months. Renewals are manual, with no automatic charges.",
         },
       },
       {

@@ -20,8 +20,8 @@ export const alaramLms = {
       en: "ALaramLMS: Launch Your Own Branded LMS With No Monthly Fees",
     },
     description: {
-      ar: "أنشئ منصة دورات تدريبية باسمك ونطاقك: دروس فيديو واختبارات ومتابعة تقدم الطلاب من لوحة إدارة واحدة. شراء لمرة واحدة من 600 ريال، بلا اشتراك شهري ولا عمولة.",
-      en: "Your own branded course platform: video lessons, quizzes, and student progress in one admin panel. One-time purchase from SAR 600, no monthly fee or commission.",
+      ar: "أنشئ منصة دورات تدريبية باسمك ونطاقك: دروس فيديو واختبارات ومتابعة تقدم الطلاب من لوحة إدارة واحدة. باقات شراء لمرة واحدة، بلا اشتراك شهري ولا عمولة.",
+      en: "Your own branded course platform: video lessons, quizzes, and student progress in one admin panel. One-time purchase plans, no monthly fee or commission.",
     },
     h1Label: {
       ar: "ALaramLMS · منصة تدريب إلكترونية (LMS) للمدربين",
@@ -242,7 +242,7 @@ export const alaramLms = {
     eyebrow: { ar: "باقات الشراء", en: "Purchase packages" },
     title: { ar: "اختر كيف تبدأ منصتك التدريبية", en: "Choose how to launch your training platform" },
     subtitle: {
-      ar: "باقتان لشراء تطبيق منصة الدورات التدريبية. اختر التطبيق فقط، أو دعنا نتولى الإعداد والتشغيل الكامل لمشروعك.",
+      ar: "باقات لشراء تطبيق منصة الدورات التدريبية. اختر التطبيق فقط، أو دعنا نتولى الإعداد والتشغيل الكامل لمشروعك.",
       en: "Two ways to buy the training course platform. Choose the application on its own, or let us handle setup and launch for you.",
     },
     currency: "SAR",
@@ -300,8 +300,8 @@ export const alaramLms = {
       name: "Tap Payments",
       url: "https://www.tap.company/ar-sa",
       label: { ar: "مزوّد الدفع: تاب", en: "Payment provider: Tap" },
-      requestCta: { ar: "اطلب الباقة عبر واتساب", en: "Request via WhatsApp" },
-      requestNote: { ar: "تواصل معنا لطلب الباقة والحصول على رابط الدفع عبر Tap.", en: "Contact us to request this package and receive a Tap payment link." },
+      requestCta: { ar: "اشترِ عبر تاب", en: "Buy with Tap" },
+      requestNote: { ar: "اختر الباقة وأكمل بياناتك للانتقال إلى صفحة الدفع الآمنة لدى تاب.", en: "Choose your package and enter your details to continue to Tap’s secure checkout." },
     },
     commission: {
       title: { ar: "لا توجد عمولة على مبيعات دوراتك", en: "No commission on course sales" },

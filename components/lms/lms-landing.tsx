@@ -16,11 +16,12 @@ import {
 
 import { alaramLms, copy } from "@/data/alaramlms";
 import { LmsPricing } from "@/components/lms/lms-pricing";
+import type { StorePackage } from "@/lib/admin/models";
 import { FAQ } from "@/components/sections/faq";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-export function LmsLanding() {
+export function LmsLanding({ packages }: { packages: StorePackage[] }) {
   const locale = useLocale();
   const withLocale = (href: string) => `/${locale}${href}`;
 
@@ -36,7 +37,7 @@ export function LmsLanding() {
       <Problem locale={locale} />
       <Solution locale={locale} />
       <Ownership locale={locale} />
-      <LmsPricing locale={locale} />
+      <LmsPricing locale={locale} packages={packages} />
       <Experience locale={locale} />
       <UseCases locale={locale} />
       <Features locale={locale} />

@@ -1,43 +1,44 @@
 import { NextRequest, NextResponse } from "next/server";
+import { contactSubmissionSchema } from "@/lib/validations/contact-schema";
+import { readJson } from "@/lib/http/read-json";
+import { isRateLimited } from "@/lib/spam-guard";
+import { isTurnstileConfigured, verifyTurnstileToken } from "@/lib/turnstile";
+import { storeRequest } from "@/lib/admin/store";
 
 export async function POST(request: NextRequest) {
+  const json = (success: boolean, status: number, code?: string) =>
+    NextResponse.json({ success, code }, { status });
   try {
-    const body = await request.json();
-
-    // Log the contact form submission (in production, this would save to a database or send to a CRM)
-    console.log("Contact Form Submission:", {
-      timestamp: new Date().toISOString(),
-      ...body,
+    const parsed = contactSubmissionSchema.safeParse(await readJson(request));
+    if (!parsed.success) return json(false, 400, "INVALID_DATA");
+    const data = parsed.data;
+    const ip =
+      request.headers.get("x-real-ip") ||
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+    if (isRateLimited(ip ? `contact:${ip}` : undefined)) return json(false, 429, "RATE_LIMITED");
+    const elapsed = Date.now() - data.formStartedAt;
+    if (data.website?.trim() || elapsed < 3000 || elapsed > 21_600_000) return json(true, 200);
+    if (process.env.NODE_ENV === "production" && !isTurnstileConfigured({ server: true }))
+      return json(false, 503, "CONFIG_ERROR");
+    if (
+      isTurnstileConfigured({ server: true }) &&
+      (!data.turnstileToken ||
+        !(await verifyTurnstileToken(data.turnstileToken, ip, "contact_form")))
+    )
+      return json(false, 403, "TURNSTILE_FAILED");
+    await storeRequest("createInquiry", {
+      submissionId: data.submissionId,
+      kind: "contact",
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      company: data.company,
+      industry: data.industry,
+      message: data.message,
+      locale: data.locale,
     });
-
-    // Simulate email sending (in production, use a service like SendGrid, Mailgun, etc.)
-    console.log(`Sending email to: ${process.env.CONTACT_INBOX || "info@alaram.net"}`);
-    console.log("Email content:", {
-      subject: `New Contact Form: ${body.name}`,
-      from: body.email,
-      message: body.message,
-    });
-
-    // Simulate a delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Return success response
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Your message has been received. We'll contact you soon!",
-      },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("Contact form error:", error);
-    return NextResponse.json(
-      {
-        success: false,
-        message: "An error occurred. Please try again later.",
-      },
-      { status: 500 }
-    );
+    return json(true, 200);
+  } catch {
+    return json(false, 503, "SERVICE_UNAVAILABLE");
   }
 }
-
