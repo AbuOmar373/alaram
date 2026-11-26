@@ -135,6 +135,7 @@ export default async function HomePage({ params }: PageProps) {
     <>
       <JsonLd data={structuredData} />
       <Hero
+        eyebrow={t("hero.eyebrow")}
         headline={t("hero.headline")}
         subheadline={t("hero.subheadline")}
         primaryCta={t("hero.cta")}

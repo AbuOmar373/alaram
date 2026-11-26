@@ -34,8 +34,9 @@
   },
   "home": {
     "hero": {
-      "headline": "ALaram: Accounting & POS software tailored to your business",
-      "subheadline": "Tailored solutions for supermarkets, retail stores, contractors and service providers, perfume shops, and women's beauty salons. Easy to use, fast performance, and accurate real-time reports.",
+      "eyebrow": "Software for businesses and teams",
+      "headline": "ALaram: Business solutions that grow with you",
+      "subheadline": "Run your business with ease today and expand with confidence as your needs evolve.",
       "cta": "Try the System Now",
       "secondaryCta": "Book a Demo"
     },

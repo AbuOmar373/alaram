@@ -7,6 +7,7 @@ import { ArrowRight, BarChart3, Check, ShieldCheck, Sparkles } from "lucide-reac
 import { Button } from "@/components/ui/button";
 
 interface HeroProps {
+  eyebrow?: string;
   headline: string;
   subheadline: string;
   primaryCta: string;
@@ -16,6 +17,7 @@ interface HeroProps {
 }
 
 export function Hero({
+  eyebrow,
   headline,
   subheadline,
   primaryCta,
@@ -69,7 +71,7 @@ export function Hero({
             >
               <div className="section-eyebrow mb-6">
                 <Sparkles className="h-4 w-4" />
-                <span>{locale === "ar" ? "حلول محاسبية مدعمة بالذكاء الصناعي" : "AI-supported accounting platform"}</span>
+                <span>{eyebrow ?? (locale === "ar" ? "حلول محاسبية مدعمة بالذكاء الصناعي" : "AI-supported accounting platform")}</span>
               </div>
 
               <h1 className="hero-title max-w-4xl text-3xl font-semibold leading-[1.08] tracking-tight text-heading sm:text-4xl lg:text-5xl xl:text-6xl">
