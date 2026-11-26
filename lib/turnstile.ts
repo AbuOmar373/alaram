@@ -33,7 +33,7 @@ export function isTurnstileConfigured(options?: { server?: boolean }) {
   return hasSiteKey && Boolean(process.env.TURNSTILE_SECRET_KEY);
 }
 
-export async function verifyTurnstileToken(token: string, remoteIp?: string) {
+export async function verifyTurnstileToken(token: string, remoteIp?: string, action = TURNSTILE_ACTION) {
   const secretKey =
     process.env.TURNSTILE_SECRET_KEY ||
     (process.env.NODE_ENV === "development" ? TURNSTILE_TEST_SECRET_KEY : "");
@@ -69,6 +69,6 @@ export async function verifyTurnstileToken(token: string, remoteIp?: string) {
 
   return (
     result.success &&
-    (!result.action || result.action === TURNSTILE_ACTION)
+    (!result.action || result.action === action)
   );
 }

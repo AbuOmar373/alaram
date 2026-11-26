@@ -15,9 +15,11 @@ export function useDemoForm() {
 
   // Time the form was opened; the server rejects submissions that are too fast (bots).
   const formStartedAtRef = React.useRef<number>(0);
+  const submissionIdRef = React.useRef("");
 
   React.useEffect(() => {
     formStartedAtRef.current = Date.now();
+    submissionIdRef.current = crypto.randomUUID();
   }, []);
 
   const form = useForm<DemoFormInput, unknown, DemoFormData>({
@@ -39,6 +41,7 @@ export function useDemoForm() {
         },
         body: JSON.stringify({
           ...data,
+          submissionId: submissionIdRef.current,
           formStartedAt: formStartedAtRef.current || undefined,
           ...(turnstileToken ? { turnstileToken } : {}),
         }),
@@ -48,6 +51,7 @@ export function useDemoForm() {
         setSubmitStatus("success");
         form.reset({ locale: data.locale });
         formStartedAtRef.current = Date.now();
+        submissionIdRef.current = crypto.randomUUID();
         return true;
       } else {
         const result = (await response.json().catch(() => null)) as {

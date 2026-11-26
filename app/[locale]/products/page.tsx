@@ -9,6 +9,9 @@ import { estimator } from "@/data/estimator";
 import { samt } from "@/data/samt";
 import { getDefaultMarket } from "@/config/markets";
 import { buildPageMetadata, getLocaleFromParam } from "@/lib/seo";
+import { getStorePackages } from "@/lib/admin/store";
+import { intervalNames } from "@/lib/admin/models";
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const locale = getLocaleFromParam((await params).locale);
@@ -27,6 +30,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
   const locale = getLocaleFromParam((await params).locale);
   setRequestLocale(locale);
   const isArabic = locale === "ar";
+  const [lmsPackages, estimatorPackages] = await Promise.all([getStorePackages("lms"), getStorePackages("estimator")]);
   const market = getDefaultMarket();
   const money = (amount: number, currency = "SAR") =>
     new Intl.NumberFormat(isArabic ? "ar-SA-u-nu-latn" : "en-SA", {
@@ -67,10 +71,10 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
         ? "تطبيق لمنصة تدريب إلكترونية باسمك لإدارة الدورات والدروس والطلاب. يمكنك شراء التطبيق وإعداده بنفسك، أو اختيار باقة تتضمن الإعداد والتشغيل الكامل."
         : "A training platform application under your brand for courses, lessons, and students. Purchase the app and set it up yourself, or choose the package with full setup and launch.",
       kind: alaramLms.pricing.period[locale],
-      prices: alaramLms.pricing.packages.map((plan) => ({
-        label: plan.name[locale],
-        amount: money(plan.price),
-        detail: plan.description[locale],
+      prices: lmsPackages.map((plan) => ({
+        label: isArabic ? plan.nameAr : plan.nameEn,
+        amount: money(plan.amountMinor / 100),
+        detail: isArabic ? plan.descriptionAr : plan.descriptionEn,
       })),
       note: alaramLms.pricing.note[locale],
       href: "/lms",
@@ -82,10 +86,10 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
       name: estimator.name[locale],
       description: estimator.summary[locale],
       kind: isArabic ? "اشتراك شهري أو سنوي" : "Monthly or annual subscription",
-      prices: estimator.pricing.plans.map((plan) => ({
-        label: plan.name[locale],
-        amount: money(plan.billedAmount),
-        detail: plan.billing[locale],
+      prices: estimatorPackages.map((plan) => ({
+        label: isArabic ? plan.nameAr : plan.nameEn,
+        amount: money(plan.amountMinor / 100),
+        detail: intervalNames[plan.interval][locale],
       })),
       note: isArabic
         ? "الاشتراك السنوي يُدفع مقدمًا عن 12 شهرًا. تشمل الباقتان جميع أقسام التطبيق."

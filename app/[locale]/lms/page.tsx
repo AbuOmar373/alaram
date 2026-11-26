@@ -14,6 +14,8 @@ import {
   organizationId,
 } from "@/lib/seo";
 import { getBaseUrl } from "@/lib/site-url";
+import { getStorePackages } from "@/lib/admin/store";
+export const dynamic = "force-dynamic";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -39,6 +41,7 @@ export default async function LmsPage({ params }: PageProps) {
   setRequestLocale(locale);
   const baseUrl = getBaseUrl();
   const screenshot = absoluteUrl(shareImagePath(currentLocale));
+  const packages = await getStorePackages("lms");
 
   const structuredData = [
     {
@@ -59,13 +62,13 @@ export default async function LmsPage({ params }: PageProps) {
         "@type": "Brand",
         name: currentLocale === "ar" ? brand.name.ar : brand.name.en,
       },
-      offers: alaramLms.pricing.packages.map((plan) => ({
+      offers: packages.map((plan) => ({
         "@type": "Offer",
-        name: copy(currentLocale, plan.name),
-        price: plan.price,
+        name: currentLocale === "ar" ? plan.nameAr : plan.nameEn,
+        price: plan.amountMinor / 100,
         availability: "https://schema.org/InStock",
         priceCurrency: alaramLms.pricing.currency,
-        description: copy(currentLocale, plan.description),
+        description: currentLocale === "ar" ? plan.descriptionAr : plan.descriptionEn,
         url: `${baseUrl}/${locale}/lms#pricing`,
       })),
     },
@@ -84,7 +87,7 @@ export default async function LmsPage({ params }: PageProps) {
   return (
     <>
       <JsonLd data={structuredData} />
-      <LmsLanding />
+      <LmsLanding packages={packages} />
     </>
   );
 }

@@ -27,6 +27,7 @@ import {
 import { copy, estimator } from "@/data/estimator";
 import { FAQ } from "@/components/sections/faq";
 import { EstimatorPricing } from "@/components/estimator/estimator-pricing";
+import type { StorePackage } from "@/lib/admin/models";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -41,7 +42,7 @@ const moduleIcons: Record<string, LucideIcon> = {
   catalog: Package,
 };
 
-export function EstimatorLanding() {
+export function EstimatorLanding({ packages }: { packages: StorePackage[] }) {
   const locale = useLocale();
   const withLocale = (href: string) => `/${locale}${href}`;
 
@@ -63,7 +64,7 @@ export function EstimatorLanding() {
       <Roles locale={locale} />
       <DataAndTrust locale={locale} />
       <Comparison locale={locale} />
-      <EstimatorPricing locale={locale} />
+      <EstimatorPricing locale={locale} packages={packages} />
       <Audience locale={locale} />
       <FAQ
         title={copy(locale, estimator.faqs.title)}

@@ -14,6 +14,8 @@ import {
   organizationId,
 } from "@/lib/seo";
 import { getBaseUrl } from "@/lib/site-url";
+import { getStorePackages } from "@/lib/admin/store";
+export const dynamic = "force-dynamic";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -39,6 +41,7 @@ export default async function EstimatorPage({ params }: PageProps) {
   setRequestLocale(locale);
   const baseUrl = getBaseUrl();
   const screenshot = absoluteUrl(shareImagePath(currentLocale));
+  const packages = await getStorePackages("estimator");
 
   const structuredData = [
     {
@@ -60,18 +63,18 @@ export default async function EstimatorPage({ params }: PageProps) {
         "@type": "Brand",
         name: currentLocale === "ar" ? brand.name.ar : brand.name.en,
       },
-      offers: estimator.pricing.plans.map((plan) => ({
+      offers: packages.map((plan) => ({
         "@type": "Offer",
-        name: copy(currentLocale, plan.name),
-        price: String(plan.billedAmount),
+        name: currentLocale === "ar" ? plan.nameAr : plan.nameEn,
+        price: String(plan.amountMinor / 100),
         priceCurrency: "SAR",
         url: `${baseUrl}/${locale}/estimator#pricing`,
         availability: "https://schema.org/InStock",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
-          price: String(plan.billedAmount),
+          price: String(plan.amountMinor / 100),
           priceCurrency: "SAR",
-          billingDuration: plan.id === "annual" ? "P1Y" : "P1M",
+          billingDuration: plan.interval === "year" ? "P1Y" : plan.interval === "month" ? "P1M" : undefined,
         },
       })),
     },
@@ -90,7 +93,7 @@ export default async function EstimatorPage({ params }: PageProps) {
   return (
     <>
       <JsonLd data={structuredData} />
-      <EstimatorLanding />
+      <EstimatorLanding packages={packages} />
     </>
   );
 }

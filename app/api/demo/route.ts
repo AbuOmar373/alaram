@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { readJson } from "@/lib/http/read-json";
+import { storeRequest } from "@/lib/admin/store";
 import { Resend } from "resend";
 import React from "react";
 
@@ -111,11 +113,7 @@ async function sendDemoEmail(
 
 export async function POST(request: NextRequest) {
   try {
-    if (!process.env.RESEND_FROM_EMAIL) {
-      throw new Error("RESEND_FROM_EMAIL is missing");
-    }
-
-    const body = await request.json();
+    const body = await readJson(request);
     const parsed = demoSubmissionSchema.safeParse(body);
 
     if (!parsed.success) {
@@ -137,7 +135,7 @@ export async function POST(request: NextRequest) {
       NextResponse.json({ success: true, message: "Demo booked successfully" }, { status: 200 });
 
     if (isRateLimited(clientIp)) {
-      console.warn("Demo form rate limited:", { ip: clientIp, email: data.email });
+      console.warn("Demo form rate limited");
       return NextResponse.json(
         { success: false, code: "RATE_LIMITED", message: "Too many requests" },
         { status: 429 }
@@ -146,11 +144,7 @@ export async function POST(request: NextRequest) {
 
     const spamCheck = checkSubmission(data);
     if (!spamCheck.ok) {
-      console.warn("Demo form blocked as spam:", {
-        reason: spamCheck.reason,
-        ip: clientIp,
-        email: data.email,
-      });
+      console.warn("Demo form blocked as spam");
       return fakeSuccess();
     }
 
@@ -179,10 +173,7 @@ export async function POST(request: NextRequest) {
       }
 
       try {
-        const isHuman = await verifyTurnstileToken(
-          data.turnstileToken,
-          clientIp
-        );
+        const isHuman = await verifyTurnstileToken(data.turnstileToken, clientIp);
 
         if (!isHuman) {
           return NextResponse.json(
@@ -209,50 +200,47 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const resend = getResendClient();
-    const adminEmail = process.env.RESEND_TO_EMAIL?.trim();
-    const fromEmail = process.env.RESEND_FROM_EMAIL;
-    const subject =
-      data.locale === "ar"
-        ? `طلب عرض توضيحي جديد - ${data.company}`
-        : `New Demo Request - ${data.company}`;
-
-    let adminSent = false;
-
-    if (adminEmail) {
-      const adminResult = await sendDemoEmail(resend, {
-        from: fromEmail,
-        to: adminEmail,
-        replyTo: data.email,
-        subject,
-        data,
-      });
-
-      if (adminResult.error) {
-        console.error("Resend admin notification error:", adminResult.error);
-
-        return NextResponse.json(
-          {
-            success: false,
-            code: "EMAIL_FAILED",
-            message: "Failed to send email",
-          },
-          { status: 500 }
-        );
+    // Persist first so a notification outage never loses the customer's request.
+    const saved = await storeRequest("createInquiry", {
+      submissionId: data.submissionId,
+      kind: "demo",
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      company: data.company,
+      industry: data.industry,
+      employeeCount: data.employeeCount,
+      preferredDate: data.preferredDate,
+      preferredTime: data.preferredTime,
+      currentSolution: data.currentSolution,
+      message: stripHtml(data.message) || "",
+      locale: data.locale,
+    });
+    if (saved.notification !== "sent") {
+      let sent = false;
+      try {
+        const adminEmail = process.env.RESEND_TO_EMAIL?.trim();
+        const from = process.env.RESEND_FROM_EMAIL;
+        if (adminEmail && from) {
+          const result = await sendDemoEmail(getResendClient(), {
+            from,
+            to: adminEmail,
+            replyTo: data.email,
+            data,
+            subject:
+              data.locale === "ar"
+                ? `طلب عرض توضيحي جديد - ${data.company}`
+                : `New Demo Request - ${data.company}`,
+          });
+          sent = !result.error;
+        }
+      } catch {
+        console.error("Demo notification could not be sent");
       }
-
-      adminSent = true;
-    }
-
-    // NOTE: We intentionally do NOT email the address typed into the form.
-    // Bots abuse that to send mail to victims through our domain, which hurts
-    // deliverability. The team replies to the customer manually instead.
-    if (!adminSent) {
-      console.error("RESEND_TO_EMAIL is missing; demo request was not delivered.");
-      return NextResponse.json(
-        { success: false, code: "CONFIG_ERROR", message: "An error occurred. Please try again later." },
-        { status: 500 }
-      );
+      await storeRequest("notification", {
+        submissionId: data.submissionId,
+        status: sent ? "sent" : "failed",
+      }).catch(() => {});
     }
 
     return NextResponse.json(
@@ -263,7 +251,7 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Demo booking error:", error);
+    console.error("Demo booking could not be saved");
 
     const message = error instanceof Error ? error.message : "Unknown error";
     const isConfigError =
